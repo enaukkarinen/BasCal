@@ -1,12 +1,12 @@
-﻿<xapCache source="C:\GitProjects\Harkkaprojekti\Harkkaprojekti\Bin\Debug\Harkkaprojekti.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="7.5.2014 15:46:32">
-  <file source="C:\GitProjects\Harkkaprojekti\Harkkaprojekti\obj\Debug\Harkkaprojekti.dll" archivePath="Harkkaprojekti.dll" lastWriteTime="7.5.2014 15:46:31" />
+﻿<xapCache source="C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti\Bin\Debug\Harkkaprojekti.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="7.5.2014 16:03:21">
+  <file source="C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti\obj\Debug\Harkkaprojekti.dll" archivePath="Harkkaprojekti.dll" lastWriteTime="7.5.2014 16:03:20" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Silverlight\v5.0\Libraries\Client\System.ComponentModel.DataAnnotations.dll" archivePath="System.ComponentModel.DataAnnotations.dll" lastWriteTime="18.11.2011 16:40:20" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Silverlight\v5.0\Libraries\Client\System.Windows.Controls.Data.dll" archivePath="System.Windows.Controls.Data.dll" lastWriteTime="18.11.2011 16:40:20" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Silverlight\v5.0\Libraries\Client\System.Windows.Controls.Data.Input.dll" archivePath="System.Windows.Controls.Data.Input.dll" lastWriteTime="18.11.2011 16:40:20" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Silverlight\v5.0\Libraries\Client\System.Windows.Controls.Navigation.dll" archivePath="System.Windows.Controls.Navigation.dll" lastWriteTime="18.11.2011 16:40:20" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Silverlight\v5.0\Libraries\Client\System.Windows.Data.dll" archivePath="System.Windows.Data.dll" lastWriteTime="18.11.2011 16:40:20" />
-  <file source="C:\GitProjects\Harkkaprojekti\Harkkaprojekti\Bin\clientaccesspolicy.xml" archivePath="Bin\clientaccesspolicy.xml" lastWriteTime="7.5.2014 12:47:48" />
-  <file source="C:\GitProjects\Harkkaprojekti\Harkkaprojekti\clientaccesspolicy.xml" archivePath="clientaccesspolicy.xml" lastWriteTime="7.5.2014 13:29:19" />
-  <file source="C:\GitProjects\Harkkaprojekti\Harkkaprojekti\ServiceReferences.ClientConfig" archivePath="ServiceReferences.ClientConfig" lastWriteTime="7.5.2014 15:43:31" />
-  <file source="C:\GitProjects\Harkkaprojekti\Harkkaprojekti\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="6.5.2014 10:33:34" />
+  <file source="C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti\Bin\clientaccesspolicy.xml" archivePath="Bin\clientaccesspolicy.xml" lastWriteTime="7.5.2014 12:47:48" />
+  <file source="C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti\clientaccesspolicy.xml" archivePath="clientaccesspolicy.xml" lastWriteTime="7.5.2014 13:29:19" />
+  <file source="C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti\ServiceReferences.ClientConfig" archivePath="ServiceReferences.ClientConfig" lastWriteTime="7.5.2014 15:49:53" />
+  <file source="C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="6.5.2014 10:33:34" />
 </xapCache>

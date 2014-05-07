@@ -7,3 +7,12 @@ C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.dll
 C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.SqlServer.dll
 C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.xml
 C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.SqlServer.xml
+C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti.Web\bin\Harkkaprojekti.Web.dll
+C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti.Web\bin\Harkkaprojekti.Web.pdb
+C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.dll
+C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.SqlServer.dll
+C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.xml
+C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.SqlServer.xml
+C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti.Web\obj\Debug\Harkkaprojekti.Web.csprojResolveAssemblyReference.cache
+C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti.Web\obj\Debug\Harkkaprojekti.Web.dll
+C:\GitProjects\BasCal\Harkkaprojekti\Harkkaprojekti.Web\obj\Debug\Harkkaprojekti.Web.pdb
