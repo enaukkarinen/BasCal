@@ -1,0 +1,9 @@
+C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\bin\Harkkaprojekti.Web.dll
+C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\bin\Harkkaprojekti.Web.pdb
+C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\obj\Debug\Harkkaprojekti.Web.csprojResolveAssemblyReference.cache
+C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\obj\Debug\Harkkaprojekti.Web.dll
+C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\obj\Debug\Harkkaprojekti.Web.pdb
+C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.dll
+C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.SqlServer.dll
+C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.xml
+C:\GitProjects\Harkkaprojekti\Harkkaprojekti.Web\bin\EntityFramework.SqlServer.xml

@@ -1,0 +1,46 @@
+VAR Kayttaja BASE RELATION {
+	KayttajaId INT NOT NULL,
+	Etunimi VARCHAR(30) NOT NULL,
+	Sukunimi VARCHAR(30) NOT NULL
+}
+PRIMARY KEY { KayttajaId }
+
+VAR Tapahtuma BASE RELATION {
+	TapahtumaId INT NOT NULL,
+	TyyppiId INT NOT NULL,
+	AlkamisAika DATETIME NOT NULL,
+	PaattymisAika DATETIME NOT NULL,
+	Paikka VARCHAR(100),
+	Nimi VARCHAR(100) NOT NULL
+}
+PRIMARY KEY { TapahtumaId },
+FOREIGN KEY { TyyppiId } REFERENCES Tapahtumatyyppi { TyyppiId }
+
+VAR Tapahtumatyyppi {
+	TyyppiId INT NOT NULL,
+	Nimi VARCHAR(100) NOT NULL
+}
+PRIMARY KEY { TyyppiId }
+
+VAR KayttajanTapahtumat BASE RELATION {
+	TapahtumaId INT NOT NULL,
+	KayttajaId INT NOT NULL,
+	Rooli VARCHAR(100) NOT NULL
+}
+PRIMARY KEY { TapahtumaId, KayttajaId },
+FOREIGN KEY { TapahtumaId } REFERENCES Tapahtuma { TapahtumaId },
+FOREIGN KEY { KayttajId } REFERENCES Kayttaja { KayttajaId }
+
+VAR Ryhma BASE RELATION {
+	RyhmaId INT NOT NULL,
+	Nimi VARCHAR(100) NOT NULL
+}
+PRIMARY KEY { RyhmaId }
+
+VAR RyhmanJasenet BASE RELATION {
+	KayttajaId INT NOT NULL,
+	RyhmaId INT NOT NULL
+}
+PRIMARY KEY { KayttajaId, RyhmaId },
+FOREIGN KEY { KayttajaId } REFERENCES Kayttaja {KayttajaId },
+FOREIGN KEY { RyhmaId } REFERENCES Ryhma { RyhmaId }

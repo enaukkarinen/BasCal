@@ -1,0 +1,17 @@
+Reactive Extensions
+Unit testing
+
+// Tietokantakaava
+Class Model
+Karkean tason Use Case
+
+Käyttäjänhallinta omaan palveluun
+Kalenterimerkinnät toiseen
+
+N Service Bus edellisten palvelujen välille
+
+ei IIS vaan Self Host
+
+Drag & Drop lopuksi
+
+rakennetaan iteratiivisesti

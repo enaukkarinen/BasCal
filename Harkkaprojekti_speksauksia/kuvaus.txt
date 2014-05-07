@@ -1,0 +1,14 @@
+Henkilˆkohtainen kalenteri web-sovellus
+=========================================
+- K‰ytt‰j‰tilit .NET Identity
+- K‰ytt‰j‰ryhm‰t .NET Identity
+- Kalenterimerkinn‰t
+	- Tapahtumatyypit
+	- K‰ytt‰j‰ryhm‰
+	- Drag & Drop
+- Kuukausi- ja viikkon‰kym‰t jne.
+- Mahd. SignalR -> Reaaliaikaiset kalenterimerkinn‰t (jos j‰‰ aikaa)
+- Lokalisointi (jos j‰‰ aikaa)
+
+- Kuukausin‰kym‰n laatikot
+	- <Grid> <TextBlock Text="{Binding Kuukausi.Day[] }"></TextBlock></Grid>
