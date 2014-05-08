@@ -16,11 +16,24 @@ namespace WcfService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
+        private Kalenteri_DBEntities entity = new Kalenteri_DBEntities();
+
+        public KayttajanKalenteri HaeKayttajanKalenteri(int id)
+        {
+            KayttajanKalenteri kalenteri = new KayttajanKalenteri();
+            kalenteri.Kayttaja = entity.Kayttaja.Where(k => k.KayttajaId == id).FirstOrDefault();
+            kalenteri.Tapahtumat = entity.KayttajanTapahtumat.Where(k => k.KayttajaId == id).Select(k => k.Tapahtuma).ToList();
+            kalenteri.Ryhmat = entity.RyhmanJasenet.Where(k => k.KayttajaId == id).Select(k => k.Ryhma).ToList();
+
+            return kalenteri;
+
+        }
+
+
         public string HaeKayttajanNimi(int id)
         {
             try
-            {
-                Kalenteri_DBEntities entity = new Kalenteri_DBEntities();
+            {           
                 var nimi = entity.Kayttaja.Where(k => k.KayttajaId == id).SingleOrDefault().Etunimi;
                 return nimi;
             }

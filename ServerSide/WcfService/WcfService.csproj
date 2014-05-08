@@ -91,6 +91,7 @@
     <Compile Include="Model\Kayttaja.cs">
       <DependentUpon>Kalenteri_db.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\KayttajanKalenteri.cs" />
     <Compile Include="Model\KayttajanTapahtumat.cs">
       <DependentUpon>Kalenteri_db.tt</DependentUpon>
     </Compile>

@@ -1,0 +1,6 @@
+  <connectionStrings>
+    <add name="HarkkaprojektiDBEntities" connectionString="metadata=res://*/Model.csdl|res://*/Model.ssdl|res://*/Model.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost;initial catalog=HarkkaprojektiDB;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+  </connectionStrings>
+
+
+harkkaprojektiDB löytyy servulta localhost
