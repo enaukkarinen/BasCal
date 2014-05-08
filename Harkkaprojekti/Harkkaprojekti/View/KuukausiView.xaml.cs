@@ -10,14 +10,12 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Navigation;
-
-using Harkkaprojekti.KalenteriServiceReference;
-
+using Harkkaprojekti.ServiceReference1;
 namespace Harkkaprojekti.View
 {
     public partial class KuukausiView : Page
     {
-        KalenteriServiceReference.KalenteriServiceClient asiakas;
+        ServiceReference1.Service1Client asiakas;
 
         public KuukausiView()
         {
@@ -28,23 +26,34 @@ namespace Harkkaprojekti.View
             }
 
 
-            asiakas = new KalenteriServiceReference.KalenteriServiceClient();
-            asiakas.AddCompleted += asiakas_AddCompleted;
-
+            asiakas = new ServiceReference1.Service1Client();
+            asiakas.HaeKayttajanNimiCompleted += asiakas_HaeKayttajanNimiCompleted;
+            asiakas.haeKaikkienKayttajienNimetCompleted += asiakas_haeKaikkienKayttajienNimetCompleted;
         }
 
-        void asiakas_AddCompleted(object sender, AddCompletedEventArgs e)
+        void asiakas_haeKaikkienKayttajienNimetCompleted(object sender, haeKaikkienKayttajienNimetCompletedEventArgs e)
         {
-            if (e.Result != -1)
-                MessageBox.Show(e.Result.ToString());
+            foreach (var nimi in e.Result)
+            {
+                MessageBox.Show(nimi);
+            }
         }
 
-
+        void asiakas_HaeKayttajanNimiCompleted(object sender, HaeKayttajanNimiCompletedEventArgs e)
+        {
+            MessageBox.Show(e.Result);
+        }
 
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
-            asiakas.AddAsync(44, 25);
+            asiakas.HaeKayttajanNimiAsync(1);
         }
+
+        private void btn2_Click(object sender, RoutedEventArgs e)
+        {
+            asiakas.haeKaikkienKayttajienNimetAsync();
+        }
+
 
 
 

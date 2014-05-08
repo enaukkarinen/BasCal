@@ -15,7 +15,7 @@
            d:DesignWidth="1900" d:DesignHeight="1200"
            Title="KuukausiView Page"
            xmlns:_model="clr-namespace:Harkkaprojekti.ViewModel">
-    
+
     <navigation:Page.Resources>
         <Style TargetType="local:DataGridRow" x:Key="MyCustomRow">
             <Setter Property="IsTabStop" Value="False" />
@@ -83,19 +83,20 @@
             </Setter>
         </Style>
 
-        <_model:KuukausiViewModel x:Key="kk" />    
+        <_model:KuukausiViewModel x:Key="kk" />
     </navigation:Page.Resources>
-    
+
     <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="200" />
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Header -->
         <Grid x:Name="headerGrid" Grid.Row="0" Background="#FFB5B5B5">
             <TextBox Width="300" Height="60"/>
-            <Button x:Name="btn1" Width="90" Height="60" Margin="420,0,0,0" Click="btn1_Click"/>
+            <Button x:Name="btn1" Height="60" Margin="1115,70,505,70" Click="btn1_Click" Content="Returns string from WCF"/>
+            <Button x:Name="btn2" Content="Returns List&lt;string&gt; WCF" HorizontalAlignment="Left" VerticalAlignment="Top" Width="284" Margin="386,70,0,0" Height="60" Click="btn2_Click"/>
         </Grid>
 
         <!-- Content -->
@@ -113,12 +114,12 @@
                     <sdk:DataGridTextColumn Binding="{Binding Torstai.PaivanTapahtumat[0].Nimi}" Header="Torstai" Width="250"/>
                     <sdk:DataGridTextColumn Binding="{Binding Perjantai.PaivanTapahtumat[0].Nimi}" Header="Perjantai" Width="250"/>
                     <sdk:DataGridTextColumn Binding="{Binding Lauantai.PaivanTapahtumat[0].Nimi}"  Header="Lauantai" Width="250"/>
-                    <sdk:DataGridTextColumn Binding="{Binding Sunnuntai.PaivanTapahtumat[0].Nimi}" Header="Sunnuntai" Width="250"/>                 
+                    <sdk:DataGridTextColumn Binding="{Binding Sunnuntai.PaivanTapahtumat[0].Nimi}" Header="Sunnuntai" Width="250"/>
                 </sdk:DataGrid.Columns>
             </sdk:DataGrid>
 
         </Grid>
     </Grid>
-    
-    
+
+
 </navigation:Page>

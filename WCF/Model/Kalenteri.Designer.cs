@@ -15,7 +15,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("HarkkaprojektiDBModel", "RyhmanJasenet", "Kayttaja", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Darkside.WCF4Silverlight.Model.Kayttaja), "Ryhma", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Darkside.WCF4Silverlight.Model.Ryhma))]
 
 // Original file name:
-// Generation date: 8.5.2014 11:04:05
+// Generation date: 8.5.2014 11:12:43
 namespace Darkside.WCF4Silverlight.Model
 {
     
