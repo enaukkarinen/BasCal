@@ -1,6 +1,0 @@
-C:\GitProjects\Darkside.WCF4Silverlight\bin\Debug\Darkside.WCF4Silverlight.exe.config
-C:\GitProjects\Darkside.WCF4Silverlight\bin\Debug\Darkside.WCF4Silverlight.exe
-C:\GitProjects\Darkside.WCF4Silverlight\bin\Debug\Darkside.WCF4Silverlight.pdb
-C:\GitProjects\Darkside.WCF4Silverlight\obj\Debug\Darkside.WCF4Silverlight.csprojResolveAssemblyReference.cache
-C:\GitProjects\Darkside.WCF4Silverlight\obj\Debug\Darkside.WCF4Silverlight.exe
-C:\GitProjects\Darkside.WCF4Silverlight\obj\Debug\Darkside.WCF4Silverlight.pdb
