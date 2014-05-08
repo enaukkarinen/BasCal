@@ -11,13 +11,13 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Navigation;
 
-using Harkkaprojekti.ServiceReference1;
+using Harkkaprojekti.KalenteriServiceReference;
 
 namespace Harkkaprojekti.View
 {
     public partial class KuukausiView : Page
     {
-        ServiceReference1.MyServiceClient asiakas;
+        KalenteriServiceReference.KalenteriServiceClient asiakas;
 
         public KuukausiView()
         {
@@ -28,14 +28,14 @@ namespace Harkkaprojekti.View
             }
 
 
-            asiakas = new ServiceReference1.MyServiceClient();
+            asiakas = new KalenteriServiceReference.KalenteriServiceClient();
             asiakas.AddCompleted += asiakas_AddCompleted;
 
         }
 
         void asiakas_AddCompleted(object sender, AddCompletedEventArgs e)
         {
-            if (e.Result != null)
+            if (e.Result != -1)
                 MessageBox.Show(e.Result.ToString());
         }
 

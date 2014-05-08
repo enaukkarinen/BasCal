@@ -2,7 +2,7 @@
     <system.serviceModel>
         <bindings>
             <basicHttpBinding>
-                <binding name="BasicHttpBinding_IMyService" maxBufferSize="2147483647"
+                <binding name="BasicHttpBinding_IKalenteriService" maxBufferSize="2147483647"
                     maxReceivedMessageSize="2147483647">
                     <security mode="None" />
                 </binding>
@@ -10,8 +10,8 @@
         </bindings>
         <client>
             <endpoint address="http://localhost:9001/Calculator" binding="basicHttpBinding"
-                bindingConfiguration="BasicHttpBinding_IMyService" contract="ServiceReference1.IMyService"
-                name="BasicHttpBinding_IMyService" />
+                bindingConfiguration="BasicHttpBinding_IKalenteriService"
+                contract="KalenteriServiceReference.IKalenteriService" name="BasicHttpBinding_IKalenteriService" />
         </client>
     </system.serviceModel>
 </configuration>

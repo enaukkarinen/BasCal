@@ -13,7 +13,7 @@ namespace Darkside.WCF4Silverlight
 
             Console.WriteLine("Starting host...");
 
-            var host = new ServiceHost(typeof(MyService));
+            var host = new ServiceHost(typeof(KalenteriService));
             host.Open();
             Console.WriteLine("Started.");
 
