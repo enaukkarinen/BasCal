@@ -4,16 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e94c8ac605ce49abab7f946aa556b606" Name="Diagram1">
+      <Diagram DiagramId="6ac4185d617b493e800d97341ba2f656" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="HarkkaprojektiDBModel.Kayttaja" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HarkkaprojektiDBModel.KayttajanTapahtumat" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HarkkaprojektiDBModel.Ryhma" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HarkkaprojektiDBModel.Ryhma" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HarkkaprojektiDBModel.RyhmanJasenet" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="HarkkaprojektiDBModel.Tapahtuma" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="HarkkaprojektiDBModel.Tapahtumatyyppi" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="HarkkaprojektiDBModel.FK_KAYTTAJANTAPAHTUMAT_KAYTTAJAID" ManuallyRouted="false" />
+        <AssociationConnector Association="HarkkaprojektiDBModel.FK_RYHMANJASENET_KAYTTAJAID" ManuallyRouted="false" />
         <AssociationConnector Association="HarkkaprojektiDBModel.FK_KAYTTAJANTAPAHTUMAT_TAPAHTUMAID" ManuallyRouted="false" />
+        <AssociationConnector Association="HarkkaprojektiDBModel.FK_RYHMANJASENET_RYHMAID" ManuallyRouted="false" />
         <AssociationConnector Association="HarkkaprojektiDBModel.FK_TAPAHTUMA_TYYPPIID" ManuallyRouted="false" />
-        <AssociationConnector Association="HarkkaprojektiDBModel.RyhmanJasenet" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

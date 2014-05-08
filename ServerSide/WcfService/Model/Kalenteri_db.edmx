@@ -64,6 +64,7 @@
           </Key>
           <Property Name="KayttajaId" Type="int" Nullable="false" />
           <Property Name="RyhmaId" Type="int" Nullable="false" />
+          <Property Name="KROOLI" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Tapahtuma">
           <Key>
@@ -148,27 +149,32 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HarkkaprojektiDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="HarkkaprojektiDBEntities" p1:LazyLoadingEnabled="true">
+        <EntityContainer Name="Kalenteri_DBEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Kayttaja" EntityType="HarkkaprojektiDBModel.Kayttaja" />
           <EntitySet Name="KayttajanTapahtumat" EntityType="HarkkaprojektiDBModel.KayttajanTapahtumat" />
           <EntitySet Name="Ryhma" EntityType="HarkkaprojektiDBModel.Ryhma" />
+          <EntitySet Name="RyhmanJasenet" EntityType="HarkkaprojektiDBModel.RyhmanJasenet" />
           <EntitySet Name="Tapahtuma" EntityType="HarkkaprojektiDBModel.Tapahtuma" />
           <EntitySet Name="Tapahtumatyyppi" EntityType="HarkkaprojektiDBModel.Tapahtumatyyppi" />
           <AssociationSet Name="FK_KAYTTAJANTAPAHTUMAT_KAYTTAJAID" Association="HarkkaprojektiDBModel.FK_KAYTTAJANTAPAHTUMAT_KAYTTAJAID">
             <End Role="Kayttaja" EntitySet="Kayttaja" />
             <End Role="KayttajanTapahtumat" EntitySet="KayttajanTapahtumat" />
           </AssociationSet>
+          <AssociationSet Name="FK_RYHMANJASENET_KAYTTAJAID" Association="HarkkaprojektiDBModel.FK_RYHMANJASENET_KAYTTAJAID">
+            <End Role="Kayttaja" EntitySet="Kayttaja" />
+            <End Role="RyhmanJasenet" EntitySet="RyhmanJasenet" />
+          </AssociationSet>
           <AssociationSet Name="FK_KAYTTAJANTAPAHTUMAT_TAPAHTUMAID" Association="HarkkaprojektiDBModel.FK_KAYTTAJANTAPAHTUMAT_TAPAHTUMAID">
             <End Role="Tapahtuma" EntitySet="Tapahtuma" />
             <End Role="KayttajanTapahtumat" EntitySet="KayttajanTapahtumat" />
           </AssociationSet>
+          <AssociationSet Name="FK_RYHMANJASENET_RYHMAID" Association="HarkkaprojektiDBModel.FK_RYHMANJASENET_RYHMAID">
+            <End Role="Ryhma" EntitySet="Ryhma" />
+            <End Role="RyhmanJasenet" EntitySet="RyhmanJasenet" />
+          </AssociationSet>
           <AssociationSet Name="FK_TAPAHTUMA_TYYPPIID" Association="HarkkaprojektiDBModel.FK_TAPAHTUMA_TYYPPIID">
             <End Role="Tapahtumatyyppi" EntitySet="Tapahtumatyyppi" />
             <End Role="Tapahtuma" EntitySet="Tapahtuma" />
-          </AssociationSet>
-          <AssociationSet Name="RyhmanJasenet" Association="HarkkaprojektiDBModel.RyhmanJasenet">
-            <End Role="Kayttaja" EntitySet="Kayttaja" />
-            <End Role="Ryhma" EntitySet="Ryhma" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Kayttaja">
@@ -179,7 +185,7 @@
           <Property Name="Etunimi" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
           <Property Name="Sukunimi" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="KayttajanTapahtumat" Relationship="HarkkaprojektiDBModel.FK_KAYTTAJANTAPAHTUMAT_KAYTTAJAID" FromRole="Kayttaja" ToRole="KayttajanTapahtumat" />
-          <NavigationProperty Name="Ryhma" Relationship="HarkkaprojektiDBModel.RyhmanJasenet" FromRole="Kayttaja" ToRole="Ryhma" />
+          <NavigationProperty Name="RyhmanJasenet" Relationship="HarkkaprojektiDBModel.FK_RYHMANJASENET_KAYTTAJAID" FromRole="Kayttaja" ToRole="RyhmanJasenet" />
         </EntityType>
         <EntityType Name="KayttajanTapahtumat">
           <Key>
@@ -198,7 +204,18 @@
           </Key>
           <Property Name="RyhmaId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Nimi" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Kayttaja" Relationship="HarkkaprojektiDBModel.RyhmanJasenet" FromRole="Ryhma" ToRole="Kayttaja" />
+          <NavigationProperty Name="RyhmanJasenet" Relationship="HarkkaprojektiDBModel.FK_RYHMANJASENET_RYHMAID" FromRole="Ryhma" ToRole="RyhmanJasenet" />
+        </EntityType>
+        <EntityType Name="RyhmanJasenet">
+          <Key>
+            <PropertyRef Name="KayttajaId" />
+            <PropertyRef Name="RyhmaId" />
+          </Key>
+          <Property Name="KayttajaId" Type="Int32" Nullable="false" />
+          <Property Name="RyhmaId" Type="Int32" Nullable="false" />
+          <Property Name="KROOLI" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Kayttaja" Relationship="HarkkaprojektiDBModel.FK_RYHMANJASENET_KAYTTAJAID" FromRole="RyhmanJasenet" ToRole="Kayttaja" />
+          <NavigationProperty Name="Ryhma" Relationship="HarkkaprojektiDBModel.FK_RYHMANJASENET_RYHMAID" FromRole="RyhmanJasenet" ToRole="Ryhma" />
         </EntityType>
         <EntityType Name="Tapahtuma">
           <Key>
@@ -233,6 +250,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RYHMANJASENET_KAYTTAJAID">
+          <End Role="Kayttaja" Type="HarkkaprojektiDBModel.Kayttaja" Multiplicity="1" />
+          <End Role="RyhmanJasenet" Type="HarkkaprojektiDBModel.RyhmanJasenet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kayttaja">
+              <PropertyRef Name="KayttajaId" />
+            </Principal>
+            <Dependent Role="RyhmanJasenet">
+              <PropertyRef Name="KayttajaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_KAYTTAJANTAPAHTUMAT_TAPAHTUMAID">
           <End Role="Tapahtuma" Type="HarkkaprojektiDBModel.Tapahtuma" Multiplicity="1" />
           <End Role="KayttajanTapahtumat" Type="HarkkaprojektiDBModel.KayttajanTapahtumat" Multiplicity="*" />
@@ -242,6 +271,18 @@
             </Principal>
             <Dependent Role="KayttajanTapahtumat">
               <PropertyRef Name="TapahtumaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RYHMANJASENET_RYHMAID">
+          <End Role="Ryhma" Type="HarkkaprojektiDBModel.Ryhma" Multiplicity="1" />
+          <End Role="RyhmanJasenet" Type="HarkkaprojektiDBModel.RyhmanJasenet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ryhma">
+              <PropertyRef Name="RyhmaId" />
+            </Principal>
+            <Dependent Role="RyhmanJasenet">
+              <PropertyRef Name="RyhmaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -257,16 +298,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="RyhmanJasenet">
-          <End Role="Kayttaja" Type="HarkkaprojektiDBModel.Kayttaja" Multiplicity="*" />
-          <End Role="Ryhma" Type="HarkkaprojektiDBModel.Ryhma" Multiplicity="*" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HarkkaprojektiDBModelStoreContainer" CdmEntityContainer="HarkkaprojektiDBEntities">
+        <EntityContainerMapping StorageEntityContainer="HarkkaprojektiDBModelStoreContainer" CdmEntityContainer="Kalenteri_DBEntities">
           <EntitySetMapping Name="Kayttaja">
             <EntityTypeMapping TypeName="HarkkaprojektiDBModel.Kayttaja">
               <MappingFragment StoreEntitySet="Kayttaja">
@@ -293,6 +330,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="RyhmanJasenet">
+            <EntityTypeMapping TypeName="HarkkaprojektiDBModel.RyhmanJasenet">
+              <MappingFragment StoreEntitySet="RyhmanJasenet">
+                <ScalarProperty Name="KayttajaId" ColumnName="KayttajaId" />
+                <ScalarProperty Name="RyhmaId" ColumnName="RyhmaId" />
+                <ScalarProperty Name="KROOLI" ColumnName="KROOLI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tapahtuma">
             <EntityTypeMapping TypeName="HarkkaprojektiDBModel.Tapahtuma">
               <MappingFragment StoreEntitySet="Tapahtuma">
@@ -313,14 +359,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="RyhmanJasenet" TypeName="HarkkaprojektiDBModel.RyhmanJasenet" StoreEntitySet="RyhmanJasenet">
-            <EndProperty Name="Kayttaja">
-              <ScalarProperty Name="KayttajaId" ColumnName="KayttajaId" />
-            </EndProperty>
-            <EndProperty Name="Ryhma">
-              <ScalarProperty Name="RyhmaId" ColumnName="RyhmaId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

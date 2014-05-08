@@ -7,21 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServerSide
+namespace WcfService.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Ryhma
+    public partial class RyhmanJasenet
     {
-        public Ryhma()
-        {
-            this.Kayttaja = new HashSet<Kayttaja>();
-        }
-    
+        public int KayttajaId { get; set; }
         public int RyhmaId { get; set; }
-        public string Nimi { get; set; }
+        public string KROOLI { get; set; }
     
-        public virtual ICollection<Kayttaja> Kayttaja { get; set; }
+        public virtual Kayttaja Kayttaja { get; set; }
+        public virtual Ryhma Ryhma { get; set; }
     }
 }

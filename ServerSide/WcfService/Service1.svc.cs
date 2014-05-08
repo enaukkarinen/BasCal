@@ -1,4 +1,4 @@
-﻿using ServerSide;
+﻿using WcfService.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace WcfService
         {
             try
             {
-                HarkkaprojektiDBEntities entity = new HarkkaprojektiDBEntities();
+                Kalenteri_DBEntities entity = new Kalenteri_DBEntities();
                 var nimi = entity.Kayttaja.Where(k => k.KayttajaId == id).SingleOrDefault().Etunimi;
                 return nimi;
             }

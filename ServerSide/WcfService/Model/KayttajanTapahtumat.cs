@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServerSide
+namespace WcfService.Model
 {
     using System;
     using System.Collections.Generic;

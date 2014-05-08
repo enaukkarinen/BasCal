@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServerSide
+namespace WcfService.Model
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace ServerSide
         public Kayttaja()
         {
             this.KayttajanTapahtumat = new HashSet<KayttajanTapahtumat>();
-            this.Ryhma = new HashSet<Ryhma>();
+            this.RyhmanJasenet = new HashSet<RyhmanJasenet>();
         }
     
         public int KayttajaId { get; set; }
@@ -25,6 +25,6 @@ namespace ServerSide
         public string Sukunimi { get; set; }
     
         public virtual ICollection<KayttajanTapahtumat> KayttajanTapahtumat { get; set; }
-        public virtual ICollection<Ryhma> Ryhma { get; set; }
+        public virtual ICollection<RyhmanJasenet> RyhmanJasenet { get; set; }
     }
 }

@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServerSide
+namespace WcfService.Model
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HarkkaprojektiDBEntities : DbContext
+    public partial class Kalenteri_DBEntities : DbContext
     {
-        public HarkkaprojektiDBEntities()
-            : base("name=HarkkaprojektiDBEntities")
+        public Kalenteri_DBEntities()
+            : base("name=Kalenteri_DBEntities")
         {
         }
     
@@ -28,6 +28,7 @@ namespace ServerSide
         public DbSet<Kayttaja> Kayttaja { get; set; }
         public DbSet<KayttajanTapahtumat> KayttajanTapahtumat { get; set; }
         public DbSet<Ryhma> Ryhma { get; set; }
+        public DbSet<RyhmanJasenet> RyhmanJasenet { get; set; }
         public DbSet<Tapahtuma> Tapahtuma { get; set; }
         public DbSet<Tapahtumatyyppi> Tapahtumatyyppi { get; set; }
     }

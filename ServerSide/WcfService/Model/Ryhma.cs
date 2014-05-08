@@ -7,26 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServerSide
+namespace WcfService.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Tapahtuma
+    public partial class Ryhma
     {
-        public Tapahtuma()
+        public Ryhma()
         {
-            this.KayttajanTapahtumat = new HashSet<KayttajanTapahtumat>();
+            this.RyhmanJasenet = new HashSet<RyhmanJasenet>();
         }
     
-        public int TapahtumaId { get; set; }
-        public int TyyppiId { get; set; }
-        public System.DateTime AlkamisAika { get; set; }
-        public System.DateTime PaattymisAika { get; set; }
-        public string Paikka { get; set; }
+        public int RyhmaId { get; set; }
         public string Nimi { get; set; }
     
-        public virtual ICollection<KayttajanTapahtumat> KayttajanTapahtumat { get; set; }
-        public virtual Tapahtumatyyppi Tapahtumatyyppi { get; set; }
+        public virtual ICollection<RyhmanJasenet> RyhmanJasenet { get; set; }
     }
 }
