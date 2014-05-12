@@ -25,6 +25,13 @@ namespace DB_Solution
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new TestitauluMap());
+            modelBuilder.Configurations.Add(new AttendeesMap());
+            modelBuilder.Configurations.Add(new AttendeeStatusMap());
+            modelBuilder.Configurations.Add(new EventMap());
+            modelBuilder.Configurations.Add(new EventTypeMap());
+            modelBuilder.Configurations.Add(new GroupMap());
+            modelBuilder.Configurations.Add(new GroupMembersMap());
+            modelBuilder.Configurations.Add(new UserMap());
         }
 
 

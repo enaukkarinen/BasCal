@@ -21,6 +21,12 @@ namespace Service_Solution
         {
             return db.FetchDataAsString();
         }
+
+        public List<Testitaulu> FetchThroughClassLibAndFromDBAsTable()
+        {
+            return db.FetchDataAsTableModel().ToList();
+        }
+
         #endregion
 
         public string GetData(int value)

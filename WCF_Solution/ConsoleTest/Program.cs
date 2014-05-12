@@ -13,7 +13,6 @@ namespace ConsoleTest
         static void Main(string[] args)
         {
             Console.WriteLine("Starting host...");
-
             ServiceSolutionRef.DB_ServiceClient host = new ServiceSolutionRef.DB_ServiceClient();
             host.Open();
             Console.WriteLine("Host Open!");
@@ -27,30 +26,16 @@ namespace ConsoleTest
             {
                 Console.WriteLine(test);
             }
-            
-            /*
-            dbRepository repo = new dbRepository();
-            List<string> nimet = repo.FetchDataAsString();
 
-            Console.Write("Haetaan List<string>: ... ");
-            Console.WriteLine("Ok!");
-            foreach (var str in nimet)
+            Console.WriteLine();
+
+            List<Testitaulu> taulut = host.FetchThroughClassLibAndFromDBAsTable().ToList();
+            Console.WriteLine("host.FetchThroughClassLibAndFromDBAsTable().ToList(); Ok!");
+            Console.WriteLine();
+            foreach (Testitaulu taulu in taulut)
             {
-                Console.WriteLine(str);
+                Console.WriteLine("Id: " + taulu.Id + ", Nimi: " + taulu.Nimi);
             }
-            Console.WriteLine("Paina <Enter>");
-            Console.ReadLine();
-
-            Console.Write("Haetaan IQueryable<Testitaulu>: ...");
-            List<Testitaulu> taulut = repo.FetchDataAsTableModel().ToList();
-            Console.WriteLine("Ok!");
-            foreach (Testitaulu x in taulut)
-            {
-                Console.WriteLine("Id: " + x.Id + " Nimi: " + x.Nimi);
-            }
-            Console.WriteLine("Paina <Enter>");
-             */
-
             Console.ReadLine();
         }
     }

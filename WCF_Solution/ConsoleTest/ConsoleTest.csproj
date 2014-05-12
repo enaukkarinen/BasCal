@@ -62,9 +62,8 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Service References\ServiceSolutionRef\ConsoleTest.ServiceSolutionRef.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <None Include="Properties\DataSources\DB_Solution.Testitaulu.datasource" />
+    <None Include="Properties\DataSources\Service_Solution.CompositeType.datasource" />
     <None Include="Service References\ServiceSolutionRef\DB_Service.wsdl" />
     <None Include="Service References\ServiceSolutionRef\item.xsd">
       <SubType>Designer</SubType>
@@ -76,6 +75,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceSolutionRef\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSolutionRef\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceSolutionRef\item5.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

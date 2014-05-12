@@ -9,70 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace ConsoleTest.ServiceSolutionRef {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/Service_Solution")]
-    [System.SerializableAttribute()]
-    public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool BoolValueField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StringValueField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BoolValue {
-            get {
-                return this.BoolValueField;
-            }
-            set {
-                if ((this.BoolValueField.Equals(value) != true)) {
-                    this.BoolValueField = value;
-                    this.RaisePropertyChanged("BoolValue");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StringValue {
-            get {
-                return this.StringValueField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StringValueField, value) != true)) {
-                    this.StringValueField = value;
-                    this.RaisePropertyChanged("StringValue");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSolutionRef.IDB_Service")]
@@ -84,6 +21,12 @@ namespace ConsoleTest.ServiceSolutionRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDB_Service/FetchThroughClassLibAndFromDBAsString", ReplyAction="http://tempuri.org/IDB_Service/FetchThroughClassLibAndFromDBAsStringResponse")]
         System.Threading.Tasks.Task<string[]> FetchThroughClassLibAndFromDBAsStringAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDB_Service/FetchThroughClassLibAndFromDBAsTable", ReplyAction="http://tempuri.org/IDB_Service/FetchThroughClassLibAndFromDBAsTableResponse")]
+        DB_Solution.Testitaulu[] FetchThroughClassLibAndFromDBAsTable();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDB_Service/FetchThroughClassLibAndFromDBAsTable", ReplyAction="http://tempuri.org/IDB_Service/FetchThroughClassLibAndFromDBAsTableResponse")]
+        System.Threading.Tasks.Task<DB_Solution.Testitaulu[]> FetchThroughClassLibAndFromDBAsTableAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDB_Service/GetData", ReplyAction="http://tempuri.org/IDB_Service/GetDataResponse")]
         string GetData(int value);
         
@@ -91,10 +34,10 @@ namespace ConsoleTest.ServiceSolutionRef {
         System.Threading.Tasks.Task<string> GetDataAsync(int value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDB_Service/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IDB_Service/GetDataUsingDataContractResponse")]
-        ConsoleTest.ServiceSolutionRef.CompositeType GetDataUsingDataContract(ConsoleTest.ServiceSolutionRef.CompositeType composite);
+        Service_Solution.CompositeType GetDataUsingDataContract(Service_Solution.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDB_Service/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IDB_Service/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<ConsoleTest.ServiceSolutionRef.CompositeType> GetDataUsingDataContractAsync(ConsoleTest.ServiceSolutionRef.CompositeType composite);
+        System.Threading.Tasks.Task<Service_Solution.CompositeType> GetDataUsingDataContractAsync(Service_Solution.CompositeType composite);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -132,6 +75,14 @@ namespace ConsoleTest.ServiceSolutionRef {
             return base.Channel.FetchThroughClassLibAndFromDBAsStringAsync();
         }
         
+        public DB_Solution.Testitaulu[] FetchThroughClassLibAndFromDBAsTable() {
+            return base.Channel.FetchThroughClassLibAndFromDBAsTable();
+        }
+        
+        public System.Threading.Tasks.Task<DB_Solution.Testitaulu[]> FetchThroughClassLibAndFromDBAsTableAsync() {
+            return base.Channel.FetchThroughClassLibAndFromDBAsTableAsync();
+        }
+        
         public string GetData(int value) {
             return base.Channel.GetData(value);
         }
@@ -140,12 +91,59 @@ namespace ConsoleTest.ServiceSolutionRef {
             return base.Channel.GetDataAsync(value);
         }
         
-        public ConsoleTest.ServiceSolutionRef.CompositeType GetDataUsingDataContract(ConsoleTest.ServiceSolutionRef.CompositeType composite) {
+        public Service_Solution.CompositeType GetDataUsingDataContract(Service_Solution.CompositeType composite) {
             return base.Channel.GetDataUsingDataContract(composite);
         }
         
-        public System.Threading.Tasks.Task<ConsoleTest.ServiceSolutionRef.CompositeType> GetDataUsingDataContractAsync(ConsoleTest.ServiceSolutionRef.CompositeType composite) {
+        public System.Threading.Tasks.Task<Service_Solution.CompositeType> GetDataUsingDataContractAsync(Service_Solution.CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSolutionRef.IClientAccessPolicy")]
+    public interface IClientAccessPolicy {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientAccessPolicy/GetClientAccessPolicy", ReplyAction="http://tempuri.org/IClientAccessPolicy/GetClientAccessPolicyResponse")]
+        System.IO.Stream GetClientAccessPolicy();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClientAccessPolicy/GetClientAccessPolicy", ReplyAction="http://tempuri.org/IClientAccessPolicy/GetClientAccessPolicyResponse")]
+        System.Threading.Tasks.Task<System.IO.Stream> GetClientAccessPolicyAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IClientAccessPolicyChannel : ConsoleTest.ServiceSolutionRef.IClientAccessPolicy, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class ClientAccessPolicyClient : System.ServiceModel.ClientBase<ConsoleTest.ServiceSolutionRef.IClientAccessPolicy>, ConsoleTest.ServiceSolutionRef.IClientAccessPolicy {
+        
+        public ClientAccessPolicyClient() {
+        }
+        
+        public ClientAccessPolicyClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public ClientAccessPolicyClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ClientAccessPolicyClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public ClientAccessPolicyClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public System.IO.Stream GetClientAccessPolicy() {
+            return base.Channel.GetClientAccessPolicy();
+        }
+        
+        public System.Threading.Tasks.Task<System.IO.Stream> GetClientAccessPolicyAsync() {
+            return base.Channel.GetClientAccessPolicyAsync();
         }
     }
 }

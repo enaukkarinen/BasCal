@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DB_Solution;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -13,6 +14,9 @@ namespace Service_Solution
     {
         [OperationContract]
         List<string> FetchThroughClassLibAndFromDBAsString();
+
+        [OperationContract]
+        List<Testitaulu> FetchThroughClassLibAndFromDBAsTable();
 
         [OperationContract]
         string GetData(int value);
