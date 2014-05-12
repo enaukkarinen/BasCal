@@ -11,14 +11,21 @@ namespace WcfService.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+
+    [DataContract]
     public partial class KayttajanTapahtumat
     {
+        [DataMember]
         public int TapahtumaId { get; set; }
+        [DataMember]
         public int KayttajaId { get; set; }
+        [DataMember]
         public string Rooli { get; set; }
-    
+
+        [DataMember]
         public virtual Kayttaja Kayttaja { get; set; }
+        [DataMember]
         public virtual Tapahtuma Tapahtuma { get; set; }
     }
 }

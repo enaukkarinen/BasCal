@@ -95,8 +95,11 @@
         <!-- Header -->
         <Grid x:Name="headerGrid" Grid.Row="0" Background="#FFB5B5B5">
             <TextBox Width="300" Height="60"/>
-            <Button x:Name="btn1" Height="60" Margin="1115,70,505,70" Click="btn1_Click" Content="Returns string from WCF"/>
-            <Button x:Name="btn2" Content="Returns List&lt;string&gt; WCF" HorizontalAlignment="Left" VerticalAlignment="Top" Width="284" Margin="386,70,0,0" Height="60" Click="btn2_Click"/>
+            <Grid Margin="10" Width="600" Height="200" HorizontalAlignment="Left" Background="#FF939393">
+                <TextBlock Text="TestiBlock" FontSize="33" FontWeight="Bold" FontFamily="Segoe UI"></TextBlock>
+                <TextBlock x:Name="testBlock" Width="500" Height="100" Margin="15,50,0,15" HorizontalAlignment="Left" Foreground="#FFFF39FA" FontSize="8" FontFamily="Segoe UI"></TextBlock>
+                <Button x:Name="btn1" Margin="188,10,173,151" Click="btn1_Click" Content="Returns List&lt;string&gt; from WCF"/>
+            </Grid>
         </Grid>
 
         <!-- Content -->

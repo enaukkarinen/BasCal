@@ -11,7 +11,8 @@ VAR Tapahtuma BASE RELATION {
 	AlkamisAika DATETIME NOT NULL,
 	PaattymisAika DATETIME NOT NULL,
 	Paikka VARCHAR(100),
-	Nimi VARCHAR(100) NOT NULL
+	Nimi VARCHAR(100) NOT NULL,
+	Kuvaus VARCHAR(300)
 }
 PRIMARY KEY { TapahtumaId },
 FOREIGN KEY { TyyppiId } REFERENCES Tapahtumatyyppi { TyyppiId }
@@ -39,7 +40,8 @@ PRIMARY KEY { RyhmaId }
 
 VAR RyhmanJasenet BASE RELATION {
 	KayttajaId INT NOT NULL,
-	RyhmaId INT NOT NULL
+	RyhmaId INT NOT NULL,
+	Rooli VARCHAR(50),
 }
 PRIMARY KEY { KayttajaId, RyhmaId },
 FOREIGN KEY { KayttajaId } REFERENCES Kayttaja {KayttajaId },

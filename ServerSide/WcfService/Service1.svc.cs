@@ -18,6 +18,17 @@ namespace WcfService
     {
         private Kalenteri_DBEntities entity = new Kalenteri_DBEntities();
 
+        public List<string> HaeKayttajanTapahtumienNimet(int id)
+        {
+            return entity.KayttajanTapahtumat.Where(k => k.KayttajaId == id).Select(k => k.Tapahtuma.Nimi).ToList();
+        }
+
+        public List<Ryhma> HaeKayttajanRyhmat(int id)
+        {
+            return entity.RyhmanJasenet.Where(k => k.KayttajaId == id).Select(k => k.Ryhma).ToList();
+        }
+
+
         public KayttajanKalenteri HaeKayttajanKalenteri(int id)
         {
             KayttajanKalenteri kalenteri = new KayttajanKalenteri();

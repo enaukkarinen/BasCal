@@ -11,22 +11,30 @@ namespace WcfService.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     
+    [DataContract]
     public partial class Tapahtuma
     {
         public Tapahtuma()
         {
-            this.KayttajanTapahtumat = new HashSet<KayttajanTapahtumat>();
+            this.KayttajanTapahtumat = new List<KayttajanTapahtumat>();
         }
-    
+        [DataMember]
         public int TapahtumaId { get; set; }
+        [DataMember]
         public int TyyppiId { get; set; }
+        [DataMember]
         public System.DateTime AlkamisAika { get; set; }
+        [DataMember]
         public System.DateTime PaattymisAika { get; set; }
+        [DataMember]
         public string Paikka { get; set; }
+        [DataMember]
         public string Nimi { get; set; }
-    
+        [DataMember]
         public virtual ICollection<KayttajanTapahtumat> KayttajanTapahtumat { get; set; }
+        [DataMember]
         public virtual Tapahtumatyyppi Tapahtumatyyppi { get; set; }
     }
 }

@@ -1,0 +1,6 @@
+this.totable(dbo.table) or (table)
+
+
+  <connectionStrings>
+    <add name="HarkkaprojektiDB" connectionString="Data Source=localhost;Initial Catalog=HarkkaprojektiDB;Integrated Security=True" providerName="System.Data.SqlClient" />
+  </connectionStrings>

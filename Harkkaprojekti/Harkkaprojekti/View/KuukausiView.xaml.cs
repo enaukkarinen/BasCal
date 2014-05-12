@@ -10,7 +10,9 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Navigation;
-using Harkkaprojekti.ServiceReference1;
+
+using Harkkaprojekti.WCF_Solution_ServiceRef;
+
 namespace Harkkaprojekti.View
 {
     public partial class KuukausiView : Page
@@ -25,34 +27,27 @@ namespace Harkkaprojekti.View
                 c.CanUserSort = false;
             }
 
-
-            asiakas = new ServiceReference1.Service1Client();
-            asiakas.HaeKayttajanNimiCompleted += asiakas_HaeKayttajanNimiCompleted;
-            asiakas.haeKaikkienKayttajienNimetCompleted += asiakas_haeKaikkienKayttajienNimetCompleted;
+            
         }
 
-        void asiakas_haeKaikkienKayttajienNimetCompleted(object sender, haeKaikkienKayttajienNimetCompletedEventArgs e)
+        void client_FetchThroughClassLibAndFromDBAsStringCompleted(object sender, FetchThroughClassLibAndFromDBAsStringCompletedEventArgs e)
         {
-            foreach (var nimi in e.Result)
+            List<string> lista = e.Result.ToList();
+
+            foreach (string nimi in lista)
             {
-                MessageBox.Show(nimi);
+                testBlock.Text = "";
+                testBlock.Text += nimi + " \r\n ";
             }
-        }
-
-        void asiakas_HaeKayttajanNimiCompleted(object sender, HaeKayttajanNimiCompletedEventArgs e)
-        {
-            MessageBox.Show(e.Result);
         }
 
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
-            asiakas.HaeKayttajanNimiAsync(1);
+            Harkkaprojekti.WCF_Solution_ServiceRef.DB_ServiceClient client = new DB_ServiceClient();
+            client.FetchThroughClassLibAndFromDBAsStringCompleted += client_FetchThroughClassLibAndFromDBAsStringCompleted;
+            client.FetchThroughClassLibAndFromDBAsStringAsync();
         }
 
-        private void btn2_Click(object sender, RoutedEventArgs e)
-        {
-            asiakas.haeKaikkienKayttajienNimetAsync();
-        }
 
 
 

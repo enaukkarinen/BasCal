@@ -11,17 +11,21 @@ namespace WcfService.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Runtime.Serialization;
+    [DataContract]
     public partial class Tapahtumatyyppi
     {
         public Tapahtumatyyppi()
         {
-            this.Tapahtuma = new HashSet<Tapahtuma>();
+            this.Tapahtuma = new List<Tapahtuma>();
         }
-    
+
+        [DataMember]
         public int TyyppiId { get; set; }
+        [DataMember]
         public string Nimi { get; set; }
-    
+
+        [DataMember]
         public virtual ICollection<Tapahtuma> Tapahtuma { get; set; }
     }
 }

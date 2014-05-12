@@ -11,17 +11,22 @@ namespace WcfService.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     
+    [DataContract]
     public partial class Kayttaja
     {
         public Kayttaja()
         {
-            this.KayttajanTapahtumat = new HashSet<KayttajanTapahtumat>();
-            this.RyhmanJasenet = new HashSet<RyhmanJasenet>();
+            this.KayttajanTapahtumat = new List<KayttajanTapahtumat>();
+            this.RyhmanJasenet = new List<RyhmanJasenet>();
         }
     
+        [DataMember]
         public int KayttajaId { get; set; }
+        [DataMember]
         public string Etunimi { get; set; }
+        [DataMember]
         public string Sukunimi { get; set; }
     
         public virtual ICollection<KayttajanTapahtumat> KayttajanTapahtumat { get; set; }

@@ -14,6 +14,12 @@ namespace WcfService
     public interface IService1
     {
         [OperationContract]
+        List<string> HaeKayttajanTapahtumienNimet(int id);
+
+        [OperationContract]
+        List<Ryhma> HaeKayttajanRyhmat(int id);
+        
+        [OperationContract]
         KayttajanKalenteri HaeKayttajanKalenteri(int id);
 
         [OperationContract]

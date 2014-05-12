@@ -96,6 +96,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\WCF_Solution_ServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\KuukausiViewModel.cs" />
     <Compile Include="ViewModel\ViikkoViewModel.cs" />
     <Compile Include="View\KuukausiView.xaml.cs">
@@ -136,6 +141,17 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\WCF_Solution_ServiceRef\DB_Service.wsdl" />
+    <None Include="Service References\WCF_Solution_ServiceRef\Harkkaprojekti.WCF_Solution_ServiceRef.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCF_Solution_ServiceRef\item.disco" />
+    <None Include="Service References\WCF_Solution_ServiceRef\configuration91.svcinfo" />
+    <None Include="Service References\WCF_Solution_ServiceRef\configuration.svcinfo" />
+    <None Include="Service References\WCF_Solution_ServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ServiceReferences.ClientConfig" />
     <None Include="Service References\ServiceReference1\Service1.wsdl" />
     <None Include="Service References\ServiceReference1\Service1.xsd">
@@ -147,12 +163,25 @@
     <None Include="Service References\ServiceReference1\Service12.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\WCF_Solution_ServiceRef\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WCF_Solution_ServiceRef\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WCF_Solution_ServiceRef\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\WCF_Solution_ServiceRef\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ServiceReference1\" />
+    <WCFMetadataStorage Include="Service References\WCF_Solution_ServiceRef\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
