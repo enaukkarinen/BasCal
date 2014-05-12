@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DB_Solution;
+using System.ServiceModel;
 
 namespace ConsoleTest
 {
@@ -11,13 +12,17 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            ServiceSolutionRef.DB_ServiceClient client = new ServiceSolutionRef.DB_ServiceClient();
-            client.Open();
-            Console.WriteLine("Client Open!");
+            Console.WriteLine("Starting host...");
 
-            
-            List<string> lista = client.FetchThroughClassLibAndFromDBAsString().ToList();
-            Console.WriteLine("client.FetchThroughClassLibAndFromDBAsString().ToList(); Ok!");
+            ServiceSolutionRef.DB_ServiceClient host = new ServiceSolutionRef.DB_ServiceClient();
+            host.Open();
+            Console.WriteLine("Host Open!");
+
+
+            List<string> lista = host.FetchThroughClassLibAndFromDBAsString().ToList();
+            Console.WriteLine();
+            Console.WriteLine("host.FetchThroughClassLibAndFromDBAsString().ToList(); Ok!");
+            Console.WriteLine();
             foreach (string test in lista)
             {
                 Console.WriteLine(test);

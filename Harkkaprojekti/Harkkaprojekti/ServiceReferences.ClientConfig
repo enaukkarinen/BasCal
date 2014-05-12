@@ -2,10 +2,6 @@
     <system.serviceModel>
         <bindings>
             <basicHttpBinding>
-                <binding name="BasicHttpBinding_IService1" maxBufferSize="2147483647"
-                    maxReceivedMessageSize="2147483647">
-                    <security mode="None" />
-                </binding>
                 <binding name="BasicHttpBinding_IDB_Service" maxBufferSize="2147483647"
                     maxReceivedMessageSize="2147483647">
                     <security mode="None" />
@@ -13,12 +9,9 @@
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://localhost:51223/Service1.svc" binding="basicHttpBinding"
-                bindingConfiguration="BasicHttpBinding_IService1" contract="ServiceReference1.IService1"
-                name="BasicHttpBinding_IService1" />
-            <endpoint address="http://localhost:8733/Service_Solution/DB_Service/"
-                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IDB_Service"
-                contract="WCF_Solution_ServiceRef.IDB_Service" name="BasicHttpBinding_IDB_Service" />
+            <endpoint address="http://localhost:9001/BasCalDB" binding="basicHttpBinding"
+                bindingConfiguration="BasicHttpBinding_IDB_Service" contract="WCF_Solution_Ref.IDB_Service"
+                name="BasicHttpBinding_IDB_Service" />
         </client>
     </system.serviceModel>
 </configuration>

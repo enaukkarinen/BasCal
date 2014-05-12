@@ -84,6 +84,10 @@
       <Project>{48eaf8ae-5786-4c63-a935-8c65fd42402f}</Project>
       <Name>DB_Solution</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Service_Solution\Service_Solution.csproj">
+      <Project>{15b3e0d2-6217-493a-a690-158c497f5318}</Project>
+      <Name>Service_Solution</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -105,9 +109,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="clientaccesspolicy.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

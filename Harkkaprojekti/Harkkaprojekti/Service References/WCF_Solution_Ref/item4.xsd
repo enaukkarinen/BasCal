@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8733/Service_Solution/DB_Service/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import schemaLocation="http://localhost:8733/Service_Solution/DB_Service/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service_Solution" />
+  <xs:import schemaLocation="http://localhost:9001/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:9001/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service_Solution" />
+  <xs:import schemaLocation="http://localhost:9001/?xsd=xsd4" namespace="http://schemas.microsoft.com/Message" />
   <xs:element name="FetchThroughClassLibAndFromDBAsString">
     <xs:complexType>
       <xs:sequence />
@@ -39,6 +40,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Service_Solution" minOccurs="0" name="GetDataUsingDataContractResult" nillable="true" type="q3:CompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClientAccessPolicy">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClientAccessPolicyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.microsoft.com/Message" name="GetClientAccessPolicyResult" type="q4:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -11,13 +11,12 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Navigation;
 
-using Harkkaprojekti.WCF_Solution_ServiceRef;
+using Harkkaprojekti.WCF_Solution_Ref;
 
 namespace Harkkaprojekti.View
 {
     public partial class KuukausiView : Page
     {
-        ServiceReference1.Service1Client asiakas;
 
         public KuukausiView()
         {
@@ -34,16 +33,16 @@ namespace Harkkaprojekti.View
         {
             List<string> lista = e.Result.ToList();
 
+            testBlock.Text = "";
             foreach (string nimi in lista)
             {
-                testBlock.Text = "";
                 testBlock.Text += nimi + " \r\n ";
             }
         }
 
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
-            Harkkaprojekti.WCF_Solution_ServiceRef.DB_ServiceClient client = new DB_ServiceClient();
+            Harkkaprojekti.WCF_Solution_Ref.DB_ServiceClient client = new DB_ServiceClient();
             client.FetchThroughClassLibAndFromDBAsStringCompleted += client_FetchThroughClassLibAndFromDBAsStringCompleted;
             client.FetchThroughClassLibAndFromDBAsStringAsync();
         }

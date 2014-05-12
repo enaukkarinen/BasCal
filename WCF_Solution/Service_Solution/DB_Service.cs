@@ -5,18 +5,24 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using DB_Solution;
+using System.IO;
+using System.ServiceModel.Web;
 
 namespace Service_Solution
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
-    public class DB_Service : IDB_Service
+    public class DB_Service : IDB_Service, IClientAccessPolicy
     {
+
+        #region DB_Service Members
         dbRepository db = new dbRepository();
 
         public List<string> FetchThroughClassLibAndFromDBAsString()
         {
             return db.FetchDataAsString();
         }
+        #endregion
+
         public string GetData(int value)
         {
             return string.Format("You entered: {0}", value);
@@ -34,5 +40,31 @@ namespace Service_Solution
             }
             return composite;
         }
+
+        #region IClientAccessPolicy Members
+
+        [OperationBehavior]
+        public Stream GetClientAccessPolicy()
+        {
+            const string result = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<access-policy>
+    <cross-domain-access>
+        <policy>
+            <allow-from http-request-headers=""*"">
+                <domain uri=""*""/>
+            </allow-from>
+            <grant-to>
+                <resource path=""/"" include-subpaths=""true""/>
+            </grant-to>
+        </policy>
+    </cross-domain-access>
+</access-policy>";
+
+            if (WebOperationContext.Current != null)
+                WebOperationContext.Current.OutgoingResponse.ContentType = "application/xml";
+            return new MemoryStream(Encoding.UTF8.GetBytes(result));
+        }
+
+        #endregion
     }
 }
