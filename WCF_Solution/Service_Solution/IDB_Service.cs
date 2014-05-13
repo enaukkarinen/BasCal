@@ -12,11 +12,21 @@ namespace Service_Solution
     [ServiceContract]
     public interface IDB_Service
     {
+        #region Events
+
+        [OperationContract]
+        List<Event> FetchEvents();
+        #endregion
+
+        #region Testitaulu
+
         [OperationContract]
         List<string> FetchThroughClassLibAndFromDBAsString();
 
         [OperationContract]
         List<Testitaulu> FetchThroughClassLibAndFromDBAsTable();
+        
+        #endregion
 
         [OperationContract]
         string GetData(int value);

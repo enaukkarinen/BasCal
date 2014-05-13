@@ -8,7 +8,7 @@ namespace DB_Solution
 {
     public partial class Event
     {
-        public int EventId { get; set; }
+        public Guid EventId { get; set; }
         public int TypeId { get; set; }
         public string Name { get; set; }
         public string Summary { get; set; }

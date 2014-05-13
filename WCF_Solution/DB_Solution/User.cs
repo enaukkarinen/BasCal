@@ -7,7 +7,7 @@ namespace DB_Solution
 {
     public partial class User
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public string UserName { get; set; }
 
         public virtual ICollection<Attendees> Attendees { get; set; }

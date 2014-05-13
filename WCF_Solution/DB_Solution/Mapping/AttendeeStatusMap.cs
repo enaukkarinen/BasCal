@@ -14,7 +14,7 @@ namespace DB_Solution.Mapping
         {
             this.HasKey(a => a.StatusId);
 
-            this.Property(a => a.StatusId).IsRequired();
+            this.Property(a => a.StatusId).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             this.Property(a => a.Name).IsRequired().HasMaxLength(255);
 
             this.ToTable("AttendeeStatus");

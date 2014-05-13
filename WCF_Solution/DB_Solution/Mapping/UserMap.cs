@@ -14,7 +14,7 @@ namespace DB_Solution.Mapping
         {
             this.HasKey(u => u.UserId);
 
-            this.Property(u => u.UserId).IsRequired();
+            this.Property(u => u.UserId).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(u => u.UserName).IsRequired().HasMaxLength(255);
 
             this.ToTable("User");

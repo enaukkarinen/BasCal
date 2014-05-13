@@ -62,6 +62,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\DB_Solution.Event.datasource" />
     <None Include="Properties\DataSources\DB_Solution.Testitaulu.datasource" />
     <None Include="Properties\DataSources\Service_Solution.CompositeType.datasource" />
     <None Include="Service References\ServiceSolutionRef\DB_Service.wsdl" />

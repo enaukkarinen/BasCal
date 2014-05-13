@@ -14,8 +14,8 @@ namespace DB_Solution.Mapping
         {
             this.HasKey(a => new { a.UserId, a.EventId });
 
-            this.Property(a => a.UserId).IsRequired();
-            this.Property(a => a.EventId).IsRequired();
+            this.Property(a => a.UserId).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(a => a.EventId).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(a => a.AttendeeStatusId).IsRequired();
 
             this.ToTable("Attendees");

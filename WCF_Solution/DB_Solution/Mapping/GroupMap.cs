@@ -14,7 +14,7 @@ namespace DB_Solution.Mapping
         {
             this.HasKey(g => g.GroupId);
 
-            this.Property(g => g.GroupId).IsRequired();
+            this.Property(g => g.GroupId).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(g => g.Name).IsRequired().HasMaxLength(255);
 
             this.ToTable("Group");

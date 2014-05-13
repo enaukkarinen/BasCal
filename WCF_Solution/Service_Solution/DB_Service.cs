@@ -13,9 +13,10 @@ namespace Service_Solution
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class DB_Service : IDB_Service, IClientAccessPolicy
     {
+        dbRepository db = new dbRepository();
 
         #region DB_Service Members
-        dbRepository db = new dbRepository();
+
 
         public List<string> FetchThroughClassLibAndFromDBAsString()
         {
@@ -28,6 +29,17 @@ namespace Service_Solution
         }
 
         #endregion
+
+        #region Events
+
+        public List<Event> FetchEvents()
+        {
+            var paluu = db.FetchEvents().ToList();
+            return paluu;
+        }
+
+        #endregion
+
 
         public string GetData(int value)
         {

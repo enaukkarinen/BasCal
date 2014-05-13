@@ -15,6 +15,12 @@ namespace ConsoleTest.ServiceSolutionRef {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceSolutionRef.IDB_Service")]
     public interface IDB_Service {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDB_Service/FetchEvents", ReplyAction="http://tempuri.org/IDB_Service/FetchEventsResponse")]
+        DB_Solution.Event[] FetchEvents();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDB_Service/FetchEvents", ReplyAction="http://tempuri.org/IDB_Service/FetchEventsResponse")]
+        System.Threading.Tasks.Task<DB_Solution.Event[]> FetchEventsAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDB_Service/FetchThroughClassLibAndFromDBAsString", ReplyAction="http://tempuri.org/IDB_Service/FetchThroughClassLibAndFromDBAsStringResponse")]
         string[] FetchThroughClassLibAndFromDBAsString();
         
@@ -65,6 +71,14 @@ namespace ConsoleTest.ServiceSolutionRef {
         
         public DB_ServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public DB_Solution.Event[] FetchEvents() {
+            return base.Channel.FetchEvents();
+        }
+        
+        public System.Threading.Tasks.Task<DB_Solution.Event[]> FetchEventsAsync() {
+            return base.Channel.FetchEventsAsync();
         }
         
         public string[] FetchThroughClassLibAndFromDBAsString() {

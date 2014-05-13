@@ -14,8 +14,8 @@ namespace DB_Solution.Mapping
         {
             this.HasKey(g => new { g.GroupId, g.UserId});
 
-            this.Property(g => g.GroupId).IsRequired();
-            this.Property(g => g.UserId).IsRequired();
+            this.Property(g => g.GroupId).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(g => g.UserId).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(g => g.Role).IsOptional().HasMaxLength(50);
 
             this.ToTable("GroupMembers");

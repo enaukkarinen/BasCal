@@ -93,7 +93,7 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid x:Name="headerGrid" Grid.Row="0" Background="#FFB5B5B5">
+        <Grid x:Name="headerGrid" Grid.Row="0" Background="Gray">
             <TextBox Width="300" Height="60"/>
             <Grid Margin="10" Width="600" Height="200" HorizontalAlignment="Left" Background="#FF939393">
                 <TextBlock Text="TestiBlock" FontSize="33" FontWeight="Bold" FontFamily="Segoe UI"></TextBlock>
@@ -104,22 +104,44 @@
 
         <!-- Content -->
         <Grid x:Name="mainGrid" Grid.Row="1"  Background="#FFD8D8D8" DataContext="{Binding Source={StaticResource ResourceKey=kk}}">
-
-            <sdk:DataGrid x:Name="kalenteriGrid" 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1500" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Column="0">
+                <sdk:DataGrid x:Name="kalenteriGrid" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" 
-                Margin="25" Width="1750" Height="950" RowHeight="200"
+                Margin="25"  Height="950" RowHeight="200"
                 RowStyle="{StaticResource MyCustomRow}"
                 AutoGenerateColumns="False" ItemsSource="{Binding Viikot}" IsReadOnly="False">
-                <sdk:DataGrid.Columns >
-                    <sdk:DataGridTextColumn Binding="{Binding Maanantai.PaivanTapahtumat[0].Nimi}" Header="Maanantai" Width="250"/>
-                    <sdk:DataGridTextColumn Binding="{Binding Tiistai.PaivanTapahtumat[0].Nimi}" Header="Tiistai" Width="250"/>
-                    <sdk:DataGridTextColumn Binding="{Binding Keskiviikko.PaivanTapahtumat[0].Nimi}" Header="Keskiviikko" Width="250"/>
-                    <sdk:DataGridTextColumn Binding="{Binding Torstai.PaivanTapahtumat[0].Nimi}" Header="Torstai" Width="250"/>
-                    <sdk:DataGridTextColumn Binding="{Binding Perjantai.PaivanTapahtumat[0].Nimi}" Header="Perjantai" Width="250"/>
-                    <sdk:DataGridTextColumn Binding="{Binding Lauantai.PaivanTapahtumat[0].Nimi}"  Header="Lauantai" Width="250"/>
-                    <sdk:DataGridTextColumn Binding="{Binding Sunnuntai.PaivanTapahtumat[0].Nimi}" Header="Sunnuntai" Width="250"/>
-                </sdk:DataGrid.Columns>
-            </sdk:DataGrid>
+                    <sdk:DataGrid.Columns >
+                        <sdk:DataGridTextColumn Binding="{Binding Maanantai.PaivanTapahtumat[0].Nimi}" Header="Maanantai" Width="250"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Tiistai.PaivanTapahtumat[0].Nimi}" Header="Tiistai" Width="250"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Keskiviikko.PaivanTapahtumat[0].Nimi}" Header="Keskiviikko" Width="250"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Torstai.PaivanTapahtumat[0].Nimi}" Header="Torstai" Width="250"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Perjantai.PaivanTapahtumat[0].Nimi}" Header="Perjantai" Width="250"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Lauantai.PaivanTapahtumat[0].Nimi}"  Header="Lauantai" Width="250"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Sunnuntai.PaivanTapahtumat[0].Nimi}" Header="Sunnuntai" Width="250"/>
+                    </sdk:DataGrid.Columns>
+                </sdk:DataGrid>
+
+            </Grid>
+            
+            <StackPanel Grid.Column="1" Background="Gray">
+                <TextBlock Text="upcoming events" FontFamily="Segoe UI" FontSize="48" VerticalAlignment="Top" Height="70" Margin="15"/>
+                <Grid Margin="15" VerticalAlignment="Top" Height="500">
+                    <ListBox x:Name="listboxUpcomingEvents" ItemsSource="{Binding Viikot}" Margin="0" Background="Transparent">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path= Viikk}"></TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </StackPanel>
+            
+            
 
         </Grid>
     </Grid>
