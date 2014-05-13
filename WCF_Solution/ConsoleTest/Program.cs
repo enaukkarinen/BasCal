@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DB_Solution;
 using System.ServiceModel;
+using ConsoleTest.DB_Service_Reference;
 
 namespace ConsoleTest
 {
@@ -20,25 +21,24 @@ namespace ConsoleTest
             Console.WriteLine();
             #endregion
 
-            
-            
+
+
             Console.WriteLine("Starting host...");
-            ServiceSolutionRef.DB_ServiceClient host = new ServiceSolutionRef.DB_ServiceClient();
+            DB_Service_Reference.DB_ServiceClient host = new DB_Service_Reference.DB_ServiceClient();
             host.Open();
             Console.WriteLine("Host Open!");
             Console.WriteLine();
 
-            Console.WriteLine();
-
-            List<Testitaulu> taulut = host.FetchThroughClassLibAndFromDBAsTable().ToList();
-            Console.WriteLine("host.FetchThroughClassLibAndFromDBAsTable().ToList(); Ok!");
-            Console.WriteLine();
-            foreach (Testitaulu taulu in taulut)
+            var upevents = host.FetchUpcomingEvents();
+            foreach (var eve in upevents)
             {
-                Console.WriteLine("Id: " + taulu.Id + ", Nimi: " + taulu.Nimi);
+                Console.WriteLine("Name: " + eve.Name);
+                Console.WriteLine("Summary: " + eve.Summary);
+                Console.WriteLine("Location: " + eve.Location);
+                Console.WriteLine("StartTime: " + eve.StartTime.ToShortDateString() + " - " + eve.StartTime.ToShortTimeString());
+                Console.WriteLine("EndTime: " + eve.EndTime.ToShortDateString() + " - " + eve.EndTime.ToShortTimeString());
+                Console.WriteLine();
             }
-
-            host.FetchEvents();
             /*
             var events = host.FetchEvents();
             Console.WriteLine("host.FetchEvents().ToList(); Ok!");

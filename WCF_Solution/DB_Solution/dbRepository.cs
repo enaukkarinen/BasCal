@@ -8,7 +8,9 @@ namespace DB_Solution
 {
     public class dbRepository
     {
+
         private dbContext db = new dbContext();
+        
 
         #region Testitaulu
 
@@ -28,7 +30,8 @@ namespace DB_Solution
 
         public IQueryable<Event> FetchEvents()
         {
-            return db.Events;
+            var paluu = db.Events;
+            return paluu;
         }
         public Event FetchEventByGuid(Guid id)
         {

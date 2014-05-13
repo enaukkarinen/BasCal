@@ -1,10 +1,10 @@
-﻿using DB_Solution;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using Service_Solution.DTO_Models;
 
 namespace Service_Solution
 {
@@ -15,26 +15,13 @@ namespace Service_Solution
         #region Events
 
         [OperationContract]
-        List<Event> FetchEvents();
-        #endregion
-
-        #region Testitaulu
+        List<UpcomingEventDTO> FetchUpcomingEvents();
 
         [OperationContract]
-        List<string> FetchThroughClassLibAndFromDBAsString();
-
-        [OperationContract]
-        List<Testitaulu> FetchThroughClassLibAndFromDBAsTable();
+        List<EventDTO> FetchEvents();
         
         #endregion
 
-        [OperationContract]
-        string GetData(int value);
-
-        [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
-
-        // TODO: Add your service operations here
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

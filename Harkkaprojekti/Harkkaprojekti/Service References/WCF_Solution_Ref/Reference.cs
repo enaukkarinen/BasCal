@@ -17,35 +17,125 @@ namespace Harkkaprojekti.WCF_Solution_Ref {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/Service_Solution")]
-    public partial class CompositeType : object, System.ComponentModel.INotifyPropertyChanged {
+    [System.Runtime.Serialization.DataContractAttribute(Name="UpcomingEventDTO", Namespace="http://schemas.datacontract.org/2004/07/Service_Solution.DTO_Models")]
+    public partial class UpcomingEventDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private bool BoolValueField;
+        private System.DateTime EndTimeField;
         
-        private string StringValueField;
+        private string LocationField;
+        
+        private string NameField;
+        
+        private System.DateTime StartTimeField;
+        
+        private string SummaryField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BoolValue {
+        public System.DateTime EndTime {
             get {
-                return this.BoolValueField;
+                return this.EndTimeField;
             }
             set {
-                if ((this.BoolValueField.Equals(value) != true)) {
-                    this.BoolValueField = value;
-                    this.RaisePropertyChanged("BoolValue");
+                if ((this.EndTimeField.Equals(value) != true)) {
+                    this.EndTimeField = value;
+                    this.RaisePropertyChanged("EndTime");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StringValue {
+        public string Location {
             get {
-                return this.StringValueField;
+                return this.LocationField;
             }
             set {
-                if ((object.ReferenceEquals(this.StringValueField, value) != true)) {
-                    this.StringValueField = value;
-                    this.RaisePropertyChanged("StringValue");
+                if ((object.ReferenceEquals(this.LocationField, value) != true)) {
+                    this.LocationField = value;
+                    this.RaisePropertyChanged("Location");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime StartTime {
+            get {
+                return this.StartTimeField;
+            }
+            set {
+                if ((this.StartTimeField.Equals(value) != true)) {
+                    this.StartTimeField = value;
+                    this.RaisePropertyChanged("StartTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Summary {
+            get {
+                return this.SummaryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SummaryField, value) != true)) {
+                    this.SummaryField = value;
+                    this.RaisePropertyChanged("Summary");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EventDTO", Namespace="http://schemas.datacontract.org/2004/07/Service_Solution")]
+    public partial class EventDTO : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.Guid EventIdField;
+        
+        private int TypeIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid EventId {
+            get {
+                return this.EventIdField;
+            }
+            set {
+                if ((this.EventIdField.Equals(value) != true)) {
+                    this.EventIdField = value;
+                    this.RaisePropertyChanged("EventId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int TypeId {
+            get {
+                return this.TypeIdField;
+            }
+            set {
+                if ((this.TypeIdField.Equals(value) != true)) {
+                    this.TypeIdField = value;
+                    this.RaisePropertyChanged("TypeId");
                 }
             }
         }
@@ -64,20 +154,15 @@ namespace Harkkaprojekti.WCF_Solution_Ref {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WCF_Solution_Ref.IDB_Service")]
     public interface IDB_Service {
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDB_Service/FetchThroughClassLibAndFromDBAsString", ReplyAction="http://tempuri.org/IDB_Service/FetchThroughClassLibAndFromDBAsStringResponse")]
-        System.IAsyncResult BeginFetchThroughClassLibAndFromDBAsString(System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDB_Service/FetchUpcomingEvents", ReplyAction="http://tempuri.org/IDB_Service/FetchUpcomingEventsResponse")]
+        System.IAsyncResult BeginFetchUpcomingEvents(System.AsyncCallback callback, object asyncState);
         
-        System.Collections.ObjectModel.ObservableCollection<string> EndFetchThroughClassLibAndFromDBAsString(System.IAsyncResult result);
+        System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.UpcomingEventDTO> EndFetchUpcomingEvents(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDB_Service/GetData", ReplyAction="http://tempuri.org/IDB_Service/GetDataResponse")]
-        System.IAsyncResult BeginGetData(int value, System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDB_Service/FetchEvents", ReplyAction="http://tempuri.org/IDB_Service/FetchEventsResponse")]
+        System.IAsyncResult BeginFetchEvents(System.AsyncCallback callback, object asyncState);
         
-        string EndGetData(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDB_Service/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IDB_Service/GetDataUsingDataContractResponse")]
-        System.IAsyncResult BeginGetDataUsingDataContract(Harkkaprojekti.WCF_Solution_Ref.CompositeType composite, System.AsyncCallback callback, object asyncState);
-        
-        Harkkaprojekti.WCF_Solution_Ref.CompositeType EndGetDataUsingDataContract(System.IAsyncResult result);
+        System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.EventDTO> EndFetchEvents(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -86,57 +171,38 @@ namespace Harkkaprojekti.WCF_Solution_Ref {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class FetchThroughClassLibAndFromDBAsStringCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class FetchUpcomingEventsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        public FetchThroughClassLibAndFromDBAsStringCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        public FetchUpcomingEventsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
-        public System.Collections.ObjectModel.ObservableCollection<string> Result {
+        public System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.UpcomingEventDTO> Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((System.Collections.ObjectModel.ObservableCollection<string>)(this.results[0]));
+                return ((System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.UpcomingEventDTO>)(this.results[0]));
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetDataCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class FetchEventsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        public GetDataCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        public FetchEventsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
-        public string Result {
+        public System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.EventDTO> Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GetDataUsingDataContractCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public GetDataUsingDataContractCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public Harkkaprojekti.WCF_Solution_Ref.CompositeType Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((Harkkaprojekti.WCF_Solution_Ref.CompositeType)(this.results[0]));
+                return ((System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.EventDTO>)(this.results[0]));
             }
         }
     }
@@ -145,23 +211,17 @@ namespace Harkkaprojekti.WCF_Solution_Ref {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class DB_ServiceClient : System.ServiceModel.ClientBase<Harkkaprojekti.WCF_Solution_Ref.IDB_Service>, Harkkaprojekti.WCF_Solution_Ref.IDB_Service {
         
-        private BeginOperationDelegate onBeginFetchThroughClassLibAndFromDBAsStringDelegate;
+        private BeginOperationDelegate onBeginFetchUpcomingEventsDelegate;
         
-        private EndOperationDelegate onEndFetchThroughClassLibAndFromDBAsStringDelegate;
+        private EndOperationDelegate onEndFetchUpcomingEventsDelegate;
         
-        private System.Threading.SendOrPostCallback onFetchThroughClassLibAndFromDBAsStringCompletedDelegate;
+        private System.Threading.SendOrPostCallback onFetchUpcomingEventsCompletedDelegate;
         
-        private BeginOperationDelegate onBeginGetDataDelegate;
+        private BeginOperationDelegate onBeginFetchEventsDelegate;
         
-        private EndOperationDelegate onEndGetDataDelegate;
+        private EndOperationDelegate onEndFetchEventsDelegate;
         
-        private System.Threading.SendOrPostCallback onGetDataCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginGetDataUsingDataContractDelegate;
-        
-        private EndOperationDelegate onEndGetDataUsingDataContractDelegate;
-        
-        private System.Threading.SendOrPostCallback onGetDataUsingDataContractCompletedDelegate;
+        private System.Threading.SendOrPostCallback onFetchEventsCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -216,150 +276,100 @@ namespace Harkkaprojekti.WCF_Solution_Ref {
             }
         }
         
-        public event System.EventHandler<FetchThroughClassLibAndFromDBAsStringCompletedEventArgs> FetchThroughClassLibAndFromDBAsStringCompleted;
+        public event System.EventHandler<FetchUpcomingEventsCompletedEventArgs> FetchUpcomingEventsCompleted;
         
-        public event System.EventHandler<GetDataCompletedEventArgs> GetDataCompleted;
-        
-        public event System.EventHandler<GetDataUsingDataContractCompletedEventArgs> GetDataUsingDataContractCompleted;
+        public event System.EventHandler<FetchEventsCompletedEventArgs> FetchEventsCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Harkkaprojekti.WCF_Solution_Ref.IDB_Service.BeginFetchThroughClassLibAndFromDBAsString(System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginFetchThroughClassLibAndFromDBAsString(callback, asyncState);
+        System.IAsyncResult Harkkaprojekti.WCF_Solution_Ref.IDB_Service.BeginFetchUpcomingEvents(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginFetchUpcomingEvents(callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Collections.ObjectModel.ObservableCollection<string> Harkkaprojekti.WCF_Solution_Ref.IDB_Service.EndFetchThroughClassLibAndFromDBAsString(System.IAsyncResult result) {
-            return base.Channel.EndFetchThroughClassLibAndFromDBAsString(result);
+        System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.UpcomingEventDTO> Harkkaprojekti.WCF_Solution_Ref.IDB_Service.EndFetchUpcomingEvents(System.IAsyncResult result) {
+            return base.Channel.EndFetchUpcomingEvents(result);
         }
         
-        private System.IAsyncResult OnBeginFetchThroughClassLibAndFromDBAsString(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return ((Harkkaprojekti.WCF_Solution_Ref.IDB_Service)(this)).BeginFetchThroughClassLibAndFromDBAsString(callback, asyncState);
+        private System.IAsyncResult OnBeginFetchUpcomingEvents(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((Harkkaprojekti.WCF_Solution_Ref.IDB_Service)(this)).BeginFetchUpcomingEvents(callback, asyncState);
         }
         
-        private object[] OnEndFetchThroughClassLibAndFromDBAsString(System.IAsyncResult result) {
-            System.Collections.ObjectModel.ObservableCollection<string> retVal = ((Harkkaprojekti.WCF_Solution_Ref.IDB_Service)(this)).EndFetchThroughClassLibAndFromDBAsString(result);
+        private object[] OnEndFetchUpcomingEvents(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.UpcomingEventDTO> retVal = ((Harkkaprojekti.WCF_Solution_Ref.IDB_Service)(this)).EndFetchUpcomingEvents(result);
             return new object[] {
                     retVal};
         }
         
-        private void OnFetchThroughClassLibAndFromDBAsStringCompleted(object state) {
-            if ((this.FetchThroughClassLibAndFromDBAsStringCompleted != null)) {
+        private void OnFetchUpcomingEventsCompleted(object state) {
+            if ((this.FetchUpcomingEventsCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.FetchThroughClassLibAndFromDBAsStringCompleted(this, new FetchThroughClassLibAndFromDBAsStringCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+                this.FetchUpcomingEventsCompleted(this, new FetchUpcomingEventsCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void FetchThroughClassLibAndFromDBAsStringAsync() {
-            this.FetchThroughClassLibAndFromDBAsStringAsync(null);
+        public void FetchUpcomingEventsAsync() {
+            this.FetchUpcomingEventsAsync(null);
         }
         
-        public void FetchThroughClassLibAndFromDBAsStringAsync(object userState) {
-            if ((this.onBeginFetchThroughClassLibAndFromDBAsStringDelegate == null)) {
-                this.onBeginFetchThroughClassLibAndFromDBAsStringDelegate = new BeginOperationDelegate(this.OnBeginFetchThroughClassLibAndFromDBAsString);
+        public void FetchUpcomingEventsAsync(object userState) {
+            if ((this.onBeginFetchUpcomingEventsDelegate == null)) {
+                this.onBeginFetchUpcomingEventsDelegate = new BeginOperationDelegate(this.OnBeginFetchUpcomingEvents);
             }
-            if ((this.onEndFetchThroughClassLibAndFromDBAsStringDelegate == null)) {
-                this.onEndFetchThroughClassLibAndFromDBAsStringDelegate = new EndOperationDelegate(this.OnEndFetchThroughClassLibAndFromDBAsString);
+            if ((this.onEndFetchUpcomingEventsDelegate == null)) {
+                this.onEndFetchUpcomingEventsDelegate = new EndOperationDelegate(this.OnEndFetchUpcomingEvents);
             }
-            if ((this.onFetchThroughClassLibAndFromDBAsStringCompletedDelegate == null)) {
-                this.onFetchThroughClassLibAndFromDBAsStringCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnFetchThroughClassLibAndFromDBAsStringCompleted);
+            if ((this.onFetchUpcomingEventsCompletedDelegate == null)) {
+                this.onFetchUpcomingEventsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnFetchUpcomingEventsCompleted);
             }
-            base.InvokeAsync(this.onBeginFetchThroughClassLibAndFromDBAsStringDelegate, null, this.onEndFetchThroughClassLibAndFromDBAsStringDelegate, this.onFetchThroughClassLibAndFromDBAsStringCompletedDelegate, userState);
+            base.InvokeAsync(this.onBeginFetchUpcomingEventsDelegate, null, this.onEndFetchUpcomingEventsDelegate, this.onFetchUpcomingEventsCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Harkkaprojekti.WCF_Solution_Ref.IDB_Service.BeginGetData(int value, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetData(value, callback, asyncState);
+        System.IAsyncResult Harkkaprojekti.WCF_Solution_Ref.IDB_Service.BeginFetchEvents(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginFetchEvents(callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        string Harkkaprojekti.WCF_Solution_Ref.IDB_Service.EndGetData(System.IAsyncResult result) {
-            return base.Channel.EndGetData(result);
+        System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.EventDTO> Harkkaprojekti.WCF_Solution_Ref.IDB_Service.EndFetchEvents(System.IAsyncResult result) {
+            return base.Channel.EndFetchEvents(result);
         }
         
-        private System.IAsyncResult OnBeginGetData(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            int value = ((int)(inValues[0]));
-            return ((Harkkaprojekti.WCF_Solution_Ref.IDB_Service)(this)).BeginGetData(value, callback, asyncState);
+        private System.IAsyncResult OnBeginFetchEvents(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((Harkkaprojekti.WCF_Solution_Ref.IDB_Service)(this)).BeginFetchEvents(callback, asyncState);
         }
         
-        private object[] OnEndGetData(System.IAsyncResult result) {
-            string retVal = ((Harkkaprojekti.WCF_Solution_Ref.IDB_Service)(this)).EndGetData(result);
+        private object[] OnEndFetchEvents(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.EventDTO> retVal = ((Harkkaprojekti.WCF_Solution_Ref.IDB_Service)(this)).EndFetchEvents(result);
             return new object[] {
                     retVal};
         }
         
-        private void OnGetDataCompleted(object state) {
-            if ((this.GetDataCompleted != null)) {
+        private void OnFetchEventsCompleted(object state) {
+            if ((this.FetchEventsCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetDataCompleted(this, new GetDataCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+                this.FetchEventsCompleted(this, new FetchEventsCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void GetDataAsync(int value) {
-            this.GetDataAsync(value, null);
+        public void FetchEventsAsync() {
+            this.FetchEventsAsync(null);
         }
         
-        public void GetDataAsync(int value, object userState) {
-            if ((this.onBeginGetDataDelegate == null)) {
-                this.onBeginGetDataDelegate = new BeginOperationDelegate(this.OnBeginGetData);
+        public void FetchEventsAsync(object userState) {
+            if ((this.onBeginFetchEventsDelegate == null)) {
+                this.onBeginFetchEventsDelegate = new BeginOperationDelegate(this.OnBeginFetchEvents);
             }
-            if ((this.onEndGetDataDelegate == null)) {
-                this.onEndGetDataDelegate = new EndOperationDelegate(this.OnEndGetData);
+            if ((this.onEndFetchEventsDelegate == null)) {
+                this.onEndFetchEventsDelegate = new EndOperationDelegate(this.OnEndFetchEvents);
             }
-            if ((this.onGetDataCompletedDelegate == null)) {
-                this.onGetDataCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetDataCompleted);
+            if ((this.onFetchEventsCompletedDelegate == null)) {
+                this.onFetchEventsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnFetchEventsCompleted);
             }
-            base.InvokeAsync(this.onBeginGetDataDelegate, new object[] {
-                        value}, this.onEndGetDataDelegate, this.onGetDataCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Harkkaprojekti.WCF_Solution_Ref.IDB_Service.BeginGetDataUsingDataContract(Harkkaprojekti.WCF_Solution_Ref.CompositeType composite, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginGetDataUsingDataContract(composite, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Harkkaprojekti.WCF_Solution_Ref.CompositeType Harkkaprojekti.WCF_Solution_Ref.IDB_Service.EndGetDataUsingDataContract(System.IAsyncResult result) {
-            return base.Channel.EndGetDataUsingDataContract(result);
-        }
-        
-        private System.IAsyncResult OnBeginGetDataUsingDataContract(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            Harkkaprojekti.WCF_Solution_Ref.CompositeType composite = ((Harkkaprojekti.WCF_Solution_Ref.CompositeType)(inValues[0]));
-            return ((Harkkaprojekti.WCF_Solution_Ref.IDB_Service)(this)).BeginGetDataUsingDataContract(composite, callback, asyncState);
-        }
-        
-        private object[] OnEndGetDataUsingDataContract(System.IAsyncResult result) {
-            Harkkaprojekti.WCF_Solution_Ref.CompositeType retVal = ((Harkkaprojekti.WCF_Solution_Ref.IDB_Service)(this)).EndGetDataUsingDataContract(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnGetDataUsingDataContractCompleted(object state) {
-            if ((this.GetDataUsingDataContractCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.GetDataUsingDataContractCompleted(this, new GetDataUsingDataContractCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void GetDataUsingDataContractAsync(Harkkaprojekti.WCF_Solution_Ref.CompositeType composite) {
-            this.GetDataUsingDataContractAsync(composite, null);
-        }
-        
-        public void GetDataUsingDataContractAsync(Harkkaprojekti.WCF_Solution_Ref.CompositeType composite, object userState) {
-            if ((this.onBeginGetDataUsingDataContractDelegate == null)) {
-                this.onBeginGetDataUsingDataContractDelegate = new BeginOperationDelegate(this.OnBeginGetDataUsingDataContract);
-            }
-            if ((this.onEndGetDataUsingDataContractDelegate == null)) {
-                this.onEndGetDataUsingDataContractDelegate = new EndOperationDelegate(this.OnEndGetDataUsingDataContract);
-            }
-            if ((this.onGetDataUsingDataContractCompletedDelegate == null)) {
-                this.onGetDataUsingDataContractCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetDataUsingDataContractCompleted);
-            }
-            base.InvokeAsync(this.onBeginGetDataUsingDataContractDelegate, new object[] {
-                        composite}, this.onEndGetDataUsingDataContractDelegate, this.onGetDataUsingDataContractCompletedDelegate, userState);
+            base.InvokeAsync(this.onBeginFetchEventsDelegate, null, this.onEndFetchEventsDelegate, this.onFetchEventsCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -438,41 +448,27 @@ namespace Harkkaprojekti.WCF_Solution_Ref {
                     base(client) {
             }
             
-            public System.IAsyncResult BeginFetchThroughClassLibAndFromDBAsString(System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginFetchUpcomingEvents(System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[0];
-                System.IAsyncResult _result = base.BeginInvoke("FetchThroughClassLibAndFromDBAsString", _args, callback, asyncState);
+                System.IAsyncResult _result = base.BeginInvoke("FetchUpcomingEvents", _args, callback, asyncState);
                 return _result;
             }
             
-            public System.Collections.ObjectModel.ObservableCollection<string> EndFetchThroughClassLibAndFromDBAsString(System.IAsyncResult result) {
+            public System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.UpcomingEventDTO> EndFetchUpcomingEvents(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                System.Collections.ObjectModel.ObservableCollection<string> _result = ((System.Collections.ObjectModel.ObservableCollection<string>)(base.EndInvoke("FetchThroughClassLibAndFromDBAsString", _args, result)));
+                System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.UpcomingEventDTO> _result = ((System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.UpcomingEventDTO>)(base.EndInvoke("FetchUpcomingEvents", _args, result)));
                 return _result;
             }
             
-            public System.IAsyncResult BeginGetData(int value, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
-                _args[0] = value;
-                System.IAsyncResult _result = base.BeginInvoke("GetData", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public string EndGetData(System.IAsyncResult result) {
+            public System.IAsyncResult BeginFetchEvents(System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[0];
-                string _result = ((string)(base.EndInvoke("GetData", _args, result)));
+                System.IAsyncResult _result = base.BeginInvoke("FetchEvents", _args, callback, asyncState);
                 return _result;
             }
             
-            public System.IAsyncResult BeginGetDataUsingDataContract(Harkkaprojekti.WCF_Solution_Ref.CompositeType composite, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
-                _args[0] = composite;
-                System.IAsyncResult _result = base.BeginInvoke("GetDataUsingDataContract", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public Harkkaprojekti.WCF_Solution_Ref.CompositeType EndGetDataUsingDataContract(System.IAsyncResult result) {
+            public System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.EventDTO> EndFetchEvents(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                Harkkaprojekti.WCF_Solution_Ref.CompositeType _result = ((Harkkaprojekti.WCF_Solution_Ref.CompositeType)(base.EndInvoke("GetDataUsingDataContract", _args, result)));
+                System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.EventDTO> _result = ((System.Collections.ObjectModel.ObservableCollection<Harkkaprojekti.WCF_Solution_Ref.EventDTO>)(base.EndInvoke("FetchEvents", _args, result)));
                 return _result;
             }
         }

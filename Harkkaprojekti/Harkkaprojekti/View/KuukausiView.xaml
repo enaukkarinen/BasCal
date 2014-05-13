@@ -98,7 +98,6 @@
             <Grid Margin="10" Width="600" Height="200" HorizontalAlignment="Left" Background="#FF939393">
                 <TextBlock Text="TestiBlock" FontSize="33" FontWeight="Bold" FontFamily="Segoe UI"></TextBlock>
                 <TextBlock x:Name="testBlock" Width="500" Height="100" Margin="15,50,0,15" HorizontalAlignment="Left" Foreground="#FFFF39FA" FontSize="8" FontFamily="Segoe UI"></TextBlock>
-                <Button x:Name="btn1" Margin="188,10,173,151" Click="btn1_Click" Content="Returns List&lt;string&gt; from WCF"/>
             </Grid>
         </Grid>
 
@@ -108,7 +107,7 @@
                 <ColumnDefinition Width="1500" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <Grid Grid.Column="0">
                 <sdk:DataGrid x:Name="kalenteriGrid" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -127,21 +126,22 @@
                 </sdk:DataGrid>
 
             </Grid>
-            
+
             <StackPanel Grid.Column="1" Background="Gray">
                 <TextBlock Text="upcoming events" FontFamily="Segoe UI" FontSize="48" VerticalAlignment="Top" Height="70" Margin="15"/>
                 <Grid Margin="15" VerticalAlignment="Top" Height="500">
-                    <ListBox x:Name="listboxUpcomingEvents" ItemsSource="{Binding Viikot}" Margin="0" Background="Transparent">
+                    <ListBox x:Name="listboxUpcomingEvents" ItemsSource="{Binding}" Margin="0" Background="Transparent">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path= Viikk}"></TextBlock>
+                                <TextBlock Height="60" Margin="15" Text="{Binding Name}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
+                <Button x:Name="btn1" Width="150" Click="btn1_Click" Content="Load Upcoming Events" Height="39"/>
             </StackPanel>
-            
-            
+
+
 
         </Grid>
     </Grid>

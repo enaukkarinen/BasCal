@@ -4,9 +4,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using DB_Solution;
 using System.IO;
 using System.ServiceModel.Web;
+using DB_Solution;
+using Service_Solution.DTO_Models;
 
 namespace Service_Solution
 {
@@ -15,49 +16,26 @@ namespace Service_Solution
     {
         dbRepository db = new dbRepository();
 
-        #region DB_Service Members
-
-
-        public List<string> FetchThroughClassLibAndFromDBAsString()
-        {
-            return db.FetchDataAsString();
-        }
-
-        public List<Testitaulu> FetchThroughClassLibAndFromDBAsTable()
-        {
-            return db.FetchDataAsTableModel().ToList();
-        }
-
-        #endregion
-
         #region Events
 
-        public List<Event> FetchEvents()
+        public List<EventDTO> FetchEvents()
         {
-            var paluu = db.FetchEvents().ToList();
-            return paluu;
+            return db.FetchEvents().Select(ev => new EventDTO { EventId = ev.EventId}).ToList();
+        }
+
+        public List<UpcomingEventDTO> FetchUpcomingEvents()
+        {
+            return db.FetchEvents().Select(ev => new UpcomingEventDTO 
+            { 
+                Name = ev.Name,
+                Location = ev.Location,
+                Summary = ev.Summary,
+                StartTime = ev.StartTime,
+                EndTime = ev.EndTime
+            }).OrderByDescending(c=> c.StartTime).ToList();
         }
 
         #endregion
-
-
-        public string GetData(int value)
-        {
-            return string.Format("You entered: {0}", value);
-        }
-
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
-        }
 
         #region IClientAccessPolicy Members
 

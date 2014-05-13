@@ -131,7 +131,10 @@
     </Content>
     <None Include="Service References\WCF_Solution_Ref\configuration91.svcinfo" />
     <None Include="Service References\WCF_Solution_Ref\configuration.svcinfo" />
-    <None Include="Service References\WCF_Solution_Ref\Harkkaprojekti.WCF_Solution_Ref.CompositeType.datasource">
+    <None Include="Service References\WCF_Solution_Ref\Harkkaprojekti.WCF_Solution_Ref.EventDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\WCF_Solution_Ref\Harkkaprojekti.WCF_Solution_Ref.UpcomingEventDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\WCF_Solution_Ref\Reference.svcmap">

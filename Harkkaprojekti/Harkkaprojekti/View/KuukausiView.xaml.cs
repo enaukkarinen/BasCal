@@ -29,22 +29,18 @@ namespace Harkkaprojekti.View
             
         }
 
-        void client_FetchThroughClassLibAndFromDBAsStringCompleted(object sender, FetchThroughClassLibAndFromDBAsStringCompletedEventArgs e)
-        {
-            List<string> lista = e.Result.ToList();
-
-            testBlock.Text = "";
-            foreach (string nimi in lista)
-            {
-                testBlock.Text += nimi + " \r\n ";
-            }
-        }
 
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
             Harkkaprojekti.WCF_Solution_Ref.DB_ServiceClient client = new DB_ServiceClient();
-            client.FetchThroughClassLibAndFromDBAsStringCompleted += client_FetchThroughClassLibAndFromDBAsStringCompleted;
-            client.FetchThroughClassLibAndFromDBAsStringAsync();
+            client.FetchUpcomingEventsCompleted += client_FetchUpcomingEventsCompleted;
+            client.FetchUpcomingEventsAsync();
+        }
+
+        void client_FetchUpcomingEventsCompleted(object sender, FetchUpcomingEventsCompletedEventArgs e)
+        {
+
+            listboxUpcomingEvents.ItemsSource = e.Result;
         }
 
 

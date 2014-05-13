@@ -57,6 +57,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO_Models\UpcomingEventDTO.cs" />
+    <Compile Include="EventDTO.cs" />
     <Compile Include="IClientAccessPolicy.cs" />
     <Compile Include="IDB_Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
