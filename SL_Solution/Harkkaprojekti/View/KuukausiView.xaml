@@ -112,8 +112,8 @@
 
         <Grid x:Name="mainGrid" Grid.Row="1"  Background="#FFD8D8D8" DataContext="{Binding Source={StaticResource ResourceKey=kk}}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="1200" />
+                <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
@@ -123,13 +123,13 @@
                 RowStyle="{StaticResource MyCustomRow}"
                 AutoGenerateColumns="False" ItemsSource="{Binding Viikot}" IsReadOnly="False">
                     <sdk:DataGrid.Columns >
-                        <sdk:DataGridTextColumn Binding="{Binding Maanantai.PaivanTapahtumat[0].Nimi}" Header="Maanantai" Width="250"/>
-                        <sdk:DataGridTextColumn Binding="{Binding Tiistai.PaivanTapahtumat[0].Nimi}" Header="Tiistai" Width="250"/>
-                        <sdk:DataGridTextColumn Binding="{Binding Keskiviikko.PaivanTapahtumat[0].Nimi}" Header="Keskiviikko" Width="250"/>
-                        <sdk:DataGridTextColumn Binding="{Binding Torstai.PaivanTapahtumat[0].Nimi}" Header="Torstai" Width="250"/>
-                        <sdk:DataGridTextColumn Binding="{Binding Perjantai.PaivanTapahtumat[0].Nimi}" Header="Perjantai" Width="250"/>
-                        <sdk:DataGridTextColumn Binding="{Binding Lauantai.PaivanTapahtumat[0].Nimi}"  Header="Lauantai" Width="250"/>
-                        <sdk:DataGridTextColumn Binding="{Binding Sunnuntai.PaivanTapahtumat[0].Nimi}" Header="Sunnuntai" Width="250"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Maanantai.PaivanTapahtumat[0].Nimi}" Header="Maanantai" Width="150"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Tiistai.PaivanTapahtumat[0].Nimi}" Header="Tiistai" Width="150"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Keskiviikko.PaivanTapahtumat[0].Nimi}" Header="Keskiviikko" Width="150"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Torstai.PaivanTapahtumat[0].Nimi}" Header="Torstai" Width="150"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Perjantai.PaivanTapahtumat[0].Nimi}" Header="Perjantai" Width="150"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Lauantai.PaivanTapahtumat[0].Nimi}"  Header="Lauantai" Width="150"/>
+                        <sdk:DataGridTextColumn Binding="{Binding Sunnuntai.PaivanTapahtumat[0].Nimi}" Header="Sunnuntai" Width="150"/>
                     </sdk:DataGrid.Columns>
                 </sdk:DataGrid>
 
