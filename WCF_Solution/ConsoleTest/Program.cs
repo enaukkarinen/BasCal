@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DB_Solution;
 using System.ServiceModel;
-using ConsoleTest.DB_Service_Reference;
+using ConsoleTest.ServiceReference1;
 
 namespace ConsoleTest
 {
@@ -24,58 +23,37 @@ namespace ConsoleTest
 
 
             Console.WriteLine("Starting host...");
-            DB_Service_Reference.DB_ServiceClient host = new DB_Service_Reference.DB_ServiceClient();
+            DB_ServiceClient host = new DB_ServiceClient();
             host.Open();
             Console.WriteLine("Host Open!");
             Console.WriteLine();
 
-            var upevents = host.FetchUpcomingEvents();
-            foreach (var eve in upevents)
-            {
-                Console.WriteLine("Name: " + eve.Name);
-                Console.WriteLine("Summary: " + eve.Summary);
-                Console.WriteLine("Location: " + eve.Location);
-                Console.WriteLine("StartTime: " + eve.StartTime.ToShortDateString() + " - " + eve.StartTime.ToShortTimeString());
-                Console.WriteLine("EndTime: " + eve.EndTime.ToShortDateString() + " - " + eve.EndTime.ToShortTimeString());
-                Console.WriteLine();
-            }
-            /*
-            var events = host.FetchEvents();
-            Console.WriteLine("host.FetchEvents().ToList(); Ok!");
+            
+       
+            var events = host.FetchUpcomingEventsShort();
+            Console.WriteLine("host.FetchUpcomingEventsShort; Ok!");
             Console.WriteLine();
             foreach (var eve in events)
             {
-                Console.WriteLine("EventId: " + eve.EventId);
-                Console.WriteLine("TypeId: " + eve.TypeId);
                 Console.WriteLine("Name: " + eve.Name);
-                Console.WriteLine("Summary: " + eve.Summary);
-                Console.WriteLine("Location: " + eve.Location);
-                Console.WriteLine("StartTime: " + eve.StartTime.ToShortDateString());
-                Console.WriteLine("EndTime: " + eve.EndTime.ToShortDateString());
+                Console.Write("StartTime: " + eve.StartTime);
+                Console.WriteLine(" StartDate: " + eve.StartDate);
+                Console.Write("EndTime: " + eve.EndTime);
+                Console.WriteLine(" EndDate: " + eve.EndDate);
                 Console.WriteLine();
             }
 
-            /*
-            List<string> lista = host.FetchThroughClassLibAndFromDBAsString().ToList();
+            var events2 = host.FetchUpcomingEvents();
+            Console.WriteLine("host.FetchUpcomingEvents; Ok!");
             Console.WriteLine();
-            Console.WriteLine("host.FetchThroughClassLibAndFromDBAsString().ToList(); Ok!");
-            Console.WriteLine();
-            foreach (string test in lista)
+            foreach (var eve in events2)
             {
-                Console.WriteLine(test);
-            }
+                Console.WriteLine("EventId: " + eve.EventId);
+                Console.WriteLine("TypeId: " + eve.TypeId);
+                Console.WriteLine("Type: " + eve.Type);
 
-            Console.WriteLine();
-
-            List<Testitaulu> taulut = host.FetchThroughClassLibAndFromDBAsTable().ToList();
-            Console.WriteLine("host.FetchThroughClassLibAndFromDBAsTable().ToList(); Ok!");
-            Console.WriteLine();
-            foreach (Testitaulu taulu in taulut)
-            {
-                Console.WriteLine("Id: " + taulu.Id + ", Nimi: " + taulu.Nimi);
+                Console.WriteLine();
             }
-             
-             */
             Console.ReadLine();
         }
     }

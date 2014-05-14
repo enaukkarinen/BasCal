@@ -10,7 +10,7 @@
         </bindings>
         <client>
             <endpoint address="http://localhost:9001/BasCalDB" binding="basicHttpBinding"
-                bindingConfiguration="BasicHttpBinding_IDB_Service" contract="WCF_Solution_Ref.IDB_Service"
+                bindingConfiguration="BasicHttpBinding_IDB_Service" contract="ServiceReference1.IDB_Service"
                 name="BasicHttpBinding_IDB_Service" />
         </client>
     </system.serviceModel>

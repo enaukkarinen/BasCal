@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace Service_Solution.DTO_Models
 {
-    public class UpcomingEventDTO
+    public class UpcomingEventShortDTO
     {
         public Guid EventId { get; set; }
-        public int TypeId { get; set; }
-        public string Type { get; set; }
         public string Name { get; set; }
-        public string Summary { get; set; }
-        public string Location { get; set; }
         public string StartTime { get; set; }
         public string StartDate { get; set; }
         public string EndTime { get; set; }

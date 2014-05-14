@@ -18,7 +18,8 @@ namespace Service_Solution
         List<UpcomingEventDTO> FetchUpcomingEvents();
 
         [OperationContract]
-        List<EventDTO> FetchEvents();
+        List<UpcomingEventShortDTO> FetchUpcomingEventsShort();
+
         
         #endregion
 

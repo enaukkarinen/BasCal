@@ -18,22 +18,37 @@ namespace Service_Solution
 
         #region Events
 
-        public List<EventDTO> FetchEvents()
-        {
-            return db.FetchEvents().Select(ev => new EventDTO { EventId = ev.EventId}).ToList();
-        }
-
         public List<UpcomingEventDTO> FetchUpcomingEvents()
         {
             return db.FetchEvents().Select(ev => new UpcomingEventDTO 
             { 
-                Name = ev.Name,
-                Location = ev.Location,
-                Summary = ev.Summary,
-                StartTime = ev.StartTime,
-                EndTime = ev.EndTime
-            }).OrderByDescending(c=> c.StartTime).ToList();
+                EventId = ev.EventId,
+                TypeId = ev.TypeId,
+                Type = ev.EventType.Name
+            }).ToList();
         }
+
+        public List<UpcomingEventShortDTO> FetchUpcomingEventsShort()
+        {
+            List<Event> jotain = db.FetchEvents().ToList();
+            List<UpcomingEventShortDTO> paluu = new List<UpcomingEventShortDTO>();
+
+            foreach (Event ev in jotain)
+            {
+                paluu.Add(new UpcomingEventShortDTO() 
+                {
+                    EventId = ev.EventId,
+                    Name = ev.Name,
+                    StartTime = ev.StartTime.ToShortTimeString(),
+                    StartDate = ev.StartTime.ToShortDateString(),
+                    EndTime = ev.EndTime.ToShortTimeString(),
+                    EndDate = ev.EndTime.ToShortDateString()
+                });
+            }
+
+            return paluu;  
+        }
+
 
         #endregion
 

@@ -37,6 +37,24 @@ namespace DB_Solution
         {
             return db.Events.Where(e => e.EventId == id).FirstOrDefault();
         }
+
+        public void DeleteEventByGuid(Guid id)
+        {
+            Event ev = FetchEventByGuid(id);
+            db.Events.Remove(ev);
+            db.SaveChanges();
+        }
+
+        public void UpdateEvent(Event ev)
+        {
+            Event tobechanged = db.Events.Where(e => e.EventId == ev.EventId).SingleOrDefault();
+            tobechanged.TypeId = ev.TypeId;
+            tobechanged.Name = ev.Name;
+            tobechanged.Summary = ev.Summary;
+            tobechanged.StartTime = ev.StartTime;
+            tobechanged.EndTime = ev.EndTime;
+            db.SaveChanges();
+        }
         public IQueryable<Event> FetchEventsBeEventType(string name)
         {
             int typeid = db.EventTypes.Where(et => et.Name == name).Select(et => et.TypeId).FirstOrDefault();

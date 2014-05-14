@@ -34,8 +34,7 @@
       <xsd:import schemaLocation="http://localhost:9001/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:9001/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:9001/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service_Solution.DTO_Models" />
-      <xsd:import schemaLocation="http://localhost:9001/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Service_Solution" />
-      <xsd:import schemaLocation="http://localhost:9001/?xsd=xsd4" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://localhost:9001/?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IDB_Service_FetchUpcomingEvents_InputMessage">
@@ -44,11 +43,11 @@
   <wsdl:message name="IDB_Service_FetchUpcomingEvents_OutputMessage">
     <wsdl:part name="parameters" element="tns:FetchUpcomingEventsResponse" />
   </wsdl:message>
-  <wsdl:message name="IDB_Service_FetchEvents_InputMessage">
-    <wsdl:part name="parameters" element="tns:FetchEvents" />
+  <wsdl:message name="IDB_Service_FetchUpcomingEventsShort_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchUpcomingEventsShort" />
   </wsdl:message>
-  <wsdl:message name="IDB_Service_FetchEvents_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FetchEventsResponse" />
+  <wsdl:message name="IDB_Service_FetchUpcomingEventsShort_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchUpcomingEventsShortResponse" />
   </wsdl:message>
   <wsdl:message name="IClientAccessPolicy_GetClientAccessPolicy_InputMessage">
     <wsdl:part name="parameters" element="tns:GetClientAccessPolicy" />
@@ -61,9 +60,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IDB_Service/FetchUpcomingEvents" message="tns:IDB_Service_FetchUpcomingEvents_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDB_Service/FetchUpcomingEventsResponse" message="tns:IDB_Service_FetchUpcomingEvents_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="FetchEvents">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDB_Service/FetchEvents" message="tns:IDB_Service_FetchEvents_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDB_Service/FetchEventsResponse" message="tns:IDB_Service_FetchEvents_OutputMessage" />
+    <wsdl:operation name="FetchUpcomingEventsShort">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDB_Service/FetchUpcomingEventsShort" message="tns:IDB_Service_FetchUpcomingEventsShort_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDB_Service/FetchUpcomingEventsShortResponse" message="tns:IDB_Service_FetchUpcomingEventsShort_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IClientAccessPolicy">
@@ -84,8 +83,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FetchEvents">
-      <soap12:operation soapAction="http://tempuri.org/IDB_Service/FetchEvents" style="document" />
+    <wsdl:operation name="FetchUpcomingEventsShort">
+      <soap12:operation soapAction="http://tempuri.org/IDB_Service/FetchUpcomingEventsShort" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -105,8 +104,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FetchEvents">
-      <soap:operation soapAction="http://tempuri.org/IDB_Service/FetchEvents" style="document" />
+    <wsdl:operation name="FetchUpcomingEventsShort">
+      <soap:operation soapAction="http://tempuri.org/IDB_Service/FetchUpcomingEventsShort" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

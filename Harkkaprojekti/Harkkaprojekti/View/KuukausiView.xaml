@@ -12,7 +12,7 @@
            xmlns:localprimitives="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Data"
            xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows"
            mc:Ignorable="d"
-           d:DesignWidth="1900" d:DesignHeight="1200"
+           d:DesignWidth="1400" d:DesignHeight="900"
            Title="KuukausiView Page"
            xmlns:_model="clr-namespace:Harkkaprojekti.ViewModel">
 
@@ -93,25 +93,33 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid x:Name="headerGrid" Grid.Row="0" Background="Gray">
-            <TextBox Width="300" Height="60"/>
-            <Grid Margin="10" Width="600" Height="200" HorizontalAlignment="Left" Background="#FF939393">
+        <Grid x:Name="headerGrid" Grid.Row="0" Background="#FF8E0000">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="10"  Height="200" HorizontalAlignment="Left" Background="#FF939393">
                 <TextBlock Text="TestiBlock" FontSize="33" FontWeight="Bold" FontFamily="Segoe UI"></TextBlock>
                 <TextBlock x:Name="testBlock" Width="500" Height="100" Margin="15,50,0,15" HorizontalAlignment="Left" Foreground="#FFFF39FA" FontSize="8" FontFamily="Segoe UI"></TextBlock>
             </Grid>
+            
+            <Grid Grid.Column="1">
+
+            </Grid>
+            
         </Grid>
 
-        <!-- Content -->
         <Grid x:Name="mainGrid" Grid.Row="1"  Background="#FFD8D8D8" DataContext="{Binding Source={StaticResource ResourceKey=kk}}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1500" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="250" />
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
                 <sdk:DataGrid x:Name="kalenteriGrid" 
-                HorizontalAlignment="Center" VerticalAlignment="Center" 
-                Margin="25"  Height="950" RowHeight="200"
+                HorizontalAlignment="Left" VerticalAlignment="Top" 
+                Margin="15"  RowHeight="200"
                 RowStyle="{StaticResource MyCustomRow}"
                 AutoGenerateColumns="False" ItemsSource="{Binding Viikot}" IsReadOnly="False">
                     <sdk:DataGrid.Columns >
@@ -128,17 +136,27 @@
             </Grid>
 
             <StackPanel Grid.Column="1" Background="Gray">
-                <TextBlock Text="upcoming events" FontFamily="Segoe UI" FontSize="48" VerticalAlignment="Top" Height="70" Margin="15"/>
-                <Grid Margin="15" VerticalAlignment="Top" Height="500">
+                <TextBlock Text="upcoming events" FontFamily="Segoe UI" FontSize="28" VerticalAlignment="Top" HorizontalAlignment="Center" Height="48" Margin="10"/>
+                <Grid Margin="10,0,10,0" VerticalAlignment="Top" Height="400">
                     <ListBox x:Name="listboxUpcomingEvents" ItemsSource="{Binding}" Margin="0" Background="Transparent">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Height="60" Margin="15" Text="{Binding Name}"/>
+                                <StackPanel Orientation="Vertical" Margin="0,5,0,0" HorizontalAlignment="Stretch">
+                                    <Grid >
+                                        <TextBlock Text="{Binding EventId}" Visibility="Collapsed"></TextBlock>
+                                        <TextBlock Height="20" Text="{Binding Name}" VerticalAlignment="Center" FontSize="16" FontFamily="Segoe UI" FontWeight="Bold"/>
+                                    </Grid>
+                                    <Grid >
+                                        <TextBlock Height="30" Margin="0,-15,0,5" VerticalAlignment="Center"  Text="{Binding StartTime}" FontSize="14" FontFamily="Segoe UI"/>
+                                        <TextBlock Height="30" Margin="40,-15,0,5" VerticalAlignment="Center"  Text="{Binding StartDate}" FontSize="14" FontFamily="Segoe UI"/>
+                                        <TextBlock Height="30" Margin="0,15,0,5" VerticalAlignment="Center"  Text="{Binding EndTime}" FontSize="14" FontFamily="Segoe UI"/>
+                                        <TextBlock Height="30" Margin="40,15,0,5" VerticalAlignment="Center"  Text="{Binding EndDate}" FontSize="14" FontFamily="Segoe UI"/>
+                                    </Grid>    
+                                </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
-                <Button x:Name="btn1" Width="150" Click="btn1_Click" Content="Load Upcoming Events" Height="39"/>
             </StackPanel>
 
 

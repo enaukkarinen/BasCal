@@ -11,7 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Navigation;
 
-using Harkkaprojekti.WCF_Solution_Ref;
+using Harkkaprojekti.ServiceReference1;
 
 namespace Harkkaprojekti.View
 {
@@ -26,22 +26,26 @@ namespace Harkkaprojekti.View
                 c.CanUserSort = false;
             }
 
-            
+            App.Current.Host.Content.Resized +=Content_Resized;
+
+            DB_ServiceClient client = new DB_ServiceClient();
+            client.FetchUpcomingEventsShortCompleted += client_FetchUpcomingEventsShortCompleted;
+            client.FetchUpcomingEventsShortAsync();
         }
 
-
-        private void btn1_Click(object sender, RoutedEventArgs e)
+        void client_FetchUpcomingEventsShortCompleted(object sender, FetchUpcomingEventsShortCompletedEventArgs e)
         {
-            Harkkaprojekti.WCF_Solution_Ref.DB_ServiceClient client = new DB_ServiceClient();
-            client.FetchUpcomingEventsCompleted += client_FetchUpcomingEventsCompleted;
-            client.FetchUpcomingEventsAsync();
-        }
-
-        void client_FetchUpcomingEventsCompleted(object sender, FetchUpcomingEventsCompletedEventArgs e)
-        {
-
             listboxUpcomingEvents.ItemsSource = e.Result;
         }
+
+
+        void Content_Resized(object sender, EventArgs e)
+        {
+            this.Width = App.Current.Host.Content.ActualWidth;
+            this.Height = App.Current.Host.Content.ActualHeight;
+        }
+
+
 
 
 
