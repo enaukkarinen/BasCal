@@ -12,7 +12,7 @@
            xmlns:localprimitives="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Data"
            xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows"
            mc:Ignorable="d"
-           d:DesignWidth="1400" d:DesignHeight="900"
+
            Title="KuukausiView Page"
            xmlns:_model="clr-namespace:Harkkaprojekti.ViewModel">
 
