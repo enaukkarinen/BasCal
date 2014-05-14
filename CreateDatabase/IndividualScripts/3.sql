@@ -1,0 +1,27 @@
+USE [HarkkaprojektiDB]
+GO
+
+/****** Object:  Table [dbo].[Group]    Script Date: 05/14/2014 14:57:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Group](
+	[GroupId] [uniqueidentifier] NOT NULL,
+	[Name] [varchar](255) NOT NULL,
+ CONSTRAINT [PK_GROUP] PRIMARY KEY CLUSTERED 
+(
+	[GroupId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
