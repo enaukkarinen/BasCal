@@ -15,13 +15,13 @@ namespace BasCal_SilverlightClient
 {
     public partial class MainPage : UserControl
     {
-        ServiceReference1.DB_ServiceClient client;
+        ServiceReference1.DBserviceClient client;
 
         public MainPage()
         {
             InitializeComponent();
 
-            client = new DB_ServiceClient();
+            client = new DBserviceClient();
             client.FetchUpcomingEventsShortCompleted += client_FetchUpcomingEventsShortCompleted;
             client.FetchEventByGuidCompleted += client_FetchEventByGuidCompleted;
             HideEventFullInfoBox.Completed += HideEventFullInfoBox_Completed;
@@ -53,7 +53,7 @@ namespace BasCal_SilverlightClient
             client.FetchEventByGuidAsync(new Guid(eventId));
             EventFullInfo.Visibility = System.Windows.Visibility.Visible;
             ShowEventFullInfoBox.Begin();
-            
+
         }
 
 

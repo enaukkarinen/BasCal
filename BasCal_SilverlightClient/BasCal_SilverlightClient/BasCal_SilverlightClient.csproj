@@ -104,16 +104,7 @@
     <None Include="Service References\ServiceReference1\BasCal_SilverlightClient.ServiceReference1.UpcomingEventShortDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
-    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
-    <None Include="Service References\ServiceReference1\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Resource Include="Content\closebtn.png" />
-    <Resource Include="Content\background.jpg" />
-    <Content Include="ServiceReferences.ClientConfig" />
-    <None Include="Service References\ServiceReference1\DB_Service.wsdl" />
+    <None Include="Service References\ServiceReference1\DBservice.wsdl" />
     <None Include="Service References\ServiceReference1\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -126,6 +117,16 @@
     <None Include="Service References\ServiceReference1\item3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Resource Include="Content\closebtn.png" />
+    <Resource Include="Content\background.jpg" />
+    <None Include="Service References\ServiceReference1\item.disco" />
+    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
+    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
+    <None Include="Service References\ServiceReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\doublearrow.png" />

@@ -17,7 +17,7 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UpcomingEventDTO", Namespace="http://schemas.datacontract.org/2004/07/Service_Solution.DTO_Models")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UpcomingEventDTO", Namespace="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models")]
     public partial class UpcomingEventDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string EndDateField;
@@ -182,7 +182,7 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UpcomingEventShortDTO", Namespace="http://schemas.datacontract.org/2004/07/Service_Solution.DTO_Models")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UpcomingEventShortDTO", Namespace="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models")]
     public partial class UpcomingEventShortDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string EndDateField;
@@ -286,27 +286,32 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IDB_Service")]
-    public interface IDB_Service {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IDBservice")]
+    public interface IDBservice {
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDB_Service/FetchEventByGuid", ReplyAction="http://tempuri.org/IDB_Service/FetchEventByGuidResponse")]
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDBservice/FetchEventByGuid", ReplyAction="http://tempuri.org/IDBservice/FetchEventByGuidResponse")]
         System.IAsyncResult BeginFetchEventByGuid(System.Guid guid, System.AsyncCallback callback, object asyncState);
         
         BasCal_SilverlightClient.ServiceReference1.UpcomingEventDTO EndFetchEventByGuid(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDB_Service/FetchUpcomingEvents", ReplyAction="http://tempuri.org/IDB_Service/FetchUpcomingEventsResponse")]
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDBservice/FetchUpcomingEvents", ReplyAction="http://tempuri.org/IDBservice/FetchUpcomingEventsResponse")]
         System.IAsyncResult BeginFetchUpcomingEvents(System.AsyncCallback callback, object asyncState);
         
         System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventDTO> EndFetchUpcomingEvents(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDB_Service/FetchUpcomingEventsShort", ReplyAction="http://tempuri.org/IDB_Service/FetchUpcomingEventsShortResponse")]
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDBservice/FetchUpcomingEventsShort", ReplyAction="http://tempuri.org/IDBservice/FetchUpcomingEventsShortResponse")]
         System.IAsyncResult BeginFetchUpcomingEventsShort(System.AsyncCallback callback, object asyncState);
         
         System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventShortDTO> EndFetchUpcomingEventsShort(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IDBservice/Add", ReplyAction="http://tempuri.org/IDBservice/AddResponse")]
+        System.IAsyncResult BeginAdd(int a, int b, System.AsyncCallback callback, object asyncState);
+        
+        int EndAdd(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDB_ServiceChannel : BasCal_SilverlightClient.ServiceReference1.IDB_Service, System.ServiceModel.IClientChannel {
+    public interface IDBserviceChannel : BasCal_SilverlightClient.ServiceReference1.IDBservice, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -368,7 +373,26 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DB_ServiceClient : System.ServiceModel.ClientBase<BasCal_SilverlightClient.ServiceReference1.IDB_Service>, BasCal_SilverlightClient.ServiceReference1.IDB_Service {
+    public partial class AddCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public AddCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public int Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class DBserviceClient : System.ServiceModel.ClientBase<BasCal_SilverlightClient.ServiceReference1.IDBservice>, BasCal_SilverlightClient.ServiceReference1.IDBservice {
         
         private BeginOperationDelegate onBeginFetchEventByGuidDelegate;
         
@@ -388,6 +412,12 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
         
         private System.Threading.SendOrPostCallback onFetchUpcomingEventsShortCompletedDelegate;
         
+        private BeginOperationDelegate onBeginAddDelegate;
+        
+        private EndOperationDelegate onEndAddDelegate;
+        
+        private System.Threading.SendOrPostCallback onAddCompletedDelegate;
+        
         private BeginOperationDelegate onBeginOpenDelegate;
         
         private EndOperationDelegate onEndOpenDelegate;
@@ -400,22 +430,22 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
         
         private System.Threading.SendOrPostCallback onCloseCompletedDelegate;
         
-        public DB_ServiceClient() {
+        public DBserviceClient() {
         }
         
-        public DB_ServiceClient(string endpointConfigurationName) : 
+        public DBserviceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public DB_ServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public DBserviceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public DB_ServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public DBserviceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public DB_ServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public DBserviceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
@@ -447,27 +477,29 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
         
         public event System.EventHandler<FetchUpcomingEventsShortCompletedEventArgs> FetchUpcomingEventsShortCompleted;
         
+        public event System.EventHandler<AddCompletedEventArgs> AddCompleted;
+        
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult BasCal_SilverlightClient.ServiceReference1.IDB_Service.BeginFetchEventByGuid(System.Guid guid, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult BasCal_SilverlightClient.ServiceReference1.IDBservice.BeginFetchEventByGuid(System.Guid guid, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginFetchEventByGuid(guid, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        BasCal_SilverlightClient.ServiceReference1.UpcomingEventDTO BasCal_SilverlightClient.ServiceReference1.IDB_Service.EndFetchEventByGuid(System.IAsyncResult result) {
+        BasCal_SilverlightClient.ServiceReference1.UpcomingEventDTO BasCal_SilverlightClient.ServiceReference1.IDBservice.EndFetchEventByGuid(System.IAsyncResult result) {
             return base.Channel.EndFetchEventByGuid(result);
         }
         
         private System.IAsyncResult OnBeginFetchEventByGuid(object[] inValues, System.AsyncCallback callback, object asyncState) {
             System.Guid guid = ((System.Guid)(inValues[0]));
-            return ((BasCal_SilverlightClient.ServiceReference1.IDB_Service)(this)).BeginFetchEventByGuid(guid, callback, asyncState);
+            return ((BasCal_SilverlightClient.ServiceReference1.IDBservice)(this)).BeginFetchEventByGuid(guid, callback, asyncState);
         }
         
         private object[] OnEndFetchEventByGuid(System.IAsyncResult result) {
-            BasCal_SilverlightClient.ServiceReference1.UpcomingEventDTO retVal = ((BasCal_SilverlightClient.ServiceReference1.IDB_Service)(this)).EndFetchEventByGuid(result);
+            BasCal_SilverlightClient.ServiceReference1.UpcomingEventDTO retVal = ((BasCal_SilverlightClient.ServiceReference1.IDBservice)(this)).EndFetchEventByGuid(result);
             return new object[] {
                     retVal};
         }
@@ -498,21 +530,21 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult BasCal_SilverlightClient.ServiceReference1.IDB_Service.BeginFetchUpcomingEvents(System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult BasCal_SilverlightClient.ServiceReference1.IDBservice.BeginFetchUpcomingEvents(System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginFetchUpcomingEvents(callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventDTO> BasCal_SilverlightClient.ServiceReference1.IDB_Service.EndFetchUpcomingEvents(System.IAsyncResult result) {
+        System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventDTO> BasCal_SilverlightClient.ServiceReference1.IDBservice.EndFetchUpcomingEvents(System.IAsyncResult result) {
             return base.Channel.EndFetchUpcomingEvents(result);
         }
         
         private System.IAsyncResult OnBeginFetchUpcomingEvents(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return ((BasCal_SilverlightClient.ServiceReference1.IDB_Service)(this)).BeginFetchUpcomingEvents(callback, asyncState);
+            return ((BasCal_SilverlightClient.ServiceReference1.IDBservice)(this)).BeginFetchUpcomingEvents(callback, asyncState);
         }
         
         private object[] OnEndFetchUpcomingEvents(System.IAsyncResult result) {
-            System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventDTO> retVal = ((BasCal_SilverlightClient.ServiceReference1.IDB_Service)(this)).EndFetchUpcomingEvents(result);
+            System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventDTO> retVal = ((BasCal_SilverlightClient.ServiceReference1.IDBservice)(this)).EndFetchUpcomingEvents(result);
             return new object[] {
                     retVal};
         }
@@ -542,21 +574,21 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult BasCal_SilverlightClient.ServiceReference1.IDB_Service.BeginFetchUpcomingEventsShort(System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult BasCal_SilverlightClient.ServiceReference1.IDBservice.BeginFetchUpcomingEventsShort(System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginFetchUpcomingEventsShort(callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventShortDTO> BasCal_SilverlightClient.ServiceReference1.IDB_Service.EndFetchUpcomingEventsShort(System.IAsyncResult result) {
+        System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventShortDTO> BasCal_SilverlightClient.ServiceReference1.IDBservice.EndFetchUpcomingEventsShort(System.IAsyncResult result) {
             return base.Channel.EndFetchUpcomingEventsShort(result);
         }
         
         private System.IAsyncResult OnBeginFetchUpcomingEventsShort(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return ((BasCal_SilverlightClient.ServiceReference1.IDB_Service)(this)).BeginFetchUpcomingEventsShort(callback, asyncState);
+            return ((BasCal_SilverlightClient.ServiceReference1.IDBservice)(this)).BeginFetchUpcomingEventsShort(callback, asyncState);
         }
         
         private object[] OnEndFetchUpcomingEventsShort(System.IAsyncResult result) {
-            System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventShortDTO> retVal = ((BasCal_SilverlightClient.ServiceReference1.IDB_Service)(this)).EndFetchUpcomingEventsShort(result);
+            System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventShortDTO> retVal = ((BasCal_SilverlightClient.ServiceReference1.IDBservice)(this)).EndFetchUpcomingEventsShort(result);
             return new object[] {
                     retVal};
         }
@@ -583,6 +615,54 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
                 this.onFetchUpcomingEventsShortCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnFetchUpcomingEventsShortCompleted);
             }
             base.InvokeAsync(this.onBeginFetchUpcomingEventsShortDelegate, null, this.onEndFetchUpcomingEventsShortDelegate, this.onFetchUpcomingEventsShortCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult BasCal_SilverlightClient.ServiceReference1.IDBservice.BeginAdd(int a, int b, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginAdd(a, b, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        int BasCal_SilverlightClient.ServiceReference1.IDBservice.EndAdd(System.IAsyncResult result) {
+            return base.Channel.EndAdd(result);
+        }
+        
+        private System.IAsyncResult OnBeginAdd(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            int a = ((int)(inValues[0]));
+            int b = ((int)(inValues[1]));
+            return ((BasCal_SilverlightClient.ServiceReference1.IDBservice)(this)).BeginAdd(a, b, callback, asyncState);
+        }
+        
+        private object[] OnEndAdd(System.IAsyncResult result) {
+            int retVal = ((BasCal_SilverlightClient.ServiceReference1.IDBservice)(this)).EndAdd(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnAddCompleted(object state) {
+            if ((this.AddCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.AddCompleted(this, new AddCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void AddAsync(int a, int b) {
+            this.AddAsync(a, b, null);
+        }
+        
+        public void AddAsync(int a, int b, object userState) {
+            if ((this.onBeginAddDelegate == null)) {
+                this.onBeginAddDelegate = new BeginOperationDelegate(this.OnBeginAdd);
+            }
+            if ((this.onEndAddDelegate == null)) {
+                this.onEndAddDelegate = new EndOperationDelegate(this.OnEndAdd);
+            }
+            if ((this.onAddCompletedDelegate == null)) {
+                this.onAddCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnAddCompleted);
+            }
+            base.InvokeAsync(this.onBeginAddDelegate, new object[] {
+                        a,
+                        b}, this.onEndAddDelegate, this.onAddCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -651,13 +731,13 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
             base.InvokeAsync(this.onBeginCloseDelegate, null, this.onEndCloseDelegate, this.onCloseCompletedDelegate, userState);
         }
         
-        protected override BasCal_SilverlightClient.ServiceReference1.IDB_Service CreateChannel() {
-            return new DB_ServiceClientChannel(this);
+        protected override BasCal_SilverlightClient.ServiceReference1.IDBservice CreateChannel() {
+            return new DBserviceClientChannel(this);
         }
         
-        private class DB_ServiceClientChannel : ChannelBase<BasCal_SilverlightClient.ServiceReference1.IDB_Service>, BasCal_SilverlightClient.ServiceReference1.IDB_Service {
+        private class DBserviceClientChannel : ChannelBase<BasCal_SilverlightClient.ServiceReference1.IDBservice>, BasCal_SilverlightClient.ServiceReference1.IDBservice {
             
-            public DB_ServiceClientChannel(System.ServiceModel.ClientBase<BasCal_SilverlightClient.ServiceReference1.IDB_Service> client) : 
+            public DBserviceClientChannel(System.ServiceModel.ClientBase<BasCal_SilverlightClient.ServiceReference1.IDBservice> client) : 
                     base(client) {
             }
             
@@ -695,6 +775,20 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
             public System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventShortDTO> EndFetchUpcomingEventsShort(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventShortDTO> _result = ((System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.ServiceReference1.UpcomingEventShortDTO>)(base.EndInvoke("FetchUpcomingEventsShort", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginAdd(int a, int b, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = a;
+                _args[1] = b;
+                System.IAsyncResult _result = base.BeginInvoke("Add", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public int EndAdd(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                int _result = ((int)(base.EndInvoke("Add", _args, result)));
                 return _result;
             }
         }

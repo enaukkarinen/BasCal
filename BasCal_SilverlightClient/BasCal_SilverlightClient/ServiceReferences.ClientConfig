@@ -2,16 +2,16 @@
     <system.serviceModel>
         <bindings>
             <basicHttpBinding>
-                <binding name="BasicHttpBinding_IDB_Service" maxBufferSize="2147483647"
+                <binding name="BasicHttpBinding_IDBservice" maxBufferSize="2147483647"
                     maxReceivedMessageSize="2147483647">
                     <security mode="None" />
                 </binding>
             </basicHttpBinding>
         </bindings>
         <client>
-            <endpoint address="http://localhost:9001/BasCalDB" binding="basicHttpBinding"
-                bindingConfiguration="BasicHttpBinding_IDB_Service" contract="ServiceReference1.IDB_Service"
-                name="BasicHttpBinding_IDB_Service" />
+            <endpoint address="http://localhost:9007/BasCal" binding="basicHttpBinding"
+                bindingConfiguration="BasicHttpBinding_IDBservice" contract="ServiceReference1.IDBservice"
+                name="BasicHttpBinding_IDBservice" />
         </client>
     </system.serviceModel>
 </configuration>
