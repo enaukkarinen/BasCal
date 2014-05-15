@@ -15,6 +15,9 @@ namespace Service_Solution
         #region Events
 
         [OperationContract]
+        UpcomingEventDTO FetchEventByGuid(Guid guid);
+
+        [OperationContract]
         List<UpcomingEventDTO> FetchUpcomingEvents();
 
         [OperationContract]

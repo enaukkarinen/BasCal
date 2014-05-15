@@ -18,6 +18,26 @@ namespace Service_Solution
 
         #region Events
 
+        public UpcomingEventDTO FetchEventByGuid(Guid guid)
+        {
+            Event ev = db.FetchEventByGuid(guid);
+            UpcomingEventDTO uev = new UpcomingEventDTO()
+            {
+                EventId = ev.EventId,
+                Type = ev.EventType.Name,
+                Name = ev.Name,
+                Summary = ev.Summary,
+                Location = ev.Location,
+                StartTime = ev.StartTime.ToShortTimeString(),
+                StartDate = ev.StartTime.ToShortDateString(),
+                EndTime = ev.EndTime.ToShortTimeString(),
+                EndDate = ev.EndTime.ToShortDateString()
+            };
+
+            return uev;
+        }
+
+
         public List<UpcomingEventDTO> FetchUpcomingEvents()
         {
             return db.FetchEvents().Select(ev => new UpcomingEventDTO 
