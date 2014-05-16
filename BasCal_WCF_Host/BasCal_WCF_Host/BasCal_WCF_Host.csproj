@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="DTO_Models\UpcomingEventDTO.cs" />
     <Compile Include="DTO_Models\UpcomingEventShortDTO.cs" />
+    <Compile Include="Extension\DTOExtensions.cs" />
     <Compile Include="IClientAccessPolicy.cs" />
     <Compile Include="IDBservice.cs" />
     <Compile Include="DBservice.cs" />

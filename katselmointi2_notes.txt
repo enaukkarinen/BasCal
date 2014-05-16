@@ -1,0 +1,18 @@
+VK 3 - tavoitteet
+
+Huomautukset:
+- DateTime muotoilut SL-clientissa
+- DTO-käännökset laajennusmetodilla
+- Luokkanimeämiset, camelCase
+
+Uudet tehtävät:
+- Lue RX-PowerPoint -lötkö
+- ViewModel ja View 
+- Lisää/Muokkaa toiminnot
+- Toinen View
+- Remote repo kuntoon
+- Torstaihin mennessä koodit valmiina!
+- Perjantaina koodikatselmointi
+
+itservicedeskistä oikeudet WiFiin cc jaska, sakke
+VK 4 mahd. Unit testing ja muuta viilausta

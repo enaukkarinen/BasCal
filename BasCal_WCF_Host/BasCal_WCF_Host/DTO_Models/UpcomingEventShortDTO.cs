@@ -10,9 +10,7 @@ namespace BasCal_WCF_Host.DTO_Models
     {
         public Guid EventId { get; set; }
         public string Name { get; set; }
-        public string StartTime { get; set; }
-        public string StartDate { get; set; }
-        public string EndTime { get; set; }
-        public string EndDate { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
 }

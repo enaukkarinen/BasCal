@@ -7,6 +7,7 @@ using BasCal_WCF_Host.DTO_Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BasCal_WCF_Host.Extension;
 
 namespace BasCal_WCF_Host
 {
@@ -19,31 +20,13 @@ namespace BasCal_WCF_Host
         public UpcomingEventDTO FetchEventByGuid(Guid guid)
         {
             Event ev = db.FetchEventByGuid(guid);
-            UpcomingEventDTO uev = new UpcomingEventDTO()
-            {
-                EventId = ev.EventId,
-                Type = ev.EventType.Name,
-                Name = ev.Name,
-                Summary = ev.Summary,
-                Location = ev.Location,
-                StartTime = ev.StartTime.ToShortTimeString(),
-                StartDate = ev.StartTime.ToShortDateString(),
-                EndTime = ev.EndTime.ToShortTimeString(),
-                EndDate = ev.EndTime.ToShortDateString()
-            };
-
-            return uev;
+            return ev.ToUpcomingEventDTO();         
         }
 
 
         public List<UpcomingEventDTO> FetchUpcomingEvents()
         {
-            return db.FetchEvents().Select(ev => new UpcomingEventDTO
-            {
-                EventId = ev.EventId,
-                TypeId = ev.TypeId,
-                Type = ev.EventType.Name
-            }).ToList();
+            return db.FetchEvents().Select(ev => ev.ToUpcomingEventDTO()).ToList();
         }
 
         public List<UpcomingEventShortDTO> FetchUpcomingEventsShort()
@@ -53,15 +36,7 @@ namespace BasCal_WCF_Host
 
             foreach (Event ev in jotain)
             {
-                paluu.Add(new UpcomingEventShortDTO()
-                {
-                    EventId = ev.EventId,
-                    Name = ev.Name,
-                    StartTime = ev.StartTime.ToShortTimeString(),
-                    StartDate = ev.StartTime.ToShortDateString(),
-                    EndTime = ev.EndTime.ToShortTimeString(),
-                    EndDate = ev.EndTime.ToShortDateString()
-                });
+                paluu.Add(ev.ToUpcomingEventShortDTO());
             }
 
             return paluu;

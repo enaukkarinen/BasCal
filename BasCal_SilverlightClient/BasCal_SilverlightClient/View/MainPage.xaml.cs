@@ -9,29 +9,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using BasCal_SilverlightClient.ServiceReference1;
+using System.Windows.Navigation;
+using BasCal_SilverlightClient.ViewModel;
 
 namespace BasCal_SilverlightClient
 {
     public partial class MainPage : UserControl
     {
-        ServiceReference1.DBserviceClient client;
 
         public MainPage()
         {
             InitializeComponent();
+ 
 
-            client = new DBserviceClient();
-            client.FetchUpcomingEventsShortCompleted += client_FetchUpcomingEventsShortCompleted;
-            client.FetchEventByGuidCompleted += client_FetchEventByGuidCompleted;
             HideEventFullInfoBox.Completed += HideEventFullInfoBox_Completed;
         }
 
-
-        void client_FetchUpcomingEventsShortCompleted(object sender, FetchUpcomingEventsShortCompletedEventArgs e)
-        {
-            listboxUpcomingEvents.ItemsSource = e.Result;
-        }
 
         private void image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -39,7 +32,7 @@ namespace BasCal_SilverlightClient
             {
                 if (RightPanelGrid.Width == 25)
                 {
-                    client.FetchUpcomingEventsShortAsync();
+                    ((EventViewModel)this.DataContext).FetchUpcomingEventShortInShortFormat();
                     RightPanelSlideIn.Begin();
                 }
                 else
@@ -58,16 +51,10 @@ namespace BasCal_SilverlightClient
         private void UpcomingEventListItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             string eventId = ((TextBlock)((Grid)((StackPanel)sender).Children[0]).Children[0]).Text;
-            client.FetchEventByGuidAsync(new Guid(eventId));
+            ((EventViewModel)this.DataContext).FetchUpcomingEventByGuid(new Guid(eventId));
             EventFullInfo.Visibility = System.Windows.Visibility.Visible;
             ShowEventFullInfoBox.Begin();
 
-        }
-
-
-        void client_FetchEventByGuidCompleted(object sender, FetchEventByGuidCompletedEventArgs e)
-        {
-            EventFullInfoInnerBox.DataContext = e.Result;
         }
 
         private void EventFullInfoCloseBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
