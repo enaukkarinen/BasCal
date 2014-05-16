@@ -159,7 +159,8 @@
                     </LinearGradientBrush>
                 </Grid.Background>
             </Grid>
-
+            
+            
             <Grid x:Name="ContentGrid" Grid.Column="0"  VerticalAlignment="Stretch" >
 
                 <sdk:DataGrid x:Name="CalendarDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15,20,15,15" Background="#59000000">
