@@ -159,19 +159,19 @@
                     </LinearGradientBrush>
                 </Grid.Background>
             </Grid>
-            
-            
+
+
             <Grid x:Name="ContentGrid" Grid.Column="0"  VerticalAlignment="Stretch" >
 
-                <sdk:DataGrid x:Name="CalendarDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15,20,15,15" Background="#59000000">
-                    
+                <sdk:DataGrid x:Name="CalendarDataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15,20,20,15" Background="#59000000">
+
                 </sdk:DataGrid>
 
             </Grid>
 
             <!-- Keep RightPanelGrid Width="25" by default. -->
             <Grid x:Name="RightPanelGrid" HorizontalAlignment="Right" Width="25" Grid.Column="1" Background="#59000000" Canvas.ZIndex="3">
-                
+
                 <TextBlock Text="upcoming events" FontFamily="Segoe UI" FontSize="16" Margin="45,15,15,15" VerticalAlignment="Top" HorizontalAlignment="Center">
                     <TextBlock.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -180,7 +180,7 @@
                         </LinearGradientBrush>
                     </TextBlock.Foreground>
                 </TextBlock>
-                
+
                 <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" MouseLeftButtonUp="image_MouseLeftButtonUp" >
                     <Image x:Name="DoubleArrowImg" Cursor="Hand" Source="Content/doublearrow.png" Width="20" Height="20" HorizontalAlignment="Left" Margin="3,0,0,0" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
                         <Image.RenderTransform>
