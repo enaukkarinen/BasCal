@@ -5,8 +5,8 @@ INSERT INTO [User] (UserID, UserName)
 VALUES (NEWID(), 'Anthony Anderson'), (NEWID(), 'Woody Harrelson'), 
 (NEWID(), 'Matthew McConaughey'), (NEWID(), 'Jordan Peele')
 
-INSERT INTO[EventType] (Name) VALUES
-('Unspecified'), ('General'), ('Work')
+INSERT INTO[EventType] (TypeId, Name) VALUES
+(0, 'Unspecified'), (1, 'General'), (2, 'Work')
 
 INSERT INTO[Event] (EventId, TypeId, Name, Summary, Location, StartTime, EndTime)
 VALUES (NEWID(), 2, 'BasCal -project review', 'This is a summary of the event', 'Pori, Meeting Room 5',
