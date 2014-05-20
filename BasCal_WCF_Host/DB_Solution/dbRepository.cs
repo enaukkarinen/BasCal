@@ -60,6 +60,12 @@ namespace DB_Solution
             int typeid = db.EventTypes.Where(et => et.Name == name).Select(et => et.TypeId).FirstOrDefault();
             return db.Events.Where(e => e.TypeId == typeid);
         }
+
+        public IQueryable<Event> FetchEventsByMonth(int month)
+        {
+            return db.Events.Where(e => e.StartTime.Month == month);
+        }
+
         public IQueryable<Event> FetchEventsByEventName(string name)
         {
             return db.Events.Where(e => e.Name.Contains(name));

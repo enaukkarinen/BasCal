@@ -9,6 +9,8 @@
     xmlns:primitives="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows"
     xmlns:localprimitives="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Data"
     xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:is="http://schemas.microsoft.com/expression/2010/interactions"
     
     mc:Ignorable="d"
     d:DesignHeight="700" d:DesignWidth="1200"
@@ -273,7 +275,7 @@
 
             <Grid x:Name="ContentGrid" Grid.Column="0"  VerticalAlignment="Stretch">
 
-            <data:DataGrid ItemsSource="{Binding Weeks}" Margin="10" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="120" Background="Transparent"
+           <data:DataGrid ItemsSource="{Binding Weeks}" Margin="10" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="120" Background="Transparent"
            AlternatingRowBackground="Transparent"
            RowBackground="Transparent"
            BorderBrush="Transparent"
@@ -408,6 +410,11 @@
                             <CompositeTransform/>
                         </Image.RenderTransform>
                     </Image>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding BringUpUpcomingEvents}"></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </Grid>
                 <ListBox x:Name="listboxUpcomingEvents" ItemsSource="{Binding UpcomingEventsInShortFormatList}" Margin="35,45,5,15" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListBox.ItemTemplate>

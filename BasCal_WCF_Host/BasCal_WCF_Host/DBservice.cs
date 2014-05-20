@@ -23,6 +23,17 @@ namespace BasCal_WCF_Host
             return ev.ToUpcomingEventDTO();         
         }
 
+        public List<UpcomingEventShortDTO> FetchEventsByMonth(int m)
+        {
+            List<Event> evs = db.FetchEventsByMonth(m).ToList();
+            List<UpcomingEventShortDTO> paluu = new List<UpcomingEventShortDTO>();
+
+            foreach (Event ev in evs)
+            {
+                paluu.Add(ev.ToUpcomingEventShortDTO());
+            }
+            return paluu;
+        }
 
         public List<UpcomingEventDTO> FetchUpcomingEvents()
         {

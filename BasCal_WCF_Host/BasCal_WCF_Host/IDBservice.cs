@@ -11,6 +11,9 @@ namespace BasCal_WCF_Host
         #region Events
 
         [OperationContract]
+        List<UpcomingEventShortDTO> FetchEventsByMonth(int m);
+
+        [OperationContract]
         UpcomingEventDTO FetchEventByGuid(Guid guid);
 
         [OperationContract]

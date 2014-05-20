@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:9007/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfUpcomingEventShortDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UpcomingEventShortDTO" nillable="true" type="tns:UpcomingEventShortDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUpcomingEventShortDTO" nillable="true" type="tns:ArrayOfUpcomingEventShortDTO" />
+  <xs:complexType name="UpcomingEventShortDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EventId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpcomingEventShortDTO" nillable="true" type="tns:UpcomingEventShortDTO" />
   <xs:complexType name="UpcomingEventDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
@@ -20,19 +35,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfUpcomingEventDTO" nillable="true" type="tns:ArrayOfUpcomingEventDTO" />
-  <xs:complexType name="ArrayOfUpcomingEventShortDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="UpcomingEventShortDTO" nillable="true" type="tns:UpcomingEventShortDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfUpcomingEventShortDTO" nillable="true" type="tns:ArrayOfUpcomingEventShortDTO" />
-  <xs:complexType name="UpcomingEventShortDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="EventId" type="ser:guid" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="UpcomingEventShortDTO" nillable="true" type="tns:UpcomingEventShortDTO" />
 </xs:schema>

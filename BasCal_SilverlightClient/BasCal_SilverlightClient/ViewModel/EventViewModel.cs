@@ -19,7 +19,7 @@ using System.Collections.Generic;
 
 namespace BasCal_SilverlightClient.ViewModel
 {
-    public class EventViewModel : INotifyPropertyChanged
+    public class EventViewModel : INotifyPropertyChanged, ICommand
     {
         private DBserviceClient client;
         private UpcomingEventDTO upcomingEventInFull;
@@ -57,13 +57,32 @@ namespace BasCal_SilverlightClient.ViewModel
                 RaisePropertyChanged("Weeks");
             }
         }
-        
+
+        public ICommand DoTheDew
+        {
+            get
+            {
+                return new Microsoft.Expression.Interactivity.Core.ActionCommand(() => MessageBox.Show("Hello from command!"));
+            }
+        }
+
         // Constructor
         public EventViewModel()
         {
             client = new DBserviceClient();
             client.FetchUpcomingEventsShortCompleted += client_FetchUpcomingEventsShortCompleted;
             client.FetchEventByGuidCompleted += client_FetchEventByGuidCompleted;
+            client.FetchEventsByMonthCompleted += client_FetchEventsByMonthCompleted;
+        }
+
+        void client_FetchEventsByMonthCompleted(object sender, FetchEventsByMonthCompletedEventArgs e)
+        {
+            FillCalendarDataGrid(e.Result);
+        }
+
+        public void FetchEventsByMonth(int m)
+        {
+            client.FetchEventsByMonthAsync(m);
         }
 
         private void FillCalendarDataGrid(ObservableCollection<UpcomingEventShortDTO> returnedList)
@@ -76,7 +95,7 @@ namespace BasCal_SilverlightClient.ViewModel
             for(int i = 1 ; i <= numberOfDaysInWholeMonth; i++)
             {
                 Day newDay = new Day(){Date = new DateTime(startOftheMonth.Year, startOftheMonth.Month, i)};
-                newDay.DaysEvents = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(x => x.StartTime.Day == newDay.Date.Day));
+                newDay.DaysEvents = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(x => x.StartTime.Day <= newDay.Date.Day && x.EndTime.Day >= newDay.Date.Day));
 
                 secondCollection.Add(newDay);
             }
@@ -97,22 +116,6 @@ namespace BasCal_SilverlightClient.ViewModel
             this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 2))));
             this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 3))));
             this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 4))));
-            
-            
-            
-            
-            //ObservableCollection<UpcomingEventShortDTO> week1Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber));
-            //ObservableCollection<UpcomingEventShortDTO> week2Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 1));
-            //ObservableCollection<UpcomingEventShortDTO> week3Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 2));
-            //ObservableCollection<UpcomingEventShortDTO> week4Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 3));
-            //ObservableCollection<UpcomingEventShortDTO> week5Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 4));
-            
-            //this.Weeks = new ObservableCollection<Week>();
-            //this.Weeks.Add(new Week(week1Items));
-            //this.Weeks.Add(new Week(week2Items));
-            //this.Weeks.Add(new Week(week3Items));
-            //this.Weeks.Add(new Week(week4Items));
-            //this.Weeks.Add(new Week(week5Items));
 
         }
 
@@ -123,8 +126,7 @@ namespace BasCal_SilverlightClient.ViewModel
         }
         void client_FetchUpcomingEventsShortCompleted(object sender, FetchUpcomingEventsShortCompletedEventArgs e)
         {
-            UpcomingEventsInShortFormatList = e.Result;
-            FillCalendarDataGrid(e.Result);
+            UpcomingEventsInShortFormatList = new ObservableCollection<UpcomingEventShortDTO>(e.Result.OrderByDescending(ev => ev.StartTime));
         }
 
         public void FetchUpcomingEventByGuid(Guid guid)
@@ -185,6 +187,18 @@ namespace BasCal_SilverlightClient.ViewModel
 
             // Return the week of our adjusted day
             return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public event EventHandler CanExecuteChanged;
+
+        public void Execute(object parameter)
+        {
+            throw new NotImplementedException();
         }
     }
 

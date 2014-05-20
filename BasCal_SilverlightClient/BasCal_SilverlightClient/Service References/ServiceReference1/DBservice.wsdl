@@ -37,6 +37,12 @@
       <xsd:import schemaLocation="http://localhost:9007/?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IDBservice_FetchEventsByMonth_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchEventsByMonth" />
+  </wsdl:message>
+  <wsdl:message name="IDBservice_FetchEventsByMonth_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchEventsByMonthResponse" />
+  </wsdl:message>
   <wsdl:message name="IDBservice_FetchEventByGuid_InputMessage">
     <wsdl:part name="parameters" element="tns:FetchEventByGuid" />
   </wsdl:message>
@@ -68,6 +74,10 @@
     <wsdl:part name="parameters" element="tns:GetClientAccessPolicyResponse" />
   </wsdl:message>
   <wsdl:portType name="IDBservice">
+    <wsdl:operation name="FetchEventsByMonth">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDBservice/FetchEventsByMonth" message="tns:IDBservice_FetchEventsByMonth_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDBservice/FetchEventsByMonthResponse" message="tns:IDBservice_FetchEventsByMonth_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="FetchEventByGuid">
       <wsdl:input wsaw:Action="http://tempuri.org/IDBservice/FetchEventByGuid" message="tns:IDBservice_FetchEventByGuid_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDBservice/FetchEventByGuidResponse" message="tns:IDBservice_FetchEventByGuid_OutputMessage" />
@@ -94,6 +104,15 @@
   <wsdl:binding name="NetTcpBinding_IDBservice" type="tns:IDBservice">
     <wsp:PolicyReference URI="#NetTcpBinding_IDBservice_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="FetchEventsByMonth">
+      <soap12:operation soapAction="http://tempuri.org/IDBservice/FetchEventsByMonth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="FetchEventByGuid">
       <soap12:operation soapAction="http://tempuri.org/IDBservice/FetchEventByGuid" style="document" />
       <wsdl:input>
@@ -133,6 +152,15 @@
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_IDBservice" type="tns:IDBservice">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FetchEventsByMonth">
+      <soap:operation soapAction="http://tempuri.org/IDBservice/FetchEventsByMonth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="FetchEventByGuid">
       <soap:operation soapAction="http://tempuri.org/IDBservice/FetchEventByGuid" style="document" />
       <wsdl:input>

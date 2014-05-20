@@ -21,7 +21,7 @@ namespace BasCal_SilverlightClient
         {
             InitializeComponent();
 
-            
+            ((EventViewModel)this.DataContext).FetchEventsByMonth(5);
 
             HideEventFullInfoBox.Completed += HideEventFullInfoBox_Completed;
         }

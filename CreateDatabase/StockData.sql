@@ -29,3 +29,8 @@ VALUES
 '20140521 2:00:00', '20140521 3:00:00'),
 (NEWID(), 1, 'Tennis', 'Just dont lose!', 'Isomäki',
 '20140512 20:00:00', '20140512 22:00:00')
+
+INSERT INTO[Event] (EventId, TypeId, Name, Summary, Location, StartTime, EndTime)
+VALUES 
+(NEWID(), 2, 'Harkkaprojekti', 'BasCal-sovellus', '',
+'20140502 9:00:00', '20140531 16:00:00')
