@@ -70,27 +70,45 @@ namespace BasCal_SilverlightClient.ViewModel
         {
             DateTime startOftheMonth = new DateTime(returnedList[0].StartTime.Year, returnedList[0].StartTime.Month, 1);
             int startOftheMonthWeekNumber = GetIso8601WeekOfYear(startOftheMonth);
-            ObservableCollection<UpcomingEventShortDTO> week1Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber));
-            ObservableCollection<UpcomingEventShortDTO> week2Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 1));
-            ObservableCollection<UpcomingEventShortDTO> week3Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 2));
-            ObservableCollection<UpcomingEventShortDTO> week4Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 3));
-            ObservableCollection<UpcomingEventShortDTO> week5Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 4));
-            
-            this.Weeks = new ObservableCollection<Week>();
-            this.Weeks.Add(new Week(week1Items));
-            this.Weeks.Add(new Week(week2Items));
-            this.Weeks.Add(new Week(week3Items));
-            this.Weeks.Add(new Week(week4Items));
-            this.Weeks.Add(new Week(week5Items));
+            int numberOfDaysInWholeMonth = DateTime.DaysInMonth(startOftheMonth.Year, startOftheMonth.Month);
+            ObservableCollection<Day> secondCollection = new ObservableCollection<Day>();
+           
 
-            returnedList = new ObservableCollection<UpcomingEventShortDTO>(returnedList.OrderBy(x => x.StartTime));
+
+            for(int i = 1 ; i <= numberOfDaysInWholeMonth; i++)
+            {
+                Day newDay = new Day(){Date = new DateTime(startOftheMonth.Year, startOftheMonth.Month, i)};
+                newDay.DaysEvents = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(x => x.StartTime.Day == newDay.Date.Day));
+
+                secondCollection.Add(newDay);
+            }
+
+            this.Weeks = new ObservableCollection<Week>();
+            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber))));
+            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 1))));
+            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 2))));
+            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 3))));
+            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 4))));
+            //ObservableCollection<UpcomingEventShortDTO> week1Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber));
+            //ObservableCollection<UpcomingEventShortDTO> week2Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 1));
+            //ObservableCollection<UpcomingEventShortDTO> week3Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 2));
+            //ObservableCollection<UpcomingEventShortDTO> week4Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 3));
+            //ObservableCollection<UpcomingEventShortDTO> week5Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 4));
             
-            int daysInMonth = DateTime.DaysInMonth(startOftheMonth.Year, startOftheMonth.Month);
+            //this.Weeks = new ObservableCollection<Week>();
+            //this.Weeks.Add(new Week(week1Items));
+            //this.Weeks.Add(new Week(week2Items));
+            //this.Weeks.Add(new Week(week3Items));
+            //this.Weeks.Add(new Week(week4Items));
+            //this.Weeks.Add(new Week(week5Items));
 
             // Find out where to put the first day of the month on the datagrid
-            int firstWeekIncrement = GetDayIncrement(startOftheMonth.Date.DayOfWeek.ToString());
-            int addedEmpties = firstWeekIncrement;
-            this.Weeks.Add(new Week());
+            //int dayIncrement = GetDayIncrement(startOftheMonth.DayOfWeek.ToString());
+
+            //while (dayIncrement > 0)
+            //{
+            //    //this.Weeks[0].Days[0]
+            //}
 
         }
 

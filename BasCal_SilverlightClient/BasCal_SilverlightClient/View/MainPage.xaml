@@ -166,80 +166,90 @@
 
             <Grid x:Name="ContentGrid" Grid.Column="0"  VerticalAlignment="Stretch">
 
-                <data:DataGrid ItemsSource="{Binding Month.Weeks}" AutoGenerateColumns="True" ColumnWidth="1*">
+                <data:DataGrid ItemsSource="{Binding Weeks}" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="160">
+                    <data:DataGrid.Resources>
+                        <!--<Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="5"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="FontFamily" Value="Segoe UI"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Foreground" Value="#FFEBEBEB"/>
+                        </Style>-->
+                    </data:DataGrid.Resources>
                     <data:DataGrid.Columns>
+
+                        <data:DataGridTemplateColumn Header="Monday">
+                            <data:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="{Binding MondayDate}" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Text="{Binding Monday}" VerticalAlignment="Center"></TextBlock>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </data:DataGridTemplateColumn.CellTemplate>
+                        </data:DataGridTemplateColumn>
+
+                        <data:DataGridTemplateColumn Header="Tuesday">
+                            <data:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Tuesday}"></TextBlock>
+                                        <TextBlock></TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </data:DataGridTemplateColumn.CellTemplate>
+                        </data:DataGridTemplateColumn>
+
+                        <data:DataGridTemplateColumn Header="Wednesday">
+                            <data:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Wednesday}"></TextBlock>
+                                        <TextBlock></TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </data:DataGridTemplateColumn.CellTemplate>
+                        </data:DataGridTemplateColumn>
+
+                        <data:DataGridTemplateColumn Header="Thursday">
+                            <data:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Thursday}"></TextBlock>
+                                        <TextBlock></TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </data:DataGridTemplateColumn.CellTemplate>
+                        </data:DataGridTemplateColumn>
+
+                        <data:DataGridTemplateColumn Header="Friday">
+                            <data:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Friday}"></TextBlock>
+                                        <TextBlock></TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </data:DataGridTemplateColumn.CellTemplate>
+                        </data:DataGridTemplateColumn>
+
+                        <data:DataGridTemplateColumn Header="Saturday">
+                            <data:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Saturday}"></TextBlock>
+                                        <TextBlock></TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </data:DataGridTemplateColumn.CellTemplate>
+                        </data:DataGridTemplateColumn>
                         
                         <data:DataGridTemplateColumn Header="Sunday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <TextBlock Text="{Binding Sunday.Date}"></TextBlock>
-                                        <TextBlock></TextBlock>
-                                    </Grid>
-                                </DataTemplate>
-                            </data:DataGridTemplateColumn.CellTemplate>
-                        </data:DataGridTemplateColumn>
-                        
-                        <data:DataGridTemplateColumn Header="Monday">
-                            <data:DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <TextBlock Text="{Binding Sunday.Date}"></TextBlock>
-                                        <TextBlock></TextBlock>
-                                    </Grid>
-                                </DataTemplate>
-                            </data:DataGridTemplateColumn.CellTemplate>
-                        </data:DataGridTemplateColumn>
-                        
-                        <data:DataGridTemplateColumn Header="Tueday">
-                            <data:DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <TextBlock Text="{Binding Sunday.Date}"></TextBlock>
-                                        <TextBlock></TextBlock>
-                                    </Grid>
-                                </DataTemplate>
-                            </data:DataGridTemplateColumn.CellTemplate>
-                        </data:DataGridTemplateColumn>
-                        
-                        <data:DataGridTemplateColumn Header="Wednesday">
-                            <data:DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <TextBlock Text="{Binding Sunday.Date}"></TextBlock>
-                                        <TextBlock></TextBlock>
-                                    </Grid>
-                                </DataTemplate>
-                            </data:DataGridTemplateColumn.CellTemplate>
-                        </data:DataGridTemplateColumn>
-                        
-                        <data:DataGridTemplateColumn Header="Thursday">
-                            <data:DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <TextBlock Text="{Binding Sunday.Date}"></TextBlock>
-                                        <TextBlock></TextBlock>
-                                    </Grid>
-                                </DataTemplate>
-                            </data:DataGridTemplateColumn.CellTemplate>
-                        </data:DataGridTemplateColumn>
-                        
-                        <data:DataGridTemplateColumn Header="Friday">
-                            <data:DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <TextBlock Text="{Binding Sunday.Date}"></TextBlock>
-                                        <TextBlock></TextBlock>
-                                    </Grid>
-                                </DataTemplate>
-                            </data:DataGridTemplateColumn.CellTemplate>
-                        </data:DataGridTemplateColumn>
-                        
-                        <data:DataGridTemplateColumn Header="Saturday">
-                            <data:DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <TextBlock Text="{Binding Sunday.Date}"></TextBlock>
+                                        <TextBlock Text="{Binding Sunday}"></TextBlock>
                                         <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>

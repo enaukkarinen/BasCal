@@ -17,5 +17,10 @@ namespace BasCal_SilverlightClient.Model
     {
         public DateTime Date { get; set; }
         public ObservableCollection<UpcomingEventShortDTO> DaysEvents { get; set; }
+
+        public Day()
+        {
+            this.DaysEvents = new ObservableCollection<UpcomingEventShortDTO>();
+        }
     }
 }
