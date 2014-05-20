@@ -20,9 +20,7 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
     [System.Runtime.Serialization.DataContractAttribute(Name="UpcomingEventDTO", Namespace="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models")]
     public partial class UpcomingEventDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private string EndDateField;
-        
-        private string EndTimeField;
+        private System.DateTime EndTimeField;
         
         private System.Guid EventIdField;
         
@@ -30,9 +28,7 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
         
         private string NameField;
         
-        private string StartDateField;
-        
-        private string StartTimeField;
+        private System.DateTime StartTimeField;
         
         private string SummaryField;
         
@@ -41,25 +37,12 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
         private int TypeIdField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string EndDate {
-            get {
-                return this.EndDateField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EndDateField, value) != true)) {
-                    this.EndDateField = value;
-                    this.RaisePropertyChanged("EndDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string EndTime {
+        public System.DateTime EndTime {
             get {
                 return this.EndTimeField;
             }
             set {
-                if ((object.ReferenceEquals(this.EndTimeField, value) != true)) {
+                if ((this.EndTimeField.Equals(value) != true)) {
                     this.EndTimeField = value;
                     this.RaisePropertyChanged("EndTime");
                 }
@@ -106,25 +89,12 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StartDate {
-            get {
-                return this.StartDateField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StartDateField, value) != true)) {
-                    this.StartDateField = value;
-                    this.RaisePropertyChanged("StartDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StartTime {
+        public System.DateTime StartTime {
             get {
                 return this.StartTimeField;
             }
             set {
-                if ((object.ReferenceEquals(this.StartTimeField, value) != true)) {
+                if ((this.StartTimeField.Equals(value) != true)) {
                     this.StartTimeField = value;
                     this.RaisePropertyChanged("StartTime");
                 }
@@ -185,38 +155,21 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
     [System.Runtime.Serialization.DataContractAttribute(Name="UpcomingEventShortDTO", Namespace="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models")]
     public partial class UpcomingEventShortDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private string EndDateField;
-        
-        private string EndTimeField;
+        private System.DateTime EndTimeField;
         
         private System.Guid EventIdField;
         
         private string NameField;
         
-        private string StartDateField;
-        
-        private string StartTimeField;
+        private System.DateTime StartTimeField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string EndDate {
-            get {
-                return this.EndDateField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EndDateField, value) != true)) {
-                    this.EndDateField = value;
-                    this.RaisePropertyChanged("EndDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string EndTime {
+        public System.DateTime EndTime {
             get {
                 return this.EndTimeField;
             }
             set {
-                if ((object.ReferenceEquals(this.EndTimeField, value) != true)) {
+                if ((this.EndTimeField.Equals(value) != true)) {
                     this.EndTimeField = value;
                     this.RaisePropertyChanged("EndTime");
                 }
@@ -250,25 +203,12 @@ namespace BasCal_SilverlightClient.ServiceReference1 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StartDate {
-            get {
-                return this.StartDateField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StartDateField, value) != true)) {
-                    this.StartDateField = value;
-                    this.RaisePropertyChanged("StartDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StartTime {
+        public System.DateTime StartTime {
             get {
                 return this.StartTimeField;
             }
             set {
-                if ((object.ReferenceEquals(this.StartTimeField, value) != true)) {
+                if ((this.StartTimeField.Equals(value) != true)) {
                     this.StartTimeField = value;
                     this.RaisePropertyChanged("StartTime");
                 }

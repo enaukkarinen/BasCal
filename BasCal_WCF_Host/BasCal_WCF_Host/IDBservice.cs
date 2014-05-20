@@ -19,7 +19,6 @@ namespace BasCal_WCF_Host
         [OperationContract]
         List<UpcomingEventShortDTO> FetchUpcomingEventsShort();
 
-
         #endregion
         [OperationContract]
         int Add(int a, int b);

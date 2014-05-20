@@ -3,13 +3,11 @@
   <xs:import schemaLocation="http://localhost:9007/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="UpcomingEventDTO">
     <xs:sequence>
-      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="EndTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="EventId" type="ser:guid" />
       <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="StartTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Summary" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TypeId" type="xs:int" />
@@ -30,12 +28,10 @@
   <xs:element name="ArrayOfUpcomingEventShortDTO" nillable="true" type="tns:ArrayOfUpcomingEventShortDTO" />
   <xs:complexType name="UpcomingEventShortDTO">
     <xs:sequence>
-      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="EndTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EndTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="EventId" type="ser:guid" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="StartTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartTime" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UpcomingEventShortDTO" nillable="true" type="tns:UpcomingEventShortDTO" />

@@ -20,7 +20,8 @@ namespace BasCal_SilverlightClient
         public MainPage()
         {
             InitializeComponent();
- 
+
+            
 
             HideEventFullInfoBox.Completed += HideEventFullInfoBox_Completed;
         }
