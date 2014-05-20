@@ -84,9 +84,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Day.cs" />
-    <Compile Include="Model\MonthViewModel.cs" />
     <Compile Include="Model\Week.cs" />
-    <Compile Include="Model\Year.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

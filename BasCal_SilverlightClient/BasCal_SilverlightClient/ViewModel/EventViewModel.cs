@@ -24,7 +24,7 @@ namespace BasCal_SilverlightClient.ViewModel
         private DBserviceClient client;
         private UpcomingEventDTO upcomingEventInFull;
         private ObservableCollection<UpcomingEventShortDTO> upcomingEventsInShortFormatList;
-        private MonthViewModel month;
+        private ObservableCollection<Week> weeks;
 
 
         public ObservableCollection<UpcomingEventShortDTO> UpcomingEventsInShortFormatList
@@ -48,15 +48,16 @@ namespace BasCal_SilverlightClient.ViewModel
             }
         }
 
-        public MonthViewModel Month
+        public ObservableCollection<Week> Weeks
         {
-            get { return month; }
+            get { return weeks; }
             set 
             {
-                month = value;
-                RaisePropertyChanged("Month");
+                weeks = value;
+                RaisePropertyChanged("Weeks");
             }
         }
+        
         // Constructor
         public EventViewModel()
         {
@@ -67,61 +68,30 @@ namespace BasCal_SilverlightClient.ViewModel
 
         private void FillCalendarDataGrid(ObservableCollection<UpcomingEventShortDTO> returnedList)
         {
-            MonthViewModel m = new MonthViewModel();
-            m.MonthNumber = returnedList[0].StartTime.Month;
-            m.MonthName = returnedList[0].StartTime.ToString("MMMM");
-            m.Year = returnedList[0].StartTime.Year;
+            DateTime startOftheMonth = new DateTime(returnedList[0].StartTime.Year, returnedList[0].StartTime.Month, 1);
+            int startOftheMonthWeekNumber = GetIso8601WeekOfYear(startOftheMonth);
+            ObservableCollection<UpcomingEventShortDTO> week1Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber));
+            ObservableCollection<UpcomingEventShortDTO> week2Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 1));
+            ObservableCollection<UpcomingEventShortDTO> week3Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 2));
+            ObservableCollection<UpcomingEventShortDTO> week4Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 3));
+            ObservableCollection<UpcomingEventShortDTO> week5Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 4));
+            
+            this.Weeks = new ObservableCollection<Week>();
+            this.Weeks.Add(new Week(week1Items));
+            this.Weeks.Add(new Week(week2Items));
+            this.Weeks.Add(new Week(week3Items));
+            this.Weeks.Add(new Week(week4Items));
+            this.Weeks.Add(new Week(week5Items));
 
-            m.Days = new ObservableCollection<Day>();
+            returnedList = new ObservableCollection<UpcomingEventShortDTO>(returnedList.OrderBy(x => x.StartTime));
+            
+            int daysInMonth = DateTime.DaysInMonth(startOftheMonth.Year, startOftheMonth.Month);
 
-            for (int i = 1; i <= DateTime.DaysInMonth(m.Year, m.MonthNumber); i++)
-            {
-                Day day = new Day();
-                day.DaysEvents = new ObservableCollection<UpcomingEventShortDTO>();
-                foreach (UpcomingEventShortDTO ev in returnedList)
-                {
-                    if (ev.StartTime.Day == i)
-                    {
-                        day.DaysEvents.Add(ev);
-                    }
-                }
-                day.Date = new DateTime(m.Year, m.MonthNumber, i);
-                m.Days.Add(day);
-            }
+            // Find out where to put the first day of the month on the datagrid
+            int firstWeekIncrement = GetDayIncrement(startOftheMonth.Date.DayOfWeek.ToString());
+            int addedEmpties = firstWeekIncrement;
+            this.Weeks.Add(new Week());
 
-            int firstWeekIncrement = GetDayIncrement(m.Days[0].Date.DayOfWeek.ToString());
-
-
-            for (int i = firstWeekIncrement; i > 0; i--)
-            {
-                m.Weeks[0].Days.Add(new Day(){Date = m.Days[0].Date.AddDays(i * -1)});
-            }
-
-            for (int i = 0; i < m.Days.Count; i++)
-            {
-                if (m.Weeks[0].Days.Count <= 7)
-                {
-                    m.Weeks[0].Days.Add(m.Days[i]);
-                }
-                else if (m.Weeks[1].Days.Count <= 7)
-                {
-                    m.Weeks[1].Days.Add(m.Days[i]);
-                }
-                else if (m.Weeks[2].Days.Count <= 7)
-                {
-                    m.Weeks[2].Days.Add(m.Days[i]);
-                }
-                else if (m.Weeks[3].Days.Count <= 7)
-                {
-                    m.Weeks[3].Days.Add(m.Days[i]);
-                }
-                else if (m.Weeks[4].Days.Count <= 7)
-                {
-                    m.Weeks[4].Days.Add(m.Days[i]);
-                }
-            }
-
-            this.Month = m;
         }
 
 
@@ -176,6 +146,23 @@ namespace BasCal_SilverlightClient.ViewModel
                 default:
                     return 0;
             }
+        }
+
+        // This presumes that weeks start with Monday.
+        // Week 1 is the 1st week of the year with a Thursday in it.
+        public static int GetIso8601WeekOfYear(DateTime time)
+        {
+            // Seriously cheat.  If its Monday, Tuesday or Wednesday, then it'll 
+            // be the same week# as whatever Thursday, Friday or Saturday are,
+            // and we always get those right
+            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
+            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
+            {
+                time = time.AddDays(3);
+            }
+
+            // Return the week of our adjusted day
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
         }
     }
 

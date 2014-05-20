@@ -16,12 +16,15 @@ namespace BasCal_SilverlightClient.Model
 {
     public class Week
     {
+        public ObservableCollection<Day> Days { get; set; }
+
         public string Sunday
         {
             get 
             {
                 string paluu = "";
                 paluu += this.Days[0].Date + "\r\n";
+
                 foreach (var e in this.Days[0].DaysEvents)
                 {
                     paluu += e.Name + "\r\n";
@@ -108,21 +111,15 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
-
-        public ObservableCollection<Day> Days { get; set; }
-
         public Week()
         {
-            Days = new ObservableCollection<Day>();
+            this.Days = new ObservableCollection<Day>();
         }
 
         public Week(ObservableCollection<UpcomingEventShortDTO> upcomingEvents)
         {
-            Days = new ObservableCollection<Day>();
-            for (int i = 0; i < 7; i++)
-            {
-                Days.Add(new Day());
-            }
+            this.Days = new ObservableCollection<Day>();
+
             foreach (UpcomingEventShortDTO ev in upcomingEvents)
             {
                 PopulateWeekDayLists(ev);
@@ -133,25 +130,25 @@ namespace BasCal_SilverlightClient.Model
         {
             switch (eve.StartTime.DayOfWeek.ToString())
             {
-                case "Monday":
+                case "Sunday":
                     Days[0].DaysEvents.Add(eve);
                     break;
-                case "Tuesday":
+                case "Monday":
                     Days[1].DaysEvents.Add(eve);
                     break;
-                case "Wednesday":
+                case "Tuesday":
                     Days[2].DaysEvents.Add(eve);
                     break;
-                case "Thursday":
+                case "Wednesday":
                     Days[3].DaysEvents.Add(eve);
                     break;
-                case "Friday":
+                case "Thursday":
                     Days[4].DaysEvents.Add(eve);
                     break;
-                case "Saturday":
+                case "Friday":
                     Days[5].DaysEvents.Add(eve);
                     break;
-                case "Sunday":
+                case "Saturday":
                     Days[6].DaysEvents.Add(eve);
                     break;
                 default:
