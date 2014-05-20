@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace BasCal_SilverlightClient.Model
 {
@@ -22,13 +23,36 @@ namespace BasCal_SilverlightClient.Model
         {
             get { return this.Days[0].Date.ToShortDateString(); } 
         }
+        public string TuesdayDate
+        {
+            get { return this.Days[1].Date.ToShortDateString(); }
+        }
+        public string WednesdayDate
+        {
+            get { return this.Days[2].Date.ToShortDateString(); }
+        }
+        public string ThursdayDate
+        {
+            get { return this.Days[3].Date.ToShortDateString(); }
+        }
+        public string FridayDate
+        {
+            get { return this.Days[4].Date.ToShortDateString(); }
+        }
+        public string SaturdayDate
+        {
+            get { return this.Days[5].Date.ToShortDateString(); }
+        }
+        public string SundayDate
+        {
+            get { return this.Days[6].Date.ToShortDateString(); }
+        }
+
         public string Monday
         {
             get 
             {
                 string paluu = "";
-                paluu += this.Days[0].Date.ToShortDateString() + "\r\n";
-
                 foreach (var e in this.Days[0].DaysEvents)
                 {
                     paluu += e.Name + "\r\n";
@@ -41,7 +65,6 @@ namespace BasCal_SilverlightClient.Model
             get
             {
                 string paluu = "";
-                paluu += this.Days[1].Date.ToShortDateString() + "\r\n";
                 foreach (var e in this.Days[1].DaysEvents)
                 {
                     paluu += e.Name + "\r\n";
@@ -54,7 +77,6 @@ namespace BasCal_SilverlightClient.Model
             get
             {
                 string paluu = "";
-                paluu += this.Days[2].Date.ToShortDateString() + "\r\n";
                 foreach (var e in this.Days[2].DaysEvents)
                 {
                     paluu += e.Name + "\r\n";
@@ -67,7 +89,6 @@ namespace BasCal_SilverlightClient.Model
             get
             {
                 string paluu = "";
-                paluu += this.Days[3].Date.ToShortDateString() + "\r\n";
                 foreach (var e in this.Days[3].DaysEvents)
                 {
                     paluu += e.Name + "\r\n";
@@ -80,7 +101,6 @@ namespace BasCal_SilverlightClient.Model
             get
             {
                 string paluu = "";
-                paluu += this.Days[4].Date.ToShortDateString() + "\r\n";
                 foreach (var e in this.Days[4].DaysEvents)
                 {
                     paluu += e.Name + "\r\n";
@@ -93,7 +113,6 @@ namespace BasCal_SilverlightClient.Model
             get
             {
                 string paluu = "";
-                paluu += this.Days[5].Date.ToShortDateString() + "\r\n";
                 foreach (var e in this.Days[5].DaysEvents)
                 {
                     paluu += e.Name + "\r\n";
@@ -106,7 +125,6 @@ namespace BasCal_SilverlightClient.Model
             get
             {
                 string paluu = "";
-                paluu += this.Days[6].Date.ToShortDateString() + "\r\n";
                 foreach (var e in this.Days[6].DaysEvents)
                 {
                     paluu += e.Name + "\r\n";
@@ -154,7 +172,10 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
-
+        public void AddDay2(Day day)
+        {
+            //this.Days.Where(d => d.Date.DayOfWeek)
+        }
         public void AddDay(Day day)
         {
             switch (day.Date.DayOfWeek.ToString())

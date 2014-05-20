@@ -89,6 +89,10 @@ namespace BasCal_SilverlightClient.ViewModel
             this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 2))));
             this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 3))));
             this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 4))));
+            
+            
+            
+            
             //ObservableCollection<UpcomingEventShortDTO> week1Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber));
             //ObservableCollection<UpcomingEventShortDTO> week2Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 1));
             //ObservableCollection<UpcomingEventShortDTO> week3Items = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(ev => GetIso8601WeekOfYear(ev.StartTime) == startOftheMonthWeekNumber + 2));

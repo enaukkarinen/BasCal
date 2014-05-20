@@ -4,6 +4,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" x:Class="BasCal_SilverlightClient.MainPage"
+    
+    xmlns:local="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data"
+    xmlns:primitives="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows"
+    xmlns:localprimitives="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Data"
+    xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows"
+    
     mc:Ignorable="d"
     d:DesignHeight="700" d:DesignWidth="1200"
     xmlns:viewModel="clr-namespace:BasCal_SilverlightClient.ViewModel">
@@ -12,6 +18,107 @@
     </UserControl.DataContext>
 
     <UserControl.Resources>
+        <Style x:Key="CellStyle" TargetType="local:DataGridCell">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Cursor" Value="Arrow" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="local:DataGridCell">
+                        <Grid Name="Root" Background="Transparent">
+                            <vsm:VisualStateManager.VisualStateGroups>
+                                <vsm:VisualStateGroup x:Name="CurrentStates" >
+                                    <vsm:VisualStateGroup.Transitions>
+                                        <vsm:VisualTransition GeneratedDuration="0" />
+                                    </vsm:VisualStateGroup.Transitions>
+
+                                    <vsm:VisualState x:Name="Regular" />
+                                    <vsm:VisualState x:Name="Current" />
+                                    <!--<Storyboard>
+										<DoubleAnimation Storyboard.TargetName="FocusVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
+									</Storyboard>
+								</vsm:VisualState>-->
+                                </vsm:VisualStateGroup>
+                            </vsm:VisualStateManager.VisualStateGroups>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Name="FocusVisual" Stroke="#FF6DBDD1" StrokeThickness="1" Fill="#66FFFFFF" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="false" Opacity="0" />
+                            <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Cursor="{TemplateBinding Cursor}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" />
+                            <Rectangle Name="RightGridLine" Grid.Column="1" VerticalAlignment="Stretch" Width="1" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="local:DataGridRow" x:Key="MyCustomRow">
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="local:DataGridRow">
+                        <localprimitives:DataGridFrozenGrid x:Name="Root">
+                            <localprimitives:DataGridFrozenGrid.Resources>
+                                <Storyboard x:Key="DetailsVisibleTransition" >
+                                    <DoubleAnimation Storyboard.TargetName="DetailsPresenter" Storyboard.TargetProperty="ContentHeight" Duration="00:00:0.1" />
+                                </Storyboard>
+                            </localprimitives:DataGridFrozenGrid.Resources>
+                            <vsm:VisualStateManager.VisualStateGroups>
+                                <vsm:VisualStateGroup x:Name="CommonStates" >
+                                    <vsm:VisualState x:Name="Normal" />
+                                    <vsm:VisualState x:Name="Normal AlternatingRow">
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="Opacity" Duration="0" To="0" />
+                                        </Storyboard>
+                                    </vsm:VisualState>
+                                    <vsm:VisualState x:Name="MouseOver" />
+                                    <!--<Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="Opacity" Duration="0" To=".5" />
+                                    </Storyboard>
+                                </vsm:VisualState>-->
+                                    <vsm:VisualState x:Name="Normal Selected"/>
+                                    <!--<Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                                    </Storyboard>
+                                </vsm:VisualState>-->
+                                    <vsm:VisualState x:Name="MouseOver Selected"/>
+                                    <!--<Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                                    </Storyboard>
+                                </vsm:VisualState>-->
+                                    <vsm:VisualState x:Name="Unfocused Selected"/>
+                                    <!--<Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="Opacity" Duration="0" To="1" />
+                                        <ColorAnimationUsingKeyFrames BeginTime="0" Duration="0" Storyboard.TargetName="BackgroundRectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                                            <SplineColorKeyFrame KeyTime="0" Value="#FFE1E7EC" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </vsm:VisualState>-->
+                                </vsm:VisualStateGroup>
+                            </vsm:VisualStateManager.VisualStateGroups>
+                            <localprimitives:DataGridFrozenGrid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </localprimitives:DataGridFrozenGrid.RowDefinitions>
+                            <localprimitives:DataGridFrozenGrid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </localprimitives:DataGridFrozenGrid.ColumnDefinitions>
+                            <Rectangle x:Name="BackgroundRectangle" Grid.RowSpan="2" Grid.ColumnSpan="2" Opacity="0" Fill="#FFBADDE9"  />
+                            <localprimitives:DataGridRowHeader Grid.RowSpan="3" x:Name="RowHeader" localprimitives:DataGridFrozenGrid.IsFrozen="True" />
+
+                            <localprimitives:DataGridCellsPresenter x:Name="CellsPresenter" localprimitives:DataGridFrozenGrid.IsFrozen="True"/>
+
+                            <localprimitives:DataGridDetailsPresenter Grid.Row="1" Grid.Column="1" x:Name="DetailsPresenter" />
+                            <Rectangle Grid.Row="2" Grid.Column="1" x:Name="BottomGridLine" HorizontalAlignment="Stretch" Height="1" />
+                        </localprimitives:DataGridFrozenGrid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Storyboard x:Name="RightPanelSlideIn">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="RightPanelGrid">
                 <EasingDoubleKeyFrame KeyTime="0" Value="25">
@@ -166,7 +273,15 @@
 
             <Grid x:Name="ContentGrid" Grid.Column="0"  VerticalAlignment="Stretch">
 
-                <data:DataGrid ItemsSource="{Binding Weeks}" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="160">
+                <data:DataGrid ItemsSource="{Binding Weeks}" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="125" Background="Transparent"
+           AlternatingRowBackground="Transparent"
+           RowBackground="Transparent"
+           BorderBrush="Transparent"
+           CellStyle="{StaticResource CellStyle}"
+           GridLinesVisibility="None" 
+           SelectionMode="Single"
+		   Foreground="#FFEBEBEB"
+		   RowStyle="{StaticResource MyCustomRow}">
                     <data:DataGrid.Resources>
                         <!--<Style TargetType="TextBlock">
                             <Setter Property="Margin" Value="5"/>
@@ -175,6 +290,14 @@
                             <Setter Property="VerticalAlignment" Value="Center"/>
                             <Setter Property="Foreground" Value="#FFEBEBEB"/>
                         </Style>-->
+                        <Style TargetType="Grid">
+                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="Background" Value="#FF5C6875" />
+                        </Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="5" />
+                            <Setter Property="FontFamily" Value="Segoe UI"/>
+                        </Style>
                     </data:DataGrid.Resources>
                     <data:DataGrid.Columns>
 
@@ -194,7 +317,8 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <TextBlock Text="{Binding Tuesday}"></TextBlock>
+                                        <TextBlock Text="{Binding TuesdayDate}" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Text="{Binding Tuesday}" VerticalAlignment="Center"></TextBlock>
                                         <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
@@ -205,7 +329,8 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <TextBlock Text="{Binding Wednesday}"></TextBlock>
+                                        <TextBlock Text="{Binding WednesdayDate}" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Text="{Binding Wednesday}"  VerticalAlignment="Center"></TextBlock>
                                         <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
@@ -216,7 +341,8 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <TextBlock Text="{Binding Thursday}"></TextBlock>
+                                        <TextBlock Text="{Binding ThursdayDate}" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Text="{Binding Thursday}" VerticalAlignment="Center"></TextBlock>
                                         <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
@@ -227,7 +353,8 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <TextBlock Text="{Binding Friday}"></TextBlock>
+                                        <TextBlock Text="{Binding FridayDate}" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Text="{Binding Friday}" VerticalAlignment="Center"></TextBlock>
                                         <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
@@ -238,7 +365,8 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <TextBlock Text="{Binding Saturday}"></TextBlock>
+                                        <TextBlock Text="{Binding SaturdayDate}" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Text="{Binding Saturday}" VerticalAlignment="Center"></TextBlock>
                                         <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
@@ -249,7 +377,8 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <TextBlock Text="{Binding Sunday}"></TextBlock>
+                                        <TextBlock Text="{Binding SundayDate}" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Text="{Binding Sunday}" VerticalAlignment="Center"></TextBlock>
                                         <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
@@ -258,68 +387,6 @@
                         
                     </data:DataGrid.Columns>
                 </data:DataGrid>
-
-                <!--<Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-                <Grid.Resources>
-                    <Style TargetType="Grid">
-                        <Setter Property="Margin" Value="5" />
-                        <Setter Property="Background" Value="#006E0404" />
-                    </Style>
-                </Grid.Resources>
-                <Grid Grid.Column="0" Grid.Row="0"><TextBlock Text="{Binding Month.Weeks[0].Sunday.Name}"></TextBlock></Grid>
-                <Grid Grid.Column="1" Grid.Row="0"><TextBlock Text="{Binding Month.Weeks[0].Monday.Name}"></TextBlock></Grid>
-                <Grid Grid.Column="2" Grid.Row="0"><TextBlock Text="{Binding Month.Weeks[0].Tuesday.Name}"></TextBlock></Grid>
-                <Grid Grid.Column="3" Grid.Row="0"><TextBlock Text="{Binding Month.Weeks[0].Wednesday.Name}"></TextBlock></Grid>
-                <Grid Grid.Column="4" Grid.Row="0"><TextBlock Text="{Binding Month.Weeks[0].Thursday.Name}"></TextBlock></Grid>
-                <Grid Grid.Column="5" Grid.Row="0"><TextBlock Text="{Binding Month.Weeks[0].Friday.Name}"></TextBlock></Grid>
-                <Grid Grid.Column="6" Grid.Row="0"><TextBlock Text="{Binding Month.Weeks[0].Saturday.Name}"></TextBlock></Grid>
-
-
-                <Grid Grid.Column="0" Grid.Row="1"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="1" Grid.Row="1"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="2" Grid.Row="1"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="3" Grid.Row="1"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="4" Grid.Row="1"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="5" Grid.Row="1"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="6" Grid.Row="1"><TextBlock></TextBlock></Grid>
-
-                <Grid Grid.Column="0" Grid.Row="2"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="1" Grid.Row="2"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="2" Grid.Row="2"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="3" Grid.Row="2"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="4" Grid.Row="2"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="5" Grid.Row="2"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="6" Grid.Row="2"><TextBlock></TextBlock></Grid>
-
-                <Grid Grid.Column="0" Grid.Row="3"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="1" Grid.Row="3"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="2" Grid.Row="3"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="3" Grid.Row="3"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="4" Grid.Row="3"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="5" Grid.Row="3"><TextBlock></TextBlock></Grid>
-                <Grid Grid.Column="6" Grid.Row="3"><TextBlock></TextBlock></Grid>
-
-                <Grid Grid.Column="0" Grid.Row="4"><TextBlock Text="{Binding Month.Weeks[4].Sunday.Name}"></TextBlock></Grid>
-                <Grid Grid.Column="1" Grid.Row="4"><TextBlock Text="{Binding Month.Weeks[4].Sunday.Name}"></TextBlock></Grid>
-                <Grid Grid.Column="2" Grid.Row="4"><TextBlock Text="{Binding Month.Weeks[4].Sunday.Name}"></TextBlock></Grid>
-                <Grid Grid.Column="3" Grid.Row="4"><TextBlock Text="{Binding Month.Weeks[4].Sunday.Name}"></TextBlock></Grid>
-                <Grid Grid.Column="5" Grid.Row="4"><TextBlock Text="{Binding Month.Weeks[4].Sunday.Name}"></TextBlock></Grid>
-                <Grid Grid.Column="6" Grid.Row="4"><TextBlock Text="{Binding Month.Weeks[4].Sunday.Name}"></TextBlock></Grid>-->
 
             </Grid>
 
@@ -342,7 +409,7 @@
                         </Image.RenderTransform>
                     </Image>
                 </Grid>
-                <ListBox x:Name="listboxUpcomingEvents" ItemsSource="{Binding UpcomingEventsInShortFormatList}" Margin="45,45,15,15" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox x:Name="listboxUpcomingEvents" ItemsSource="{Binding UpcomingEventsInShortFormatList}" Margin="35,45,5,15" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Cursor="Hand" x:Name="UpcomingEventListItem" Orientation="Vertical" Margin="0,5,0,0" HorizontalAlignment="Stretch" MouseLeftButtonUp="UpcomingEventListItem_MouseLeftButtonUp">
