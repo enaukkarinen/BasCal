@@ -273,7 +273,7 @@
 
             <Grid x:Name="ContentGrid" Grid.Column="0"  VerticalAlignment="Stretch">
 
-                <data:DataGrid ItemsSource="{Binding Weeks}" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="125" Background="Transparent"
+            <data:DataGrid ItemsSource="{Binding Weeks}" Margin="10" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="120" Background="Transparent"
            AlternatingRowBackground="Transparent"
            RowBackground="Transparent"
            BorderBrush="Transparent"

@@ -72,8 +72,6 @@ namespace BasCal_SilverlightClient.ViewModel
             int startOftheMonthWeekNumber = GetIso8601WeekOfYear(startOftheMonth);
             int numberOfDaysInWholeMonth = DateTime.DaysInMonth(startOftheMonth.Year, startOftheMonth.Month);
             ObservableCollection<Day> secondCollection = new ObservableCollection<Day>();
-           
-
 
             for(int i = 1 ; i <= numberOfDaysInWholeMonth; i++)
             {
@@ -83,8 +81,18 @@ namespace BasCal_SilverlightClient.ViewModel
                 secondCollection.Add(newDay);
             }
 
+
+            int dayIncrement = GetDayIncrement(secondCollection[0].Date.DayOfWeek.ToString());
+            do
+            {
+                DateTime newDate = startOftheMonth;
+                newDate = newDate.AddDays(-1 * dayIncrement);
+                secondCollection.Insert(0, new Day(){Date = newDate});
+                dayIncrement--;
+            } while (dayIncrement > 0);
+
             this.Weeks = new ObservableCollection<Week>();
-            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber))));
+            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) <= startOftheMonthWeekNumber ))));
             this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 1))));
             this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 2))));
             this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 3))));
@@ -105,14 +113,6 @@ namespace BasCal_SilverlightClient.ViewModel
             //this.Weeks.Add(new Week(week3Items));
             //this.Weeks.Add(new Week(week4Items));
             //this.Weeks.Add(new Week(week5Items));
-
-            // Find out where to put the first day of the month on the datagrid
-            //int dayIncrement = GetDayIncrement(startOftheMonth.DayOfWeek.ToString());
-
-            //while (dayIncrement > 0)
-            //{
-            //    //this.Weeks[0].Days[0]
-            //}
 
         }
 

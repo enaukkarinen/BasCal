@@ -277,6 +277,43 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
+        //public void FixPreludingDates()
+        //{
+        //    this.Days = new ObservableCollection<Day>(this.Days.OrderByDescending(o => o.Date));
+        //    int increment = GetDayIncrement(this.Days.Where(d => d.Date == new DateTime()).FirstOrDefault().Date.DayOfWeek.ToString());
+        //    if(increment != 0)
+        //    {
+        //        do
+        //        {
+        //            this.Days
+        //        } while (increment > 0);
+        //    }
+
+        //}
+
+        private int GetDayIncrement(string dayofweek)
+        {
+            switch (dayofweek)
+            {
+                case "Monday":
+                    return 0;
+                case "Tuesday":
+                    return 1;
+                case "Wednesday":
+                    return 2;
+                case "Thursday":
+                    return 3;
+                case "Friday":
+                    return 4;
+                case "Saturday":
+                    return 5;
+                case "Sunday":
+                    return 6;
+                default:
+                    return 0;
+            }
+        }
+
         public void PopulateWeekDayLists(UpcomingEventShortDTO eve)
         {
             switch (eve.StartTime.DayOfWeek.ToString())
