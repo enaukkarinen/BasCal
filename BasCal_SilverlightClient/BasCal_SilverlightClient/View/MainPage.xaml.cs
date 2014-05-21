@@ -65,5 +65,11 @@ namespace BasCal_SilverlightClient
             EventFullInfo.Visibility = System.Windows.Visibility.Collapsed;
         }
 
+        private void AddEventGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            EventFullInfo.Visibility = System.Windows.Visibility.Visible;
+            ShowEventFullInfoBox.Begin();
+        }
+
     }
 }

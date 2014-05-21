@@ -38,6 +38,12 @@ namespace DB_Solution
             return edb.Events.Where(e => e.EventId == id).FirstOrDefault();
         }
 
+        public void AddEvent(Event ev)
+        {
+            edb.Events.Add(ev);
+            edb.SaveChanges();
+        }
+
         public void DeleteEventByGuid(Guid id)
         {
             Event ev = FetchEventByGuid(id);
@@ -47,13 +53,29 @@ namespace DB_Solution
 
         public void UpdateEvent(Event ev)
         {
-            Event tobechanged = edb.Events.Where(e => e.EventId == ev.EventId).SingleOrDefault();
-            tobechanged.TypeId = ev.TypeId;
-            tobechanged.Name = ev.Name;
-            tobechanged.Summary = ev.Summary;
-            tobechanged.StartTime = ev.StartTime;
-            tobechanged.EndTime = ev.EndTime;
-            edb.SaveChanges();
+            try
+            {
+                Event tobechanged = edb.Events.Where(e => e.EventId == ev.EventId).SingleOrDefault();
+                if (tobechanged != null)
+                {
+                    tobechanged.TypeId = ev.TypeId;
+                    tobechanged.Name = ev.Name;
+                    tobechanged.Summary = ev.Summary;
+                    tobechanged.StartTime = ev.StartTime;
+                    tobechanged.EndTime = ev.EndTime;
+                    edb.SaveChanges();
+                }
+                else
+                {
+                    ev.EventType = edb.EventTypes.Where(type => type.TypeId == ev.TypeId).SingleOrDefault();
+                    AddEvent(ev);
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+
         }
         public IQueryable<Event> FetchEventsBeEventType(string name)
         {

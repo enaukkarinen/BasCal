@@ -10,6 +10,19 @@ namespace BasCal_WCF_Host.Extension
 {
     public static class DTOExtensions
     {
+        public static Event ToEvent(this UpcomingEventDTO uev)
+        {
+            return new Event()
+            {
+                EventId = uev.EventId,
+                TypeId = uev.TypeId,
+                Name = uev.Name,
+                Summary = uev.Summary,
+                Location = uev.Location,
+                StartTime = uev.StartTime,
+                EndTime = uev.EndTime
+            };
+        }
         public static UpcomingEventDTO ToUpcomingEventDTO(this Event ev)
         {
             return new UpcomingEventDTO()

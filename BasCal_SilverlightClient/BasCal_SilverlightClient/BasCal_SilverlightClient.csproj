@@ -138,14 +138,14 @@
     </None>
     <Resource Include="Content\closebtn.png" />
     <Resource Include="Content\background.jpg" />
+    <Resource Include="Content\Add.png" />
+    <Resource Include="Content\Modify.png" />
     <None Include="Service References\EventDataService\configuration91.svcinfo" />
     <None Include="Service References\EventDataService\configuration.svcinfo" />
     <None Include="Service References\EventDataService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Resource Include="Content\Add.png" />
-    <Resource Include="Content\Modify.png" />
     <Content Include="ServiceReferences.ClientConfig" />
     <Resource Include="Content\save.png" />
   </ItemGroup>

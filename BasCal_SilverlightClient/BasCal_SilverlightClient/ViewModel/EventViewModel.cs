@@ -67,7 +67,7 @@ namespace BasCal_SilverlightClient.ViewModel
         public ICommand LoadCalendar { get; set; }
         public ICommand LoadUpcomingEventList { get; set; }
         public ICommand SaveEvent { get; set; }
-
+        public ICommand AddEvent { get; set; }
 
         // Constructor
         public EventViewModel()
@@ -76,15 +76,31 @@ namespace BasCal_SilverlightClient.ViewModel
             client.FetchUpcomingEventsShortCompleted += client_FetchUpcomingEventsShortCompleted;
             client.FetchEventByGuidCompleted += client_FetchEventByGuidCompleted;
             client.FetchEventsByMonthCompleted += client_FetchEventsByMonthCompleted;
-
+            client.UpdateEventCompleted += client_UpdateEventCompleted;
             this.LoadUpcomingEventList = new DelegateCommand(FetchUpcomingEventShortInShortFormat, CanExecute);
             this.LoadCalendar = new DelegateCommand(FetchEventsByMonth, CanExecute);
             this.SaveEvent = new DelegateCommand(UpdateEventInDatabase, CanExecute);
+            this.AddEvent = new DelegateCommand(DestroyUpcomingEventInFull, CanExecute);
+        }
+
+        public void DestroyUpcomingEventInFull(object parameter)
+        {
+            this.UpcomingEventInFull = new UpcomingEventDTO() 
+            { 
+                EventId = Guid.NewGuid(), 
+                StartTime = DateTime.Now, 
+                EndTime = DateTime.Now.AddHours(1)
+            };
         }
 
         public void UpdateEventInDatabase(object parameter)
         {
-
+            this.client.UpdateEventAsync(this.UpcomingEventInFull);
+        }
+        void client_UpdateEventCompleted(object sender, UpdateEventCompletedEventArgs e)
+        {
+            MessageBox.Show(e.Result ? "Ok!" : "Error!");
+            client.FetchEventsByMonthAsync(5);
         }
         public void FetchUpcomingEventShortInShortFormat(object parameter)
         {

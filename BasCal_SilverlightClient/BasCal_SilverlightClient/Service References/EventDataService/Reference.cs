@@ -17,81 +17,6 @@ namespace BasCal_SilverlightClient.EventDataService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UpcomingEventShortDTO", Namespace="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models")]
-    public partial class UpcomingEventShortDTO : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private System.DateTime EndTimeField;
-        
-        private System.Guid EventIdField;
-        
-        private string NameField;
-        
-        private System.DateTime StartTimeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime EndTime {
-            get {
-                return this.EndTimeField;
-            }
-            set {
-                if ((this.EndTimeField.Equals(value) != true)) {
-                    this.EndTimeField = value;
-                    this.RaisePropertyChanged("EndTime");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Guid EventId {
-            get {
-                return this.EventIdField;
-            }
-            set {
-                if ((this.EventIdField.Equals(value) != true)) {
-                    this.EventIdField = value;
-                    this.RaisePropertyChanged("EventId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime StartTime {
-            get {
-                return this.StartTimeField;
-            }
-            set {
-                if ((this.StartTimeField.Equals(value) != true)) {
-                    this.StartTimeField = value;
-                    this.RaisePropertyChanged("StartTime");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="UpcomingEventDTO", Namespace="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models")]
     public partial class UpcomingEventDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -225,9 +150,89 @@ namespace BasCal_SilverlightClient.EventDataService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UpcomingEventShortDTO", Namespace="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models")]
+    public partial class UpcomingEventShortDTO : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.DateTime EndTimeField;
+        
+        private System.Guid EventIdField;
+        
+        private string NameField;
+        
+        private System.DateTime StartTimeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EndTime {
+            get {
+                return this.EndTimeField;
+            }
+            set {
+                if ((this.EndTimeField.Equals(value) != true)) {
+                    this.EndTimeField = value;
+                    this.RaisePropertyChanged("EndTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid EventId {
+            get {
+                return this.EventIdField;
+            }
+            set {
+                if ((this.EventIdField.Equals(value) != true)) {
+                    this.EventIdField = value;
+                    this.RaisePropertyChanged("EventId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime StartTime {
+            get {
+                return this.StartTimeField;
+            }
+            set {
+                if ((this.StartTimeField.Equals(value) != true)) {
+                    this.StartTimeField = value;
+                    this.RaisePropertyChanged("StartTime");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EventDataService.IEventDataService")]
     public interface IEventDataService {
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEventDataService/UpdateEvent", ReplyAction="http://tempuri.org/IEventDataService/UpdateEventResponse")]
+        System.IAsyncResult BeginUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState);
+        
+        bool EndUpdateEvent(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEventDataService/FetchEventsByMonth", ReplyAction="http://tempuri.org/IEventDataService/FetchEventsByMonthResponse")]
         System.IAsyncResult BeginFetchEventsByMonth(int m, System.AsyncCallback callback, object asyncState);
@@ -257,6 +262,25 @@ namespace BasCal_SilverlightClient.EventDataService {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IEventDataServiceChannel : BasCal_SilverlightClient.EventDataService.IEventDataService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class UpdateEventCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public UpdateEventCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public bool Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -358,6 +382,12 @@ namespace BasCal_SilverlightClient.EventDataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class EventDataServiceClient : System.ServiceModel.ClientBase<BasCal_SilverlightClient.EventDataService.IEventDataService>, BasCal_SilverlightClient.EventDataService.IEventDataService {
         
+        private BeginOperationDelegate onBeginUpdateEventDelegate;
+        
+        private EndOperationDelegate onEndUpdateEventDelegate;
+        
+        private System.Threading.SendOrPostCallback onUpdateEventCompletedDelegate;
+        
         private BeginOperationDelegate onBeginFetchEventsByMonthDelegate;
         
         private EndOperationDelegate onEndFetchEventsByMonthDelegate;
@@ -441,6 +471,8 @@ namespace BasCal_SilverlightClient.EventDataService {
             }
         }
         
+        public event System.EventHandler<UpdateEventCompletedEventArgs> UpdateEventCompleted;
+        
         public event System.EventHandler<FetchEventsByMonthCompletedEventArgs> FetchEventsByMonthCompleted;
         
         public event System.EventHandler<FetchEventByGuidCompletedEventArgs> FetchEventByGuidCompleted;
@@ -454,6 +486,52 @@ namespace BasCal_SilverlightClient.EventDataService {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult BasCal_SilverlightClient.EventDataService.IEventDataService.BeginUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginUpdateEvent(eve, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        bool BasCal_SilverlightClient.EventDataService.IEventDataService.EndUpdateEvent(System.IAsyncResult result) {
+            return base.Channel.EndUpdateEvent(result);
+        }
+        
+        private System.IAsyncResult OnBeginUpdateEvent(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve = ((BasCal_SilverlightClient.EventDataService.UpcomingEventDTO)(inValues[0]));
+            return ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).BeginUpdateEvent(eve, callback, asyncState);
+        }
+        
+        private object[] OnEndUpdateEvent(System.IAsyncResult result) {
+            bool retVal = ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).EndUpdateEvent(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnUpdateEventCompleted(object state) {
+            if ((this.UpdateEventCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.UpdateEventCompleted(this, new UpdateEventCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void UpdateEventAsync(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve) {
+            this.UpdateEventAsync(eve, null);
+        }
+        
+        public void UpdateEventAsync(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, object userState) {
+            if ((this.onBeginUpdateEventDelegate == null)) {
+                this.onBeginUpdateEventDelegate = new BeginOperationDelegate(this.OnBeginUpdateEvent);
+            }
+            if ((this.onEndUpdateEventDelegate == null)) {
+                this.onEndUpdateEventDelegate = new EndOperationDelegate(this.OnEndUpdateEvent);
+            }
+            if ((this.onUpdateEventCompletedDelegate == null)) {
+                this.onUpdateEventCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUpdateEventCompleted);
+            }
+            base.InvokeAsync(this.onBeginUpdateEventDelegate, new object[] {
+                        eve}, this.onEndUpdateEventDelegate, this.onUpdateEventCompletedDelegate, userState);
+        }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult BasCal_SilverlightClient.EventDataService.IEventDataService.BeginFetchEventsByMonth(int m, System.AsyncCallback callback, object asyncState) {
@@ -757,6 +835,19 @@ namespace BasCal_SilverlightClient.EventDataService {
             
             public EventDataServiceClientChannel(System.ServiceModel.ClientBase<BasCal_SilverlightClient.EventDataService.IEventDataService> client) : 
                     base(client) {
+            }
+            
+            public System.IAsyncResult BeginUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = eve;
+                System.IAsyncResult _result = base.BeginInvoke("UpdateEvent", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public bool EndUpdateEvent(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                bool _result = ((bool)(base.EndInvoke("UpdateEvent", _args, result)));
+                return _result;
             }
             
             public System.IAsyncResult BeginFetchEventsByMonth(int m, System.AsyncCallback callback, object asyncState) {

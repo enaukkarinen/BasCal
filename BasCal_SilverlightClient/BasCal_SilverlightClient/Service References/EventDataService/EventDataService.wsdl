@@ -37,6 +37,12 @@
       <xsd:import schemaLocation="http://localhost:9007/?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IEventDataService_UpdateEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEvent" />
+  </wsdl:message>
+  <wsdl:message name="IEventDataService_UpdateEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEventResponse" />
+  </wsdl:message>
   <wsdl:message name="IEventDataService_FetchEventsByMonth_InputMessage">
     <wsdl:part name="parameters" element="tns:FetchEventsByMonth" />
   </wsdl:message>
@@ -74,6 +80,10 @@
     <wsdl:part name="parameters" element="tns:GetClientAccessPolicyResponse" />
   </wsdl:message>
   <wsdl:portType name="IEventDataService">
+    <wsdl:operation name="UpdateEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventDataService/UpdateEvent" message="tns:IEventDataService_UpdateEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventDataService/UpdateEventResponse" message="tns:IEventDataService_UpdateEvent_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="FetchEventsByMonth">
       <wsdl:input wsaw:Action="http://tempuri.org/IEventDataService/FetchEventsByMonth" message="tns:IEventDataService_FetchEventsByMonth_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEventDataService/FetchEventsByMonthResponse" message="tns:IEventDataService_FetchEventsByMonth_OutputMessage" />
@@ -104,6 +114,15 @@
   <wsdl:binding name="NetTcpBinding_IEventDataService" type="tns:IEventDataService">
     <wsp:PolicyReference URI="#NetTcpBinding_IEventDataService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="UpdateEvent">
+      <soap12:operation soapAction="http://tempuri.org/IEventDataService/UpdateEvent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="FetchEventsByMonth">
       <soap12:operation soapAction="http://tempuri.org/IEventDataService/FetchEventsByMonth" style="document" />
       <wsdl:input>
@@ -152,6 +171,15 @@
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_IEventDataService" type="tns:IEventDataService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UpdateEvent">
+      <soap:operation soapAction="http://tempuri.org/IEventDataService/UpdateEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="FetchEventsByMonth">
       <soap:operation soapAction="http://tempuri.org/IEventDataService/FetchEventsByMonth" style="document" />
       <wsdl:input>

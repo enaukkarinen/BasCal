@@ -19,7 +19,8 @@ namespace BasCal_SilverlightClient.Model
             for (int i = 1; i <= numberOfDaysInWholeMonth; i++)
             {
                 Day newDay = new Day() { Date = new DateTime(startOftheMonth.Year, startOftheMonth.Month, i) };
-                newDay.DaysEvents = new ObservableCollection<UpcomingEventShortDTO>(events.Where(x => x.StartTime.Day <= newDay.Date.Day && x.EndTime.Day >= newDay.Date.Day));
+                newDay.DaysEvents = new ObservableCollection<UpcomingEventShortDTO>
+                    (events.Where(x => x.StartTime.Day <= newDay.Date.Day && x.EndTime.Day >= newDay.Date.Day));
 
                 dayCollection.Add(newDay);
             }

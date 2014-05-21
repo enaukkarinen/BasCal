@@ -258,7 +258,7 @@
                 <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
-            
+
             <Viewbox Grid.Column="0">
                 <TextBlock Cursor="Hand" Text="basCal" FontFamily="Segoe UI" FontSize="36" Margin="15" TextDecorations="Underline">
                     <TextBlock.Foreground>
@@ -271,7 +271,7 @@
             </Viewbox>
 
             <Grid Grid.Column="4">
-                <Grid x:Name="AddEventGrid" MaxWidth="90" Cursor="Hand">
+                <Grid x:Name="AddEventGrid" MaxWidth="90" Cursor="Hand" MouseLeftButtonUp="AddEventGrid_MouseLeftButtonUp" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.5*" />
                         <RowDefinition Height="2*" />
@@ -279,9 +279,10 @@
                     </Grid.RowDefinitions>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding}"></i:InvokeCommandAction>
+                            <i:InvokeCommandAction Command="{Binding AddEvent}"></i:InvokeCommandAction>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
+                    
                     <Image Grid.Row="1" Source="/BasCal_SilverlightClient;component/Content/Add.png" ></Image>
                     <TextBlock Grid.Row="2" Text="add event" Foreground="#FFEBEBEB" FontSize="12" HorizontalAlignment="Center"></TextBlock>
                 </Grid>
@@ -289,13 +290,13 @@
             <Grid Grid.Column="5">
                 <Grid x:Name="ModifyEventGrid" MaxWidth="90" Cursor="Hand">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.5*" />
+                        <RowDefinition />
+                        <RowDefinition Height="73" />
                         <RowDefinition Height="2*" />
-                        <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
                     <Image Grid.Row="1" Source="/BasCal_SilverlightClient;component/Content/Modify.png" ></Image>
                     <TextBlock Grid.Row="2" Text="modify event" Foreground="#FFEBEBEB" FontSize="12" HorizontalAlignment="Center"></TextBlock>
-                </Grid>              
+                </Grid>
             </Grid>
         </Grid>
 
