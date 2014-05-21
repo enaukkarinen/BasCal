@@ -13,7 +13,7 @@ namespace BasCal_WCF_Host
         {
             Console.WriteLine("Starting host...");
 
-            var host = new ServiceHost(typeof(DBservice));
+            var host = new ServiceHost(typeof(EventDataService));
             host.Open();
             Console.WriteLine("Started.");
 

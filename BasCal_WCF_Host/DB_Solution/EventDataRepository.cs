@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace DB_Solution
 {
-    public class dbRepository
+    public class EventDataRepository
     {
 
-        private dbContext db = new dbContext();
+        private EventDataContext edb = new EventDataContext();
         
 
         #region Testitaulu
 
         public List<string> FetchDataAsString()
         {
-            return db.Testit.Select(t => t.Nimi).ToList();
+            return edb.Testit.Select(t => t.Nimi).ToList();
         }
 
         public IQueryable<Testitaulu> FetchDataAsTableModel()
         {
-            return db.Testit;
+            return edb.Testit;
         }
 
         #endregion
@@ -30,57 +30,57 @@ namespace DB_Solution
 
         public IQueryable<Event> FetchEvents()
         {
-            var paluu = db.Events;
+            var paluu = edb.Events;
             return paluu;
         }
         public Event FetchEventByGuid(Guid id)
         {
-            return db.Events.Where(e => e.EventId == id).FirstOrDefault();
+            return edb.Events.Where(e => e.EventId == id).FirstOrDefault();
         }
 
         public void DeleteEventByGuid(Guid id)
         {
             Event ev = FetchEventByGuid(id);
-            db.Events.Remove(ev);
-            db.SaveChanges();
+            edb.Events.Remove(ev);
+            edb.SaveChanges();
         }
 
         public void UpdateEvent(Event ev)
         {
-            Event tobechanged = db.Events.Where(e => e.EventId == ev.EventId).SingleOrDefault();
+            Event tobechanged = edb.Events.Where(e => e.EventId == ev.EventId).SingleOrDefault();
             tobechanged.TypeId = ev.TypeId;
             tobechanged.Name = ev.Name;
             tobechanged.Summary = ev.Summary;
             tobechanged.StartTime = ev.StartTime;
             tobechanged.EndTime = ev.EndTime;
-            db.SaveChanges();
+            edb.SaveChanges();
         }
         public IQueryable<Event> FetchEventsBeEventType(string name)
         {
-            int typeid = db.EventTypes.Where(et => et.Name == name).Select(et => et.TypeId).FirstOrDefault();
-            return db.Events.Where(e => e.TypeId == typeid);
+            int typeid = edb.EventTypes.Where(et => et.Name == name).Select(et => et.TypeId).FirstOrDefault();
+            return edb.Events.Where(e => e.TypeId == typeid);
         }
 
         public IQueryable<Event> FetchEventsByMonth(int month)
         {
-            return db.Events.Where(e => e.StartTime.Month == month);
+            return edb.Events.Where(e => e.StartTime.Month == month);
         }
 
         public IQueryable<Event> FetchEventsByEventName(string name)
         {
-            return db.Events.Where(e => e.Name.Contains(name));
+            return edb.Events.Where(e => e.Name.Contains(name));
         }
         public IQueryable<Event> FetchEventsByStartDate(DateTime date)
         {
-            return db.Events.Where(e => e.StartTime.Date == date.Date);
+            return edb.Events.Where(e => e.StartTime.Date == date.Date);
         }
         public IQueryable<Event> FetchEventsByEndDate(DateTime date)
         {
-            return db.Events.Where(e => e.EndTime.Date == date.Date);
+            return edb.Events.Where(e => e.EndTime.Date == date.Date);
         }
         public IQueryable<Event> FetchEventsByLocation(string location)
         {
-            return db.Events.Where(e => e.Location == location);
+            return edb.Events.Where(e => e.Location == location);
         }
 
         #endregion
@@ -89,7 +89,7 @@ namespace DB_Solution
 
         public IQueryable<EventType> FetchEventTypes()
         {
-            return db.EventTypes;
+            return edb.EventTypes;
         }
 
         #endregion

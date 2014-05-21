@@ -7,7 +7,7 @@ Huomautukset:
 
 Uudet tehtävät:
 - Lue RX-PowerPoint -lötkö
-- ViewModel ja View 
+//- ViewModel ja View 
 - Lisää/Muokkaa toiminnot
 - Toinen View
 - Remote repo kuntoon

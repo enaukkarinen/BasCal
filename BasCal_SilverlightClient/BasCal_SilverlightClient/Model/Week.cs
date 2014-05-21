@@ -1,4 +1,4 @@
-﻿using BasCal_SilverlightClient.ServiceReference1;
+﻿using BasCal_SilverlightClient.EventDataService;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -143,7 +143,7 @@ namespace BasCal_SilverlightClient.Model
             FillDayList();
             AddDays(days);
         }
-        public Week(ObservableCollection<UpcomingEventShortDTO> upcomingEvents)
+        public Week(IEnumerable<UpcomingEventShortDTO> upcomingEvents)
         {
             FillDayList();
             foreach (UpcomingEventShortDTO ev in upcomingEvents)
@@ -164,7 +164,7 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
-        public void AddDays(ObservableCollection<Day> days)
+        public void AddDays(IEnumerable<Day> days)
         {
             foreach (Day d in days)
             {

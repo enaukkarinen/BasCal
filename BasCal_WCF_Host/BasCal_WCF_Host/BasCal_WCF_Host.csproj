@@ -59,8 +59,8 @@
     <Compile Include="DTO_Models\UpcomingEventShortDTO.cs" />
     <Compile Include="Extension\DTOExtensions.cs" />
     <Compile Include="IClientAccessPolicy.cs" />
-    <Compile Include="IDBservice.cs" />
-    <Compile Include="DBservice.cs" />
+    <Compile Include="IEventDataService.cs" />
+    <Compile Include="EventDataService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -52,8 +52,8 @@
   <ItemGroup>
     <Compile Include="Attendees.cs" />
     <Compile Include="AttendeeStatus.cs" />
-    <Compile Include="dbContext.cs" />
-    <Compile Include="dbRepository.cs" />
+    <Compile Include="EventDataContext.cs" />
+    <Compile Include="EventDataRepository.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="EventType.cs" />
     <Compile Include="Group.cs" />

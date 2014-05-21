@@ -11,9 +11,9 @@ using BasCal_WCF_Host.Extension;
 
 namespace BasCal_WCF_Host
 {
-    public class DBservice : IDBservice, IClientAccessPolicy
+    public class EventDataService : IEventDataService, IClientAccessPolicy
     {
-        dbRepository db = new dbRepository();
+        EventDataRepository db = new EventDataRepository();
 
         #region Events
 

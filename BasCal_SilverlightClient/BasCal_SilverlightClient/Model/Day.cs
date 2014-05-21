@@ -1,4 +1,4 @@
-﻿using BasCal_SilverlightClient.ServiceReference1;
+﻿using BasCal_SilverlightClient.EventDataService;
 using System;
 using System.Collections.ObjectModel;
 using System.Net;

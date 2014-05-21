@@ -243,9 +243,23 @@
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="/BasCal_SilverlightClient;component/Content/background.jpg"/>
         </Grid.Background>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <i:InvokeCommandAction Command="{Binding LoadCalendar}"></i:InvokeCommandAction>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
 
-        <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" Grid.Row="0" Background="#59000000">
-            <Viewbox HorizontalAlignment="Left">
+        <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" Grid.Row="0" Background="#59000000" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+            </Grid.ColumnDefinitions>
+            
+            <Viewbox Grid.Column="0">
                 <TextBlock Cursor="Hand" Text="basCal" FontFamily="Segoe UI" FontSize="36" Margin="15" TextDecorations="Underline">
                     <TextBlock.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -256,6 +270,33 @@
                 </TextBlock>
             </Viewbox>
 
+            <Grid Grid.Column="4">
+                <Grid x:Name="AddEventGrid" MaxWidth="90" Cursor="Hand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding}"></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Image Grid.Row="1" Source="/BasCal_SilverlightClient;component/Content/Add.png" ></Image>
+                    <TextBlock Grid.Row="2" Text="add event" Foreground="#FFEBEBEB" FontSize="12" HorizontalAlignment="Center"></TextBlock>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="5">
+                <Grid x:Name="ModifyEventGrid" MaxWidth="90" Cursor="Hand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="1" Source="/BasCal_SilverlightClient;component/Content/Modify.png" ></Image>
+                    <TextBlock Grid.Row="2" Text="modify event" Foreground="#FFEBEBEB" FontSize="12" HorizontalAlignment="Center"></TextBlock>
+                </Grid>              
+            </Grid>
         </Grid>
 
         <Grid x:Name="MainGrid" Grid.Row="1">
@@ -275,7 +316,7 @@
 
             <Grid x:Name="ContentGrid" Grid.Column="0"  VerticalAlignment="Stretch">
 
-           <data:DataGrid ItemsSource="{Binding Weeks}" Margin="10" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="120" Background="Transparent"
+                <data:DataGrid ItemsSource="{Binding Weeks}" Margin="10" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="120" Background="Transparent"
            AlternatingRowBackground="Transparent"
            RowBackground="Transparent"
            BorderBrush="Transparent"
@@ -374,7 +415,7 @@
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
-                        
+
                         <data:DataGridTemplateColumn Header="Sunday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -386,7 +427,7 @@
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
-                        
+
                     </data:DataGrid.Columns>
                 </data:DataGrid>
 
@@ -412,7 +453,7 @@
                     </Image>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding BringUpUpcomingEvents}"></i:InvokeCommandAction>
+                            <i:InvokeCommandAction Command="{Binding LoadUpcomingEventList}"></i:InvokeCommandAction>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Grid>
@@ -439,7 +480,7 @@
         <!-- Keep Opacity="0" Visibility="Collapsed" by default. -->
         <Grid x:Name="EventFullInfo" Grid.ColumnSpan="2" Grid.RowSpan="2" Canvas.ZIndex="5" Background="#66778899" Opacity="0" Visibility="Collapsed">
 
-            <Grid x:Name="EventFullInfoInnerBox" Width="400" Height="250" Background="#FF4D5863" DataContext="{Binding UpcomingEventInFull}" Canvas.ZIndex="6" RenderTransformOrigin="0.5,0.5" >
+            <Grid x:Name="EventFullInfoInnerBox" Width="400" Height="250" Background="#FF4D5863" Canvas.ZIndex="6" RenderTransformOrigin="0.5,0.5" >
                 <Grid.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="Margin" Value="5"/>
@@ -448,10 +489,18 @@
                         <Setter Property="VerticalAlignment" Value="Center"/>
                         <Setter Property="Foreground" Value="#FFEBEBEB"/>
                     </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Foreground" Value="#FF4D5863"/>
+                    </Style>
                 </Grid.Resources>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
@@ -488,14 +537,22 @@
 					<Run Text="Ends at:"/>
                 </TextBlock>
 
-                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Name}"/>
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Type}"/>
-                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Summary}"/>
-                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Location}"/>
-                <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding StartTime}" HorizontalAlignment="Left"/>
-                <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding EndTime}" HorizontalAlignment="Left"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=UpcomingEventInFull.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=UpcomingEventInFull.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=UpcomingEventInFull.Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=UpcomingEventInFull.Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=UpcomingEventInFull.StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"/>
+                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=UpcomingEventInFull.EndTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"/>
 
-                <Image x:Name="EventFullInfoCloseBtn" Cursor="Hand" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Width="15" Height="15" Source="/BasCal_SilverlightClient;component/Content/closebtn.png" MouseLeftButtonUp="EventFullInfoCloseBtn_MouseLeftButtonUp" />
+                <Image x:Name="EventFullInfoCloseBtn" Cursor="Hand" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Width="15" Height="15" Source="/BasCal_SilverlightClient;component/Content/closebtn.png" MouseLeftButtonUp="EventFullInfoCloseBtn_MouseLeftButtonUp" />
+
+                <Image x:Name="SaveModifiedEventBtn" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,30,0" Width="30" Height="30" Source="/BasCal_SilverlightClient;component/Content/save.png" MouseLeftButtonUp="EventFullInfoCloseBtn_MouseLeftButtonUp">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding SaveEvent}" CommandParameter="{Binding UpcomingEventInFull}" ></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
 
             </Grid>
 

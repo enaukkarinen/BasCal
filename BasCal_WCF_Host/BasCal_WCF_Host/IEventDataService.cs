@@ -6,7 +6,7 @@ using System.ServiceModel;
 namespace BasCal_WCF_Host
 {
     [ServiceContract]
-    public interface IDBservice
+    public interface IEventDataService
     {
         #region Events
 

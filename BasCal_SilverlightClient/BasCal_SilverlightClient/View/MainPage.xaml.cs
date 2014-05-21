@@ -20,9 +20,6 @@ namespace BasCal_SilverlightClient
         public MainPage()
         {
             InitializeComponent();
-
-            ((EventViewModel)this.DataContext).FetchEventsByMonth(5);
-
             HideEventFullInfoBox.Completed += HideEventFullInfoBox_Completed;
         }
 
@@ -33,7 +30,6 @@ namespace BasCal_SilverlightClient
             {
                 if (RightPanelGrid.Width == 25)
                 {
-                    ((EventViewModel)this.DataContext).FetchUpcomingEventShortInShortFormat();
                     RightPanelSlideIn.Begin();
                 }
                 else
@@ -68,5 +64,6 @@ namespace BasCal_SilverlightClient
         {
             EventFullInfo.Visibility = System.Windows.Visibility.Collapsed;
         }
+
     }
 }

@@ -8,16 +8,16 @@ using DB_Solution.Mapping;
 
 namespace DB_Solution
 {
-    class dbContext : DbContext
+    class EventDataContext : DbContext
     {
-        public dbContext()
+        public EventDataContext()
             : base("HarkkaprojektiDBEntities")
         {
 
         }
-        static dbContext()
+        static EventDataContext()
         {
-            Database.SetInitializer<dbContext>(null);
+            Database.SetInitializer<EventDataContext>(null);
         }
 
         public DbSet<Testitaulu> Testit { get; set; }

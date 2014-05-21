@@ -85,9 +85,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CommandBase\DelegateCommand.cs" />
+    <Compile Include="CommandBase\ViewModelBase.cs" />
     <Compile Include="Model\Day.cs" />
     <Compile Include="Model\Week.cs" />
-    <Compile Include="Service References\ServiceReference1\Reference.cs">
+    <Compile Include="Model\WeekFactory.cs" />
+    <Compile Include="Service References\EventDataService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -114,34 +117,37 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Service References\ServiceReference1\BasCal_SilverlightClient.ServiceReference1.UpcomingEventDTO.datasource">
+    <None Include="Service References\EventDataService\BasCal_SilverlightClient.EventDataService.UpcomingEventDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference1\BasCal_SilverlightClient.ServiceReference1.UpcomingEventShortDTO.datasource">
+    <None Include="Service References\EventDataService\BasCal_SilverlightClient.EventDataService.UpcomingEventShortDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference1\DBservice.wsdl" />
-    <None Include="Service References\ServiceReference1\item.xsd">
+    <None Include="Service References\EventDataService\EventDataService.wsdl" />
+    <None Include="Service References\EventDataService\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\item1.xsd">
+    <None Include="Service References\EventDataService\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\item2.xsd">
+    <None Include="Service References\EventDataService\item2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\item3.xsd">
+    <None Include="Service References\EventDataService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
     <Resource Include="Content\closebtn.png" />
     <Resource Include="Content\background.jpg" />
-    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
-    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
-    <None Include="Service References\ServiceReference1\Reference.svcmap">
+    <None Include="Service References\EventDataService\configuration91.svcinfo" />
+    <None Include="Service References\EventDataService\configuration.svcinfo" />
+    <None Include="Service References\EventDataService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Resource Include="Content\Add.png" />
+    <Resource Include="Content\Modify.png" />
     <Content Include="ServiceReferences.ClientConfig" />
+    <Resource Include="Content\save.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\doublearrow.png" />
@@ -150,7 +156,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
+    <WCFMetadataStorage Include="Service References\EventDataService\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

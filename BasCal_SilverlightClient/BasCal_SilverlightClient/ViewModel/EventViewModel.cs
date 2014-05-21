@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using BasCal_SilverlightClient.ServiceReference1;
+using BasCal_SilverlightClient.EventDataService;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using BasCal_SilverlightClient.Model;
@@ -16,12 +16,15 @@ using System.Diagnostics;
 using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
+using Microsoft.Expression.Interactivity.Core;
+using BasCal_SilverlightClient.CommandBase;
 
 namespace BasCal_SilverlightClient.ViewModel
 {
-    public class EventViewModel : INotifyPropertyChanged, ICommand
+    public class EventViewModel : ViewModelBase
     {
-        private DBserviceClient client;
+        private EventDataServiceClient client;
+
         private UpcomingEventDTO upcomingEventInFull;
         private ObservableCollection<UpcomingEventShortDTO> upcomingEventsInShortFormatList;
         private ObservableCollection<Week> weeks;
@@ -33,8 +36,7 @@ namespace BasCal_SilverlightClient.ViewModel
             set
             {
                 upcomingEventsInShortFormatList = value;
-                RaisePropertyChanged("UpcomingEventsInShortFormatList");
-
+                OnPropertyChanged("UpcomingEventsInShortFormatList");
             }
         }
 
@@ -44,7 +46,7 @@ namespace BasCal_SilverlightClient.ViewModel
             set 
             {
                 upcomingEventInFull = value;
-                RaisePropertyChanged("UpcomingEventInFull");
+                OnPropertyChanged("UpcomingEventInFull");
             }
         }
 
@@ -53,77 +55,57 @@ namespace BasCal_SilverlightClient.ViewModel
             get { return weeks; }
             set 
             {
-                weeks = value;
-                RaisePropertyChanged("Weeks");
+                if (weeks != value)
+                {
+                    weeks = value;
+                    OnPropertyChanged("Weeks");
+                }
             }
         }
 
-        public ICommand DoTheDew
-        {
-            get
-            {
-                return new Microsoft.Expression.Interactivity.Core.ActionCommand(() => MessageBox.Show("Hello from command!"));
-            }
-        }
+        // Commands binded in xaml
+        public ICommand LoadCalendar { get; set; }
+        public ICommand LoadUpcomingEventList { get; set; }
+        public ICommand SaveEvent { get; set; }
+
 
         // Constructor
         public EventViewModel()
         {
-            client = new DBserviceClient();
+            client = new EventDataServiceClient();
             client.FetchUpcomingEventsShortCompleted += client_FetchUpcomingEventsShortCompleted;
             client.FetchEventByGuidCompleted += client_FetchEventByGuidCompleted;
             client.FetchEventsByMonthCompleted += client_FetchEventsByMonthCompleted;
+
+            this.LoadUpcomingEventList = new DelegateCommand(FetchUpcomingEventShortInShortFormat, CanExecute);
+            this.LoadCalendar = new DelegateCommand(FetchEventsByMonth, CanExecute);
+            this.SaveEvent = new DelegateCommand(UpdateEventInDatabase, CanExecute);
         }
 
+        public void UpdateEventInDatabase(object parameter)
+        {
+
+        }
+        public void FetchUpcomingEventShortInShortFormat(object parameter)
+        {
+            client.FetchUpcomingEventsShortAsync();
+        }
         void client_FetchEventsByMonthCompleted(object sender, FetchEventsByMonthCompletedEventArgs e)
         {
             FillCalendarDataGrid(e.Result);
         }
 
-        public void FetchEventsByMonth(int m)
+        private void FetchEventsByMonth(object parameter)
         {
-            client.FetchEventsByMonthAsync(m);
+            client.FetchEventsByMonthAsync(5);
         }
 
         private void FillCalendarDataGrid(ObservableCollection<UpcomingEventShortDTO> returnedList)
         {
-            DateTime startOftheMonth = new DateTime(returnedList[0].StartTime.Year, returnedList[0].StartTime.Month, 1);
-            int startOftheMonthWeekNumber = GetIso8601WeekOfYear(startOftheMonth);
-            int numberOfDaysInWholeMonth = DateTime.DaysInMonth(startOftheMonth.Year, startOftheMonth.Month);
-            ObservableCollection<Day> secondCollection = new ObservableCollection<Day>();
-
-            for(int i = 1 ; i <= numberOfDaysInWholeMonth; i++)
-            {
-                Day newDay = new Day(){Date = new DateTime(startOftheMonth.Year, startOftheMonth.Month, i)};
-                newDay.DaysEvents = new ObservableCollection<UpcomingEventShortDTO>(returnedList.Where(x => x.StartTime.Day <= newDay.Date.Day && x.EndTime.Day >= newDay.Date.Day));
-
-                secondCollection.Add(newDay);
-            }
-
-
-            int dayIncrement = GetDayIncrement(secondCollection[0].Date.DayOfWeek.ToString());
-            do
-            {
-                DateTime newDate = startOftheMonth;
-                newDate = newDate.AddDays(-1 * dayIncrement);
-                secondCollection.Insert(0, new Day(){Date = newDate});
-                dayIncrement--;
-            } while (dayIncrement > 0);
-
-            this.Weeks = new ObservableCollection<Week>();
-            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) <= startOftheMonthWeekNumber ))));
-            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 1))));
-            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 2))));
-            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 3))));
-            this.Weeks.Add(new Week(new ObservableCollection<Day>(secondCollection.Where(x => GetIso8601WeekOfYear(x.Date) == startOftheMonthWeekNumber + 4))));
-
+            this.Weeks = WeekFactory.WeekBuilder(returnedList);                       
         }
 
 
-        public void FetchUpcomingEventShortInShortFormat()
-        {
-            client.FetchUpcomingEventsShortAsync();
-        }
         void client_FetchUpcomingEventsShortCompleted(object sender, FetchUpcomingEventsShortCompletedEventArgs e)
         {
             UpcomingEventsInShortFormatList = new ObservableCollection<UpcomingEventShortDTO>(e.Result.OrderByDescending(ev => ev.StartTime));
@@ -138,70 +120,10 @@ namespace BasCal_SilverlightClient.ViewModel
             UpcomingEventInFull = e.Result;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) 
-        {
-            PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) 
-            {
-                propertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        private static int GetDayIncrement(string dayofweek)
-        {
-            switch (dayofweek)
-            {
-                case "Monday":
-                    return 0;
-                case "Tuesday":
-                    return 1;
-                case "Wednesday":
-                    return 2;
-                case "Thursday":
-                    return 3;
-                case "Friday":
-                    return 4;
-                case "Saturday":
-                    return 5;
-                case "Sunday":
-                    return 6;
-                default:
-                    return 0;
-            }
-        }
-
-        // This presumes that weeks start with Monday.
-        // Week 1 is the 1st week of the year with a Thursday in it.
-        public static int GetIso8601WeekOfYear(DateTime time)
-        {
-            // Seriously cheat.  If its Monday, Tuesday or Wednesday, then it'll 
-            // be the same week# as whatever Thursday, Friday or Saturday are,
-            // and we always get those right
-            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
-            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
-            {
-                time = time.AddDays(3);
-            }
-
-            // Return the week of our adjusted day
-            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-        }
-
         public bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
-        public event EventHandler CanExecuteChanged;
-
-        public void Execute(object parameter)
-        {
-            throw new NotImplementedException();
-        }
     }
-
-
-
 }
