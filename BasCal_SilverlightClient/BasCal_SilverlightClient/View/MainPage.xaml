@@ -570,7 +570,7 @@
         <Grid x:Name="RightPanelCharmsBar" Grid.RowSpan="2" Grid.Column="1" Width="10" Background="Black" MouseEnter="RightPanelCharmsBar_MouseEnter" MouseLeave="RightPanelCharmsBar_MouseLeave">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
-                <RowDefinition Height="0.20*" />
+                <RowDefinition Height="0.40*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
@@ -584,7 +584,7 @@
                 <TextBlock Grid.Row="2" Text="modify event" Foreground="#FFEBEBEB" FontSize="8" HorizontalAlignment="Center"></TextBlock>
             </Grid>
 
-            <Grid x:Name="AddEventGrid" Grid.Row="1" MaxWidth="50" Opacity="0" Cursor="Hand" MouseLeftButtonUp="AddEventGrid_MouseLeftButtonUp" >
+            <Grid x:Name="AddEventGrid" Grid.Row="1" MaxWidth="50" Opacity="0" Cursor="Hand" MouseLeftButtonUp="AddEventGrid_MouseLeftButtonUp" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*" />
                     <RowDefinition Height="0.5*" />
@@ -605,7 +605,7 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
 
-                <Image Grid.Row="0" Source="/BasCal_SilverlightClient;component/Content/Add.png" VerticalAlignment="Top"></Image>
+                <Image Grid.Row="0" Source="/BasCal_SilverlightClient;component/Content/Groups.png" VerticalAlignment="Top"></Image>
                 <TextBlock Grid.Row="1" Text="user groups" Foreground="#FFEBEBEB" FontSize="8" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
             </Grid>
         </Grid>

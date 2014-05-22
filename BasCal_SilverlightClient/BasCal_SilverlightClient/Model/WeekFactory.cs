@@ -35,6 +35,7 @@ namespace BasCal_SilverlightClient.Model
                 dayIncrement--;
             } while (dayIncrement > 0);
 
+
             IEnumerable<Week> weeks = from eventDay in dayCollection
                                       group eventDay by GetIso8601WeekOfYear(eventDay.Date) into w
                                       select new Week(new ObservableCollection<Day>(w));
