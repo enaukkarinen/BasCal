@@ -28,13 +28,13 @@ namespace BasCal_SilverlightClient
         {
             try
             {
-                if (RightPanelGrid.Width == 25)
+                if (LeftPanelGrid.Width == 25)
                 {
-                    RightPanelSlideIn.Begin();
+                    LeftPanelSlideIn.Begin();
                 }
                 else
                 {
-                    RightPanelSlideBack.Begin();
+                    LeftPanelSlideBack.Begin();
                 }
             }
             catch (Exception exc)
@@ -69,6 +69,16 @@ namespace BasCal_SilverlightClient
         {
             EventFullInfo.Visibility = System.Windows.Visibility.Visible;
             ShowEventFullInfoBox.Begin();
+        }
+
+        private void RightPanelCharmsBar_MouseEnter(object sender, MouseEventArgs e)
+        {
+            CharmsBarSlideIn.Begin();
+        }
+
+        private void RightPanelCharmsBar_MouseLeave(object sender, MouseEventArgs e)
+        {
+            CharmsBarSlideOut.Begin();
         }
 
     }

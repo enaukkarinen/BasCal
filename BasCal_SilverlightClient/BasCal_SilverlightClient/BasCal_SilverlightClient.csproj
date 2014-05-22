@@ -140,6 +140,7 @@
     <Resource Include="Content\background.jpg" />
     <Resource Include="Content\Add.png" />
     <Resource Include="Content\Modify.png" />
+    <Resource Include="Content\Groups.png" />
     <None Include="Service References\EventDataService\configuration91.svcinfo" />
     <None Include="Service References\EventDataService\configuration.svcinfo" />
     <None Include="Service References\EventDataService\Reference.svcmap">

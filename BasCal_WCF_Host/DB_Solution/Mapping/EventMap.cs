@@ -14,7 +14,7 @@ namespace DB_Solution.Mapping
         {
             this.HasKey(e => e.EventId);
 
-            this.Property(e => e.EventId).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(e => e.EventId).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             this.Property(e => e.TypeId).IsRequired();
             this.Property(e => e.Name).IsRequired().HasMaxLength(255);
             this.Property(e => e.Summary).IsOptional().HasMaxLength(255);

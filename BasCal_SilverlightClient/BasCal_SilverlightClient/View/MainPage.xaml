@@ -121,8 +121,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Storyboard x:Name="RightPanelSlideIn">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="RightPanelGrid">
+        <Storyboard x:Name="LeftPanelSlideIn">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="LeftPanelGrid">
                 <EasingDoubleKeyFrame KeyTime="0" Value="25">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseOut"/>
@@ -143,8 +143,8 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Name="RightPanelSlideBack">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="RightPanelGrid">
+        <Storyboard x:Name="LeftPanelSlideBack">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="LeftPanelGrid">
                 <EasingDoubleKeyFrame KeyTime="0" Value="200">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseIn"/>
@@ -227,6 +227,45 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Name="CharmsBarSlideIn">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="RightPanelCharmsBar">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="10"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="90"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="AddEventGrid">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ModifyEventGrid">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="UserGroupsGrid">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="CharmsBarSlideOut">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="RightPanelCharmsBar">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="90"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="10"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="AddEventGrid">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ModifyEventGrid">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="UserGroupsGrid">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
 
 
@@ -240,6 +279,10 @@
             <RowDefinition Height="2*" />
             <RowDefinition Height="9*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="/BasCal_SilverlightClient;component/Content/background.jpg"/>
         </Grid.Background>
@@ -249,17 +292,9 @@
             </i:EventTrigger>
         </i:Interaction.Triggers>
 
-        <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" Grid.Row="0" Background="#59000000" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="0.5*" />
-                <ColumnDefinition Width="0.5*" />
-            </Grid.ColumnDefinitions>
+        <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2" Background="#59000000" >
 
-            <Viewbox Grid.Column="0">
+            <Viewbox HorizontalAlignment="Left">
                 <TextBlock Cursor="Hand" Text="basCal" FontFamily="Segoe UI" FontSize="36" Margin="15" TextDecorations="Underline">
                     <TextBlock.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -269,43 +304,15 @@
                     </TextBlock.Foreground>
                 </TextBlock>
             </Viewbox>
-
-            <Grid Grid.Column="4">
-                <Grid x:Name="AddEventGrid" MaxWidth="90" Cursor="Hand" MouseLeftButtonUp="AddEventGrid_MouseLeftButtonUp" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.5*" />
-                        <RowDefinition Height="2*" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding AddEvent}"></i:InvokeCommandAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    
-                    <Image Grid.Row="1" Source="/BasCal_SilverlightClient;component/Content/Add.png" ></Image>
-                    <TextBlock Grid.Row="2" Text="add event" Foreground="#FFEBEBEB" FontSize="12" HorizontalAlignment="Center"></TextBlock>
-                </Grid>
-            </Grid>
-            <Grid Grid.Column="5">
-                <Grid x:Name="ModifyEventGrid" MaxWidth="90" Cursor="Hand">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition Height="73" />
-                        <RowDefinition Height="2*" />
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="1" Source="/BasCal_SilverlightClient;component/Content/Modify.png" ></Image>
-                    <TextBlock Grid.Row="2" Text="modify event" Foreground="#FFEBEBEB" FontSize="12" HorizontalAlignment="Center"></TextBlock>
-                </Grid>
-            </Grid>
+            
         </Grid>
 
-        <Grid x:Name="MainGrid" Grid.Row="1">
+        <Grid x:Name="MainGrid" Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Grid x:Name="HeaderGridShadow" Height="10" VerticalAlignment="Top" Canvas.ZIndex="2">
+            <Grid x:Name="HeaderGridShadow" Height="10" Grid.ColumnSpan="2" VerticalAlignment="Top" Canvas.ZIndex="2">
                 <Grid.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0"/>
@@ -315,9 +322,9 @@
             </Grid>
 
 
-            <Grid x:Name="ContentGrid" Grid.Column="0"  VerticalAlignment="Stretch">
+            <Grid x:Name="ContentGrid" Grid.Column="1"  VerticalAlignment="Stretch">
 
-                <data:DataGrid ItemsSource="{Binding Weeks}" Margin="10" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="120" Background="Transparent"
+                <data:DataGrid ItemsSource="{Binding Weeks}" Margin="10,15,10,10" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="120" Background="Transparent"
            AlternatingRowBackground="Transparent"
            RowBackground="Transparent"
            BorderBrush="Transparent"
@@ -434,10 +441,10 @@
 
             </Grid>
 
-            <!-- Keep RightPanelGrid Width="25" by default. -->
-            <Grid x:Name="RightPanelGrid" HorizontalAlignment="Right" Width="25" Grid.Column="1" Background="#59000000" Canvas.ZIndex="3">
+            <!-- Keep LeftPanelGrid Width="25" by default. -->
+            <Grid x:Name="LeftPanelGrid" HorizontalAlignment="Left" Width="25" Grid.Column="0" Background="#59000000" Canvas.ZIndex="3">
 
-                <TextBlock Text="upcoming events" FontFamily="Segoe UI" FontSize="18" Margin="45,15,15,15" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <TextBlock Text="upcoming events" FontFamily="Segoe UI" FontSize="18" Margin="15,15,45,15" VerticalAlignment="Top" HorizontalAlignment="Center">
                     <TextBlock.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF778798" Offset="0"/>
@@ -446,8 +453,8 @@
                     </TextBlock.Foreground>
                 </TextBlock>
 
-                <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" MouseLeftButtonUp="image_MouseLeftButtonUp" >
-                    <Image x:Name="DoubleArrowImg" Cursor="Hand" Source="/BasCal_SilverlightClient;component/Content/doublearrow.png" Width="20" Height="20" HorizontalAlignment="Left" Margin="3,0,0,0" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
+                <Grid HorizontalAlignment="Right" VerticalAlignment="Stretch" MouseLeftButtonUp="image_MouseLeftButtonUp" >
+                    <Image x:Name="DoubleArrowImg" Cursor="Hand" Source="/BasCal_SilverlightClient;component/Content/doublearrow.png" Width="20" Height="20" HorizontalAlignment="Left" Margin="0,0,3,0" RenderTransformOrigin="0.5,0.5" Stretch="Fill">
                         <Image.RenderTransform>
                             <CompositeTransform/>
                         </Image.RenderTransform>
@@ -458,7 +465,8 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Grid>
-                <ListBox x:Name="listboxUpcomingEvents" ItemsSource="{Binding UpcomingEventsInShortFormatList}" Margin="35,45,5,15" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                
+                <ListBox x:Name="listboxUpcomingEvents" ItemsSource="{Binding UpcomingEventsInShortFormatList}" Margin="5,45,35,15" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Cursor="Hand" x:Name="UpcomingEventListItem" Orientation="Vertical" Margin="0,5,0,0" HorizontalAlignment="Stretch" MouseLeftButtonUp="UpcomingEventListItem_MouseLeftButtonUp">
@@ -538,12 +546,12 @@
 					<Run Text="Ends at:"/>
                 </TextBlock>
 
-                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=UpcomingEventInFull.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=UpcomingEventInFull.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=UpcomingEventInFull.Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=UpcomingEventInFull.Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=UpcomingEventInFull.StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"/>
-                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=UpcomingEventInFull.EndTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=UpcomingEventInFull.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=UpcomingEventInFull.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=UpcomingEventInFull.Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"/>
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=UpcomingEventInFull.Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"/>
+                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=UpcomingEventInFull.StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" HorizontalAlignment="Left"/>
+                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=UpcomingEventInFull.EndTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" HorizontalAlignment="Left"/>
 
                 <Image x:Name="EventFullInfoCloseBtn" Cursor="Hand" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Width="15" Height="15" Source="/BasCal_SilverlightClient;component/Content/closebtn.png" MouseLeftButtonUp="EventFullInfoCloseBtn_MouseLeftButtonUp" />
 
@@ -558,6 +566,50 @@
             </Grid>
 
         </Grid>
+    
+        <Grid x:Name="RightPanelCharmsBar" Grid.RowSpan="2" Grid.Column="1" Width="10" Background="Black" MouseEnter="RightPanelCharmsBar_MouseEnter" MouseLeave="RightPanelCharmsBar_MouseLeave">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="0.20*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="ModifyEventGrid" Grid.Row="0" MaxWidth="50" Opacity="0"  Cursor="Hand" VerticalAlignment="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Image Grid.Row="1" Source="/BasCal_SilverlightClient;component/Content/Modify.png" VerticalAlignment="Bottom"></Image>
+                <TextBlock Grid.Row="2" Text="modify event" Foreground="#FFEBEBEB" FontSize="8" HorizontalAlignment="Center"></TextBlock>
+            </Grid>
+
+            <Grid x:Name="AddEventGrid" Grid.Row="1" MaxWidth="50" Opacity="0" Cursor="Hand" MouseLeftButtonUp="AddEventGrid_MouseLeftButtonUp" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="0.5*" />
+                </Grid.RowDefinitions>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding AddEvent}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+                <Image Grid.Row="0" Source="/BasCal_SilverlightClient;component/Content/Add.png" VerticalAlignment="Bottom"></Image>
+                <TextBlock Grid.Row="1" Text="add event" Foreground="#FFEBEBEB" FontSize="8" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
+            </Grid>
+
+            <Grid x:Name="UserGroupsGrid" Grid.Row="2" MaxWidth="50" Opacity="0" Cursor="Hand" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0" Source="/BasCal_SilverlightClient;component/Content/Add.png" VerticalAlignment="Top"></Image>
+                <TextBlock Grid.Row="1" Text="user groups" Foreground="#FFEBEBEB" FontSize="8" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
+            </Grid>
+        </Grid>
+    
     </Grid>
 
 </UserControl>

@@ -87,9 +87,12 @@ namespace BasCal_SilverlightClient.ViewModel
         {
             this.UpcomingEventInFull = new UpcomingEventDTO() 
             { 
+                Name = "New event",
                 EventId = Guid.NewGuid(), 
                 StartTime = DateTime.Now, 
-                EndTime = DateTime.Now.AddHours(1)
+                EndTime = DateTime.Now.AddHours(1),
+                TypeId = 0,
+                Type = "Unspecified"
             };
         }
 
