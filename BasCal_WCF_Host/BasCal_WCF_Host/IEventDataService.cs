@@ -11,7 +11,7 @@ namespace BasCal_WCF_Host
         #region Events
 
         [OperationContract]
-        bool UpdateEvent(UpcomingEventDTO eve);
+        string AddOrUpdateEvent(UpcomingEventDTO eve);
 
         [OperationContract]
         List<UpcomingEventShortDTO> FetchEventsByMonth(int m);

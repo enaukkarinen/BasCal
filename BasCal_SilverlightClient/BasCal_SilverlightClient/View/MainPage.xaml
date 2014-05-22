@@ -574,7 +574,7 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <Grid x:Name="ModifyEventGrid" Grid.Row="0" MaxWidth="50" Opacity="0"  Cursor="Hand" VerticalAlignment="Bottom">
+            <Grid x:Name="ModifyEventGrid" Grid.Row="0" MaxWidth="50" Opacity="0" VerticalAlignment="Bottom" >
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition Height="2*" />
@@ -599,7 +599,7 @@
                 <TextBlock Grid.Row="1" Text="add event" Foreground="#FFEBEBEB" FontSize="8" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
             </Grid>
 
-            <Grid x:Name="UserGroupsGrid" Grid.Row="2" MaxWidth="50" Opacity="0" Cursor="Hand" VerticalAlignment="Top">
+            <Grid x:Name="UserGroupsGrid" Grid.Row="2" MaxWidth="50" Opacity="0" Cursor="Hand" VerticalAlignment="Top" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />

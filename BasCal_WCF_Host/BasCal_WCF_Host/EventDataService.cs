@@ -23,18 +23,10 @@ namespace BasCal_WCF_Host
             return ev.ToUpcomingEventDTO();         
         }
 
-        public bool UpdateEvent(UpcomingEventDTO uev)
+        public string AddOrUpdateEvent(UpcomingEventDTO uev)
         {
-            try
-            {
                 Event ev = uev.ToEvent();
-                db.UpdateEvent(ev);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+                return db.UpdateOrAddEvent(ev);
         }
 
         public List<UpcomingEventShortDTO> FetchEventsByMonth(int m)

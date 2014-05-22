@@ -51,7 +51,7 @@ namespace DB_Solution
             edb.SaveChanges();
         }
 
-        public void UpdateEvent(Event ev)
+        public string UpdateOrAddEvent(Event ev)
         {
             try
             {
@@ -64,16 +64,18 @@ namespace DB_Solution
                     tobechanged.StartTime = ev.StartTime;
                     tobechanged.EndTime = ev.EndTime;
                     edb.SaveChanges();
+                    return "1 event modified";
                 }
                 else
                 {
                     ev.EventType = edb.EventTypes.Where(type => type.TypeId == ev.TypeId).SingleOrDefault();
                     AddEvent(ev);
+                    return "1 event added";
                 }
             }
             catch (Exception e)
             {
-
+                return e.Message;
             }
 
         }

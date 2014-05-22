@@ -229,10 +229,10 @@ namespace BasCal_SilverlightClient.EventDataService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EventDataService.IEventDataService")]
     public interface IEventDataService {
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEventDataService/UpdateEvent", ReplyAction="http://tempuri.org/IEventDataService/UpdateEventResponse")]
-        System.IAsyncResult BeginUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEventDataService/AddOrUpdateEvent", ReplyAction="http://tempuri.org/IEventDataService/AddOrUpdateEventResponse")]
+        System.IAsyncResult BeginAddOrUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState);
         
-        bool EndUpdateEvent(System.IAsyncResult result);
+        string EndAddOrUpdateEvent(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEventDataService/FetchEventsByMonth", ReplyAction="http://tempuri.org/IEventDataService/FetchEventsByMonthResponse")]
         System.IAsyncResult BeginFetchEventsByMonth(int m, System.AsyncCallback callback, object asyncState);
@@ -266,19 +266,19 @@ namespace BasCal_SilverlightClient.EventDataService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UpdateEventCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class AddOrUpdateEventCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        public UpdateEventCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        public AddOrUpdateEventCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
-        public bool Result {
+        public string Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
+                return ((string)(this.results[0]));
             }
         }
     }
@@ -382,11 +382,11 @@ namespace BasCal_SilverlightClient.EventDataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class EventDataServiceClient : System.ServiceModel.ClientBase<BasCal_SilverlightClient.EventDataService.IEventDataService>, BasCal_SilverlightClient.EventDataService.IEventDataService {
         
-        private BeginOperationDelegate onBeginUpdateEventDelegate;
+        private BeginOperationDelegate onBeginAddOrUpdateEventDelegate;
         
-        private EndOperationDelegate onEndUpdateEventDelegate;
+        private EndOperationDelegate onEndAddOrUpdateEventDelegate;
         
-        private System.Threading.SendOrPostCallback onUpdateEventCompletedDelegate;
+        private System.Threading.SendOrPostCallback onAddOrUpdateEventCompletedDelegate;
         
         private BeginOperationDelegate onBeginFetchEventsByMonthDelegate;
         
@@ -471,7 +471,7 @@ namespace BasCal_SilverlightClient.EventDataService {
             }
         }
         
-        public event System.EventHandler<UpdateEventCompletedEventArgs> UpdateEventCompleted;
+        public event System.EventHandler<AddOrUpdateEventCompletedEventArgs> AddOrUpdateEventCompleted;
         
         public event System.EventHandler<FetchEventsByMonthCompletedEventArgs> FetchEventsByMonthCompleted;
         
@@ -488,49 +488,49 @@ namespace BasCal_SilverlightClient.EventDataService {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult BasCal_SilverlightClient.EventDataService.IEventDataService.BeginUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginUpdateEvent(eve, callback, asyncState);
+        System.IAsyncResult BasCal_SilverlightClient.EventDataService.IEventDataService.BeginAddOrUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginAddOrUpdateEvent(eve, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        bool BasCal_SilverlightClient.EventDataService.IEventDataService.EndUpdateEvent(System.IAsyncResult result) {
-            return base.Channel.EndUpdateEvent(result);
+        string BasCal_SilverlightClient.EventDataService.IEventDataService.EndAddOrUpdateEvent(System.IAsyncResult result) {
+            return base.Channel.EndAddOrUpdateEvent(result);
         }
         
-        private System.IAsyncResult OnBeginUpdateEvent(object[] inValues, System.AsyncCallback callback, object asyncState) {
+        private System.IAsyncResult OnBeginAddOrUpdateEvent(object[] inValues, System.AsyncCallback callback, object asyncState) {
             BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve = ((BasCal_SilverlightClient.EventDataService.UpcomingEventDTO)(inValues[0]));
-            return ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).BeginUpdateEvent(eve, callback, asyncState);
+            return ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).BeginAddOrUpdateEvent(eve, callback, asyncState);
         }
         
-        private object[] OnEndUpdateEvent(System.IAsyncResult result) {
-            bool retVal = ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).EndUpdateEvent(result);
+        private object[] OnEndAddOrUpdateEvent(System.IAsyncResult result) {
+            string retVal = ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).EndAddOrUpdateEvent(result);
             return new object[] {
                     retVal};
         }
         
-        private void OnUpdateEventCompleted(object state) {
-            if ((this.UpdateEventCompleted != null)) {
+        private void OnAddOrUpdateEventCompleted(object state) {
+            if ((this.AddOrUpdateEventCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.UpdateEventCompleted(this, new UpdateEventCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+                this.AddOrUpdateEventCompleted(this, new AddOrUpdateEventCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void UpdateEventAsync(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve) {
-            this.UpdateEventAsync(eve, null);
+        public void AddOrUpdateEventAsync(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve) {
+            this.AddOrUpdateEventAsync(eve, null);
         }
         
-        public void UpdateEventAsync(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, object userState) {
-            if ((this.onBeginUpdateEventDelegate == null)) {
-                this.onBeginUpdateEventDelegate = new BeginOperationDelegate(this.OnBeginUpdateEvent);
+        public void AddOrUpdateEventAsync(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, object userState) {
+            if ((this.onBeginAddOrUpdateEventDelegate == null)) {
+                this.onBeginAddOrUpdateEventDelegate = new BeginOperationDelegate(this.OnBeginAddOrUpdateEvent);
             }
-            if ((this.onEndUpdateEventDelegate == null)) {
-                this.onEndUpdateEventDelegate = new EndOperationDelegate(this.OnEndUpdateEvent);
+            if ((this.onEndAddOrUpdateEventDelegate == null)) {
+                this.onEndAddOrUpdateEventDelegate = new EndOperationDelegate(this.OnEndAddOrUpdateEvent);
             }
-            if ((this.onUpdateEventCompletedDelegate == null)) {
-                this.onUpdateEventCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUpdateEventCompleted);
+            if ((this.onAddOrUpdateEventCompletedDelegate == null)) {
+                this.onAddOrUpdateEventCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnAddOrUpdateEventCompleted);
             }
-            base.InvokeAsync(this.onBeginUpdateEventDelegate, new object[] {
-                        eve}, this.onEndUpdateEventDelegate, this.onUpdateEventCompletedDelegate, userState);
+            base.InvokeAsync(this.onBeginAddOrUpdateEventDelegate, new object[] {
+                        eve}, this.onEndAddOrUpdateEventDelegate, this.onAddOrUpdateEventCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -837,16 +837,16 @@ namespace BasCal_SilverlightClient.EventDataService {
                     base(client) {
             }
             
-            public System.IAsyncResult BeginUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginAddOrUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = eve;
-                System.IAsyncResult _result = base.BeginInvoke("UpdateEvent", _args, callback, asyncState);
+                System.IAsyncResult _result = base.BeginInvoke("AddOrUpdateEvent", _args, callback, asyncState);
                 return _result;
             }
             
-            public bool EndUpdateEvent(System.IAsyncResult result) {
+            public string EndAddOrUpdateEvent(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                bool _result = ((bool)(base.EndInvoke("UpdateEvent", _args, result)));
+                string _result = ((string)(base.EndInvoke("AddOrUpdateEvent", _args, result)));
                 return _result;
             }
             
