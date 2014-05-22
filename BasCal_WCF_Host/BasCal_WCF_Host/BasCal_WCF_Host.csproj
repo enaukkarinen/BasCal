@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO_Models\EventTypeDTO.cs" />
     <Compile Include="DTO_Models\UpcomingEventDTO.cs" />
     <Compile Include="DTO_Models\UpcomingEventShortDTO.cs" />
     <Compile Include="Extension\DTOExtensions.cs" />

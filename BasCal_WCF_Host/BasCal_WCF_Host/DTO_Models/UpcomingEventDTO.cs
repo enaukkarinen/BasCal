@@ -11,26 +11,13 @@ namespace BasCal_WCF_Host.DTO_Models
 {
     public class UpcomingEventDTO
     {
-        private string name;
         public Guid EventId { get; set; }
         public int TypeId { get; set; }
 
         //[DisplayName("Type")]
         public string Type { get; set; }
 
-        //[Required(ErrorMessage = "Name is required.")]
-        public string Name
-        { 
-            get { return name; }
-            set 
-            {
-                if (String.IsNullOrEmpty(value))
-                {
-                    throw new Exception("Name is required");
-                }
-                name = value;
-            } 
-        }
+        public string Name { get; set; }
         public string Summary { get; set; }
         public string Location { get; set; }
 

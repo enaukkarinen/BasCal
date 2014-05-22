@@ -66,6 +66,22 @@ namespace BasCal_WCF_Host
 
         #endregion
 
+
+        #region EventTypes
+
+        public List<EventTypeDTO> FetchEventTypes()
+        {
+            List<EventType> evs =  db.FetchEventTypes().ToList();
+            List<EventTypeDTO> ret = new List<EventTypeDTO>();
+            foreach (var ev in evs)
+            {
+                ret.Add(ev.ToEventTypeDTO());
+            }
+            return ret;
+            
+        }
+        #endregion
+
         #region IService Members
 
         public int Add(int a, int b)

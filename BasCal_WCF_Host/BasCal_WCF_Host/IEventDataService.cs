@@ -11,6 +11,9 @@ namespace BasCal_WCF_Host
         #region Events
 
         [OperationContract]
+        List<EventTypeDTO> FetchEventTypes();
+
+        [OperationContract]
         string AddOrUpdateEvent(UpcomingEventDTO eve);
 
         [OperationContract]

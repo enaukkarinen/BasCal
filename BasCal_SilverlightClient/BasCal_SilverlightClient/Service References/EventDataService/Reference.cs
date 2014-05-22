@@ -17,6 +17,51 @@ namespace BasCal_SilverlightClient.EventDataService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EventTypeDTO", Namespace="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models")]
+    public partial class EventTypeDTO : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private int TypeIdField;
+        
+        private string TypeNameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int TypeId {
+            get {
+                return this.TypeIdField;
+            }
+            set {
+                if ((this.TypeIdField.Equals(value) != true)) {
+                    this.TypeIdField = value;
+                    this.RaisePropertyChanged("TypeId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TypeName {
+            get {
+                return this.TypeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TypeNameField, value) != true)) {
+                    this.TypeNameField = value;
+                    this.RaisePropertyChanged("TypeName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="UpcomingEventDTO", Namespace="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models")]
     public partial class UpcomingEventDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -42,7 +87,12 @@ namespace BasCal_SilverlightClient.EventDataService {
                 return this.EndTimeField;
             }
             set {
-                if ((this.EndTimeField.Equals(value) != true)) {
+                if ((this.EndTimeField.Equals(value) != true)) 
+                {
+                    if (value <= this.EndTime)
+                    {
+                        throw new System.Exception("End time has to be after the start time.");
+                    }
                     this.EndTimeField = value;
                     this.RaisePropertyChanged("EndTime");
                 }
@@ -81,7 +131,12 @@ namespace BasCal_SilverlightClient.EventDataService {
                 return this.NameField;
             }
             set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) 
+                {
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        throw new System.Exception("Name is required.");
+                    }
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
                 }
@@ -94,7 +149,8 @@ namespace BasCal_SilverlightClient.EventDataService {
                 return this.StartTimeField;
             }
             set {
-                if ((this.StartTimeField.Equals(value) != true)) {
+                if ((this.StartTimeField.Equals(value) != true)) 
+                {
                     this.StartTimeField = value;
                     this.RaisePropertyChanged("StartTime");
                 }
@@ -229,6 +285,11 @@ namespace BasCal_SilverlightClient.EventDataService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EventDataService.IEventDataService")]
     public interface IEventDataService {
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEventDataService/FetchEventTypes", ReplyAction="http://tempuri.org/IEventDataService/FetchEventTypesResponse")]
+        System.IAsyncResult BeginFetchEventTypes(System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.EventTypeDTO> EndFetchEventTypes(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEventDataService/AddOrUpdateEvent", ReplyAction="http://tempuri.org/IEventDataService/AddOrUpdateEventResponse")]
         System.IAsyncResult BeginAddOrUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState);
         
@@ -262,6 +323,25 @@ namespace BasCal_SilverlightClient.EventDataService {
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IEventDataServiceChannel : BasCal_SilverlightClient.EventDataService.IEventDataService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class FetchEventTypesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public FetchEventTypesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.EventTypeDTO> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.EventTypeDTO>)(this.results[0]));
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -382,6 +462,12 @@ namespace BasCal_SilverlightClient.EventDataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class EventDataServiceClient : System.ServiceModel.ClientBase<BasCal_SilverlightClient.EventDataService.IEventDataService>, BasCal_SilverlightClient.EventDataService.IEventDataService {
         
+        private BeginOperationDelegate onBeginFetchEventTypesDelegate;
+        
+        private EndOperationDelegate onEndFetchEventTypesDelegate;
+        
+        private System.Threading.SendOrPostCallback onFetchEventTypesCompletedDelegate;
+        
         private BeginOperationDelegate onBeginAddOrUpdateEventDelegate;
         
         private EndOperationDelegate onEndAddOrUpdateEventDelegate;
@@ -471,6 +557,8 @@ namespace BasCal_SilverlightClient.EventDataService {
             }
         }
         
+        public event System.EventHandler<FetchEventTypesCompletedEventArgs> FetchEventTypesCompleted;
+        
         public event System.EventHandler<AddOrUpdateEventCompletedEventArgs> AddOrUpdateEventCompleted;
         
         public event System.EventHandler<FetchEventsByMonthCompletedEventArgs> FetchEventsByMonthCompleted;
@@ -486,6 +574,50 @@ namespace BasCal_SilverlightClient.EventDataService {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult BasCal_SilverlightClient.EventDataService.IEventDataService.BeginFetchEventTypes(System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginFetchEventTypes(callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.EventTypeDTO> BasCal_SilverlightClient.EventDataService.IEventDataService.EndFetchEventTypes(System.IAsyncResult result) {
+            return base.Channel.EndFetchEventTypes(result);
+        }
+        
+        private System.IAsyncResult OnBeginFetchEventTypes(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).BeginFetchEventTypes(callback, asyncState);
+        }
+        
+        private object[] OnEndFetchEventTypes(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.EventTypeDTO> retVal = ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).EndFetchEventTypes(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnFetchEventTypesCompleted(object state) {
+            if ((this.FetchEventTypesCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.FetchEventTypesCompleted(this, new FetchEventTypesCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void FetchEventTypesAsync() {
+            this.FetchEventTypesAsync(null);
+        }
+        
+        public void FetchEventTypesAsync(object userState) {
+            if ((this.onBeginFetchEventTypesDelegate == null)) {
+                this.onBeginFetchEventTypesDelegate = new BeginOperationDelegate(this.OnBeginFetchEventTypes);
+            }
+            if ((this.onEndFetchEventTypesDelegate == null)) {
+                this.onEndFetchEventTypesDelegate = new EndOperationDelegate(this.OnEndFetchEventTypes);
+            }
+            if ((this.onFetchEventTypesCompletedDelegate == null)) {
+                this.onFetchEventTypesCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnFetchEventTypesCompleted);
+            }
+            base.InvokeAsync(this.onBeginFetchEventTypesDelegate, null, this.onEndFetchEventTypesDelegate, this.onFetchEventTypesCompletedDelegate, userState);
+        }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult BasCal_SilverlightClient.EventDataService.IEventDataService.BeginAddOrUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState) {
@@ -835,6 +967,18 @@ namespace BasCal_SilverlightClient.EventDataService {
             
             public EventDataServiceClientChannel(System.ServiceModel.ClientBase<BasCal_SilverlightClient.EventDataService.IEventDataService> client) : 
                     base(client) {
+            }
+            
+            public System.IAsyncResult BeginFetchEventTypes(System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[0];
+                System.IAsyncResult _result = base.BeginInvoke("FetchEventTypes", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.EventTypeDTO> EndFetchEventTypes(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.EventTypeDTO> _result = ((System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.EventTypeDTO>)(base.EndInvoke("FetchEventTypes", _args, result)));
+                return _result;
             }
             
             public System.IAsyncResult BeginAddOrUpdateEvent(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO eve, System.AsyncCallback callback, object asyncState) {

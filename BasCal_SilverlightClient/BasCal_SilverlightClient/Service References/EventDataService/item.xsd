@@ -3,10 +3,22 @@
   <xs:import schemaLocation="http://localhost:9007/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" />
   <xs:import schemaLocation="http://localhost:9007/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import schemaLocation="http://localhost:9007/?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
+  <xs:element name="FetchEventTypes">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchEventTypesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" minOccurs="0" name="FetchEventTypesResult" nillable="true" type="q1:ArrayOfEventTypeDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AddOrUpdateEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" minOccurs="0" name="eve" nillable="true" type="q1:UpcomingEventDTO" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" minOccurs="0" name="eve" nillable="true" type="q2:UpcomingEventDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -27,21 +39,21 @@
   <xs:element name="FetchEventsByMonthResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" minOccurs="0" name="FetchEventsByMonthResult" nillable="true" type="q2:ArrayOfUpcomingEventShortDTO" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" minOccurs="0" name="FetchEventsByMonthResult" nillable="true" type="q3:ArrayOfUpcomingEventShortDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FetchEventByGuid">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="guid" type="q3:guid" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="guid" type="q4:guid" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FetchEventByGuidResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" minOccurs="0" name="FetchEventByGuidResult" nillable="true" type="q4:UpcomingEventDTO" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" minOccurs="0" name="FetchEventByGuidResult" nillable="true" type="q5:UpcomingEventDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -53,7 +65,7 @@
   <xs:element name="FetchUpcomingEventsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" minOccurs="0" name="FetchUpcomingEventsResult" nillable="true" type="q5:ArrayOfUpcomingEventDTO" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" minOccurs="0" name="FetchUpcomingEventsResult" nillable="true" type="q6:ArrayOfUpcomingEventDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -65,7 +77,7 @@
   <xs:element name="FetchUpcomingEventsShortResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" minOccurs="0" name="FetchUpcomingEventsShortResult" nillable="true" type="q6:ArrayOfUpcomingEventShortDTO" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BasCal_WCF_Host.DTO_Models" minOccurs="0" name="FetchUpcomingEventsShortResult" nillable="true" type="q7:ArrayOfUpcomingEventShortDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -92,7 +104,7 @@
   <xs:element name="GetClientAccessPolicyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.microsoft.com/Message" name="GetClientAccessPolicyResult" type="q7:StreamBody" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/Message" name="GetClientAccessPolicyResult" type="q8:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

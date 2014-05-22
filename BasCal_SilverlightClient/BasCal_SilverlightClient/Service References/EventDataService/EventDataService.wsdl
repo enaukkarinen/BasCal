@@ -37,6 +37,12 @@
       <xsd:import schemaLocation="http://localhost:9007/?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IEventDataService_FetchEventTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchEventTypes" />
+  </wsdl:message>
+  <wsdl:message name="IEventDataService_FetchEventTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchEventTypesResponse" />
+  </wsdl:message>
   <wsdl:message name="IEventDataService_AddOrUpdateEvent_InputMessage">
     <wsdl:part name="parameters" element="tns:AddOrUpdateEvent" />
   </wsdl:message>
@@ -80,6 +86,10 @@
     <wsdl:part name="parameters" element="tns:GetClientAccessPolicyResponse" />
   </wsdl:message>
   <wsdl:portType name="IEventDataService">
+    <wsdl:operation name="FetchEventTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IEventDataService/FetchEventTypes" message="tns:IEventDataService_FetchEventTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IEventDataService/FetchEventTypesResponse" message="tns:IEventDataService_FetchEventTypes_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AddOrUpdateEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IEventDataService/AddOrUpdateEvent" message="tns:IEventDataService_AddOrUpdateEvent_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEventDataService/AddOrUpdateEventResponse" message="tns:IEventDataService_AddOrUpdateEvent_OutputMessage" />
@@ -114,6 +124,15 @@
   <wsdl:binding name="NetTcpBinding_IEventDataService" type="tns:IEventDataService">
     <wsp:PolicyReference URI="#NetTcpBinding_IEventDataService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="FetchEventTypes">
+      <soap12:operation soapAction="http://tempuri.org/IEventDataService/FetchEventTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddOrUpdateEvent">
       <soap12:operation soapAction="http://tempuri.org/IEventDataService/AddOrUpdateEvent" style="document" />
       <wsdl:input>
@@ -171,6 +190,15 @@
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_IEventDataService" type="tns:IEventDataService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FetchEventTypes">
+      <soap:operation soapAction="http://tempuri.org/IEventDataService/FetchEventTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddOrUpdateEvent">
       <soap:operation soapAction="http://tempuri.org/IEventDataService/AddOrUpdateEvent" style="document" />
       <wsdl:input>

@@ -134,6 +134,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\AppManifest.xml" />
+    <None Include="Service References\EventDataService\BasCal_SilverlightClient.EventDataService.EventTypeDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\EventDataService\BasCal_SilverlightClient.EventDataService.UpcomingEventDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
