@@ -54,14 +54,14 @@ namespace BasCal_WCF_Host
 
         public List<UpcomingEventShortDTO> FetchUpcomingEventsShort()
         {
-            List<Event> evs = db.FetchEvents().ToList();
-            List<UpcomingEventShortDTO> paluu = new List<UpcomingEventShortDTO>();
+            return db.FetchEvents().ToList().Select(x => x.ToUpcomingEventShortDTO()).ToList();
+            //List<UpcomingEventShortDTO> paluu = new List<UpcomingEventShortDTO>();
 
-            foreach (Event ev in evs)
-            {
-                paluu.Add(ev.ToUpcomingEventShortDTO());
-            }
-            return paluu;
+            //foreach (Event ev in evs)
+            //{
+            //    paluu.Add(ev.ToUpcomingEventShortDTO());
+            //}
+            //return evs;
         }
 
         #endregion

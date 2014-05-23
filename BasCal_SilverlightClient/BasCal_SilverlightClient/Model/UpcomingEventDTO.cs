@@ -33,6 +33,7 @@ namespace BasCal_SilverlightClient.Model
 
         private int TypeIdField;
 
+
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid EventId
         {
@@ -238,6 +239,7 @@ namespace BasCal_SilverlightClient.Model
                             return "Name cannot by empty.";
                         }
                         break;
+                    case "EndTime":
                     case "StartTime":
                         if (StartTime > EndTime)
                         {

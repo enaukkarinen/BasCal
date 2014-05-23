@@ -13,7 +13,6 @@
 // 
 namespace BasCal_SilverlightClient.EventDataService {
     using System.Runtime.Serialization;
-    using BasCal_SilverlightClient.Model;
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

@@ -344,7 +344,7 @@
                         </Style>-->
                         <Style TargetType="Grid">
                             <Setter Property="Margin" Value="5" />
-                            <Setter Property="Background" Value="#FF5C6875" />
+                            <!--<Setter Property="Background" Value="#FF5C6875" />-->
                         </Style>
                         <Style TargetType="TextBlock">
                             <Setter Property="Margin" Value="5" />
@@ -356,10 +356,9 @@
                         <data:DataGridTemplateColumn Header="Monday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid Background="{Binding Days[0].CellColor}">
                                         <TextBlock Text="{Binding MondayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Monday}" VerticalAlignment="Center"></TextBlock>
-
                                     </Grid>
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
@@ -368,10 +367,9 @@
                         <data:DataGridTemplateColumn Header="Tuesday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid Background="{Binding Days[1].CellColor}">
                                         <TextBlock Text="{Binding TuesdayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Tuesday}" VerticalAlignment="Center"></TextBlock>
-                                        <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
@@ -380,10 +378,9 @@
                         <data:DataGridTemplateColumn Header="Wednesday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid Background="{Binding Days[2].CellColor}">
                                         <TextBlock Text="{Binding WednesdayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Wednesday}"  VerticalAlignment="Center"></TextBlock>
-                                        <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
@@ -392,10 +389,9 @@
                         <data:DataGridTemplateColumn Header="Thursday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid Background="{Binding Days[3].CellColor}">
                                         <TextBlock Text="{Binding ThursdayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Thursday}" VerticalAlignment="Center"></TextBlock>
-                                        <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
@@ -404,10 +400,9 @@
                         <data:DataGridTemplateColumn Header="Friday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid Background="{Binding Days[4].CellColor}">
                                         <TextBlock Text="{Binding FridayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Friday}" VerticalAlignment="Center"></TextBlock>
-                                        <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
@@ -416,10 +411,9 @@
                         <data:DataGridTemplateColumn Header="Saturday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid Background="{Binding Days[5].CellColor}">
                                         <TextBlock Text="{Binding SaturdayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Saturday}" VerticalAlignment="Center"></TextBlock>
-                                        <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
@@ -428,10 +422,9 @@
                         <data:DataGridTemplateColumn Header="Sunday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid Background="{Binding Days[6].CellColor}">
                                         <TextBlock Text="{Binding SundayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Sunday}" VerticalAlignment="Center"></TextBlock>
-                                        <TextBlock></TextBlock>
                                     </Grid>
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
@@ -549,11 +542,11 @@
                 </TextBlock>
 
                 <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=UpcomingEventInFull.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=UpcomingEventInFull.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=UpcomingEventInFull.Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
-                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=UpcomingEventInFull.Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
-                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=UpcomingEventInFull.StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}" HorizontalAlignment="Left"/>
-                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=UpcomingEventInFull.EndTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True}" HorizontalAlignment="Left"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=UpcomingEventInFull.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=UpcomingEventInFull.Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=UpcomingEventInFull.Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=UpcomingEventInFull.StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" HorizontalAlignment="Left"/>
+                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=UpcomingEventInFull.EndTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" HorizontalAlignment="Left"/>
 
                 <Image x:Name="EventFullInfoCloseBtn" Cursor="Hand" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Width="15" Height="15" Source="/BasCal_SilverlightClient;component/Content/closebtn.png" MouseLeftButtonUp="EventFullInfoCloseBtn_MouseLeftButtonUp" />
 
@@ -565,7 +558,7 @@
                     </i:Interaction.Triggers>
                 </Image>
 
-                <dataInput:ValidationSummary Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Grid.RowSpan="2" />
+                <!--<dataInput:ValidationSummary Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Grid.RowSpan="2" />-->
             </Grid>
 
         </Grid>

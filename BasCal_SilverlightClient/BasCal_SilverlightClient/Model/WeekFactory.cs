@@ -26,7 +26,7 @@ namespace BasCal_SilverlightClient.Model
             }
 
             // Adds the days visible from the previous month
-            int dayIncrement = GetDayIncrement(dayCollection[0].Date.DayOfWeek.ToString());
+            int dayIncrement = (int)dayCollection[0].Date.DayOfWeek + 2;
             do
             {
                 DateTime newDate = startOftheMonth;
@@ -59,30 +59,6 @@ namespace BasCal_SilverlightClient.Model
 
             // Return the week of our adjusted day
             return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-        }
-
-
-        private static int GetDayIncrement(string dayofweek)
-        {
-            switch (dayofweek)
-            {
-                case "Monday":
-                    return 0;
-                case "Tuesday":
-                    return 1;
-                case "Wednesday":
-                    return 2;
-                case "Thursday":
-                    return 3;
-                case "Friday":
-                    return 4;
-                case "Saturday":
-                    return 5;
-                case "Sunday":
-                    return 6;
-                default:
-                    return 0;
-            }
-        }
+        }    
     }
 }

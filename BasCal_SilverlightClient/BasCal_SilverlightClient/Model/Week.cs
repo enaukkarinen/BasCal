@@ -17,6 +17,7 @@ namespace BasCal_SilverlightClient.Model
 {
     public class Week
     {
+
         public ObservableCollection<Day> Days { get; set; }
 
         public string MondayDate 
@@ -52,90 +53,50 @@ namespace BasCal_SilverlightClient.Model
         {
             get 
             {
-                string paluu = "";
-                foreach (var e in this.Days[0].DaysEvents)
-                {
-                    paluu += e.Name + "\r\n";
-                }
-                return paluu;
+                return GetDaysEvents(0);
             }
         }
         public string Tuesday 
         {
             get
             {
-                string paluu = "";
-                foreach (var e in this.Days[1].DaysEvents)
-                {
-                    paluu += e.Name + "\r\n";
-                }
-                return paluu;
+                return GetDaysEvents(1);
             }
         }
         public string Wednesday
         {
             get
             {
-                string paluu = "";
-                foreach (var e in this.Days[2].DaysEvents)
-                {
-                    paluu += e.Name + "\r\n";
-                }
-                return paluu;
+                return GetDaysEvents(2);
             }
         }
         public string Thursday
         {
             get
             {
-                string paluu = "";
-                foreach (var e in this.Days[3].DaysEvents)
-                {
-                    paluu += e.Name + "\r\n";
-                }
-                return paluu;
+                return GetDaysEvents(3);
             }
         }
         public string Friday
         {
             get
             {
-                string paluu = "";
-                foreach (var e in this.Days[4].DaysEvents)
-                {
-                    paluu += e.Name + "\r\n";
-                }
-                return paluu;
+                return GetDaysEvents(4);
             }
         }
         public string Saturday
         {
             get
             {
-                string paluu = "";
-                foreach (var e in this.Days[5].DaysEvents)
-                {
-                    paluu += e.Name + "\r\n";
-                }
-                return paluu;
+                return GetDaysEvents(5);
             }
         }
         public string Sunday
         {
             get
             {
-                string paluu = "";
-                foreach (var e in this.Days[6].DaysEvents)
-                {
-                    paluu += e.Name + "\r\n";
-                }
-                return paluu;
+                return GetDaysEvents(6);
             }
-        }
-
-        public Week()
-        {
-            FillDayList();
         }
 
         public Week(ObservableCollection<Day> days)
@@ -150,6 +111,16 @@ namespace BasCal_SilverlightClient.Model
             {
                 PopulateWeekDayLists(ev);
             }
+        }
+
+        private string GetDaysEvents(int d)
+        {
+            string catenatedEvents = "";
+            foreach (var e in this.Days[d].DaysEvents)
+            {
+                catenatedEvents += e.Name + "\r\n";
+            }
+            return catenatedEvents;
         }
 
         public void FillDayList()
@@ -172,12 +143,25 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
-        public void AddDay2(Day day)
-        {
-            //this.Days.Where(d => d.Date.DayOfWeek)
-        }
         public void AddDay(Day day)
         {
+            //(from d in this.Days
+            //         where d.Date.DayOfWeek == day.Date.DayOfWeek
+            //         select d).First().Date = new DateTime();
+   
+            //Day y = this.Days.Where(dd => dd.Date.DayOfWeek == day.Date.DayOfWeek).Single();
+            if (Days[0].Date == new DateTime())
+            {
+                Days[0] = day;
+            }
+            else
+            {
+                foreach (var d in day.DaysEvents)
+                {
+                    Days[0].DaysEvents.Add(d);
+                }   
+            }
+
             switch (day.Date.DayOfWeek.ToString())
             {
                 case "Monday":
@@ -276,44 +260,15 @@ namespace BasCal_SilverlightClient.Model
                     break;
             }
         }
-
-        //public void FixPreludingDates()
-        //{
-        //    this.Days = new ObservableCollection<Day>(this.Days.OrderByDescending(o => o.Date));
-        //    int increment = GetDayIncrement(this.Days.Where(d => d.Date == new DateTime()).FirstOrDefault().Date.DayOfWeek.ToString());
-        //    if(increment != 0)
-        //    {
-        //        do
-        //        {
-        //            this.Days
-        //        } while (increment > 0);
-        //    }
-
-        //}
-
-        private int GetDayIncrement(string dayofweek)
+        private static IEnumerable<T> ReplaceImpl<T>(IEnumerable<T> sequence, T find, T replaceWith, IEqualityComparer<T> comparer)
         {
-            switch (dayofweek)
+            foreach (T item in sequence)
             {
-                case "Monday":
-                    return 0;
-                case "Tuesday":
-                    return 1;
-                case "Wednesday":
-                    return 2;
-                case "Thursday":
-                    return 3;
-                case "Friday":
-                    return 4;
-                case "Saturday":
-                    return 5;
-                case "Sunday":
-                    return 6;
-                default:
-                    return 0;
+                bool match = comparer.Equals(find, item);
+                T x = match ? replaceWith : item;
+                yield return x;
             }
         }
-
         public void PopulateWeekDayLists(UpcomingEventShortDTO eve)
         {
             switch (eve.StartTime.DayOfWeek.ToString())
