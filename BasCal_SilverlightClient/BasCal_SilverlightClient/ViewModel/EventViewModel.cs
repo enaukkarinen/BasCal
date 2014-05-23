@@ -25,7 +25,7 @@ namespace BasCal_SilverlightClient.ViewModel
     {
         private EventDataServiceClient client;
 
-        private UpcomingEventDTO upcomingEventInFull;
+        private BasCal_SilverlightClient.Model.UpcomingEventDTO upcomingEventInFull;
         private ObservableCollection<UpcomingEventShortDTO> upcomingEventsInShortFormatList;
         private ObservableCollection<Week> weeks;
 
@@ -40,13 +40,18 @@ namespace BasCal_SilverlightClient.ViewModel
             }
         }
 
-        public UpcomingEventDTO UpcomingEventInFull
+        public BasCal_SilverlightClient.Model.UpcomingEventDTO UpcomingEventInFull
         {
             get { return upcomingEventInFull; }
             set 
             {
-                upcomingEventInFull = value;
-                OnPropertyChanged("UpcomingEventInFull");
+                if (value != null)
+                {
+                    //var val = value.GetType().GetProperty("Name").GetValue(typeof(string), true);
+                    upcomingEventInFull = value;
+                    OnPropertyChanged("UpcomingEventInFull");
+                }
+
             }
         }
 
@@ -85,7 +90,7 @@ namespace BasCal_SilverlightClient.ViewModel
 
         public void DestroyUpcomingEventInFull(object parameter)
         {
-            this.UpcomingEventInFull = new UpcomingEventDTO() 
+            this.UpcomingEventInFull = new BasCal_SilverlightClient.Model.UpcomingEventDTO() 
             { 
                 Name = "New event",
                 EventId = Guid.NewGuid(), 
@@ -98,7 +103,7 @@ namespace BasCal_SilverlightClient.ViewModel
 
         public void AddOrUpdateEventInDatabase(object parameter)
         {
-            this.client.AddOrUpdateEventAsync(this.UpcomingEventInFull);
+            this.client.AddOrUpdateEventAsync(this.UpcomingEventInFull.ToWCFUpcomingEventDTO());
         }
         void client_AddOrUpdateEventCompleted(object sender, AddOrUpdateEventCompletedEventArgs e)
         {
@@ -136,7 +141,7 @@ namespace BasCal_SilverlightClient.ViewModel
         }
         void client_FetchEventByGuidCompleted(object sender, FetchEventByGuidCompletedEventArgs e)
         {
-            UpcomingEventInFull = e.Result;
+            UpcomingEventInFull = new Model.UpcomingEventDTO(e.Result);
         }
 
         public bool CanExecute(object parameter)

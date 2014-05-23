@@ -1,15 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using System.Net;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
+using BasCal_SilverlightClient.EventDataService;
+using System.ComponentModel.DataAnnotations;
 
-namespace BasCal_WCF_Host.DTO_Models
+namespace BasCal_SilverlightClient.Model
 {
-    public class UpcomingEventDTO : INotifyPropertyChanged 
+    public class UpcomingEventDTO : INotifyPropertyChanged, IDataErrorInfo
     {
         private System.DateTime EndTimeField;
 
@@ -26,23 +32,6 @@ namespace BasCal_WCF_Host.DTO_Models
         private string TypeField;
 
         private int TypeIdField;
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime EndTime
-        {
-            get
-            {
-                return this.EndTimeField;
-            }
-            set
-            {
-                if ((this.EndTimeField.Equals(value) != true))
-                {
-                    this.EndTimeField = value;
-                    this.RaisePropertyChanged("EndTime");
-                }
-            }
-        }
 
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid EventId
@@ -90,13 +79,13 @@ namespace BasCal_WCF_Host.DTO_Models
             {
                 if ((object.ReferenceEquals(this.NameField, value) != true))
                 {
-                    Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Name" }); 
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
                 }
             }
         }
 
+        [Required]
         [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime StartTime
         {
@@ -114,6 +103,23 @@ namespace BasCal_WCF_Host.DTO_Models
             }
         }
 
+        [Required]
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EndTime
+        {
+            get
+            {
+                return this.EndTimeField;
+            }
+            set
+            {
+                if ((this.EndTimeField.Equals(value) != true))
+                {
+                    this.EndTimeField = value;
+                    this.RaisePropertyChanged("EndTime");
+                }
+            }
+        }
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Summary
         {
@@ -175,6 +181,75 @@ namespace BasCal_WCF_Host.DTO_Models
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-    
+
+        public UpcomingEventDTO()
+        {
+        }
+
+        public UpcomingEventDTO(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO ued)
+        {
+            this.EventId = ued.EventId;
+            this.Name = ued.Name;
+            this.Summary = ued.Summary;
+            this.Location = ued.Location;
+            this.TypeId = ued.TypeId;
+            this.Type = ued.Type;
+            this.StartTime = ued.StartTime;
+            this.EndTime = ued.EndTime;
+        }
+
+        public BasCal_SilverlightClient.EventDataService.UpcomingEventDTO ToWCFUpcomingEventDTO()
+        {
+            return new EventDataService.UpcomingEventDTO()
+            {
+                EventId = this.EventId,
+                Name = this.Name,
+                Summary = this.Summary,
+                Location = this.Location,
+                TypeId = this.TypeId,
+                Type = this.Type,
+                StartTime = this.StartTime,
+                EndTime = this.EndTime
+            };
+        }
+
+
+        #region Error handling
+
+        private string Errors;
+        private const string ErrorsText = "Error in event data.";
+        public string Error
+        {
+            get { return Errors; }
+        }
+
+        public string this[string columnName]
+        {
+            get 
+            {
+                Errors = null;
+
+                switch (columnName)
+                {
+                    case "Name":
+                        if (string.IsNullOrEmpty(Name))
+                        {
+                            Errors = ErrorsText;
+                            return "Name cannot by empty.";
+                        }
+                        break;
+                    case "StartTime":
+                        if (StartTime > EndTime)
+                        {
+                            Errors = ErrorsText;
+                            return "Start time has to be sooner than end time.";
+                        }
+                        break;
+                }
+                return null; 
+            }
+        }
+
+        #endregion
     }
 }

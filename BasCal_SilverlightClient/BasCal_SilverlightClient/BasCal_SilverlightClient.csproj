@@ -104,6 +104,7 @@
     <Compile Include="CommandBase\DelegateCommand.cs" />
     <Compile Include="CommandBase\ViewModelBase.cs" />
     <Compile Include="Model\Day.cs" />
+    <Compile Include="Model\UpcomingEventDTO.cs" />
     <Compile Include="Model\Week.cs" />
     <Compile Include="Model\WeekFactory.cs" />
     <Compile Include="CollectionExtensions\ToObservableExtension.cs" />

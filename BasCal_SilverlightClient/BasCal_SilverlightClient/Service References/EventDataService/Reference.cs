@@ -13,6 +13,7 @@
 // 
 namespace BasCal_SilverlightClient.EventDataService {
     using System.Runtime.Serialization;
+    using BasCal_SilverlightClient.Model;
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -87,12 +88,7 @@ namespace BasCal_SilverlightClient.EventDataService {
                 return this.EndTimeField;
             }
             set {
-                if ((this.EndTimeField.Equals(value) != true)) 
-                {
-                    if (value <= this.EndTime)
-                    {
-                        throw new System.Exception("End time has to be after the start time.");
-                    }
+                if ((this.EndTimeField.Equals(value) != true)) {
                     this.EndTimeField = value;
                     this.RaisePropertyChanged("EndTime");
                 }
@@ -131,12 +127,7 @@ namespace BasCal_SilverlightClient.EventDataService {
                 return this.NameField;
             }
             set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) 
-                {
-                    if (string.IsNullOrEmpty(value))
-                    {
-                        throw new System.Exception("Name is required.");
-                    }
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
                 }
@@ -149,8 +140,7 @@ namespace BasCal_SilverlightClient.EventDataService {
                 return this.StartTimeField;
             }
             set {
-                if ((this.StartTimeField.Equals(value) != true)) 
-                {
+                if ((this.StartTimeField.Equals(value) != true)) {
                     this.StartTimeField = value;
                     this.RaisePropertyChanged("StartTime");
                 }

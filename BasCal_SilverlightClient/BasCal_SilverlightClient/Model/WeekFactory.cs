@@ -34,7 +34,7 @@ namespace BasCal_SilverlightClient.Model
                 dayCollection.Insert(0, new Day() { Date = newDate });
                 dayIncrement--;
             } while (dayIncrement > 0);
-
+                    
 
             IEnumerable<Week> weeks = from eventDay in dayCollection
                                       group eventDay by GetIso8601WeekOfYear(eventDay.Date) into w
