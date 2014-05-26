@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Collections.Generic;
+using BasCal_SilverlightClient.CollectionExtensions;
 
 namespace BasCal_SilverlightClient.Model
 {
@@ -25,24 +26,38 @@ namespace BasCal_SilverlightClient.Model
                 dayCollection.Add(newDay);
             }
 
-            // Adds the days visible from the previous month
-            int dayIncrement = (int)dayCollection[0].Date.DayOfWeek + 2;
+            var weeks = (from eventDay in dayCollection
+                         group eventDay by GetIso8601WeekOfYear(eventDay.Date) into w
+                         select new Week(new ObservableCollection<Day>(w))).ToObservableCollection();
+
+            
+             //Adds the days visible from previous month
+            Week firstWeek = weeks.First();
+            int dayIncrementForBeginningOfMonth = ((int)firstWeek.Days.First().Date.DayOfWeek == 0) ? 7 : (int)firstWeek.Days.First().Date.DayOfWeek;
+            dayIncrementForBeginningOfMonth--;
             do
             {
                 DateTime newDate = startOftheMonth;
-                newDate = newDate.AddDays(-1 * dayIncrement);
-                dayCollection.Insert(0, new Day() { Date = newDate });
-                dayIncrement--;
-            } while (dayIncrement > 0);
-                    
+                newDate = newDate.AddDays(-1 * dayIncrementForBeginningOfMonth);
+                firstWeek.Days.Insert(0, new Day() { Date = newDate });
+                dayIncrementForBeginningOfMonth--;
+            } while (dayIncrementForBeginningOfMonth > 0);
+            weeks[0] = new Week(firstWeek.Days);
 
-            IEnumerable<Week> weeks = from eventDay in dayCollection
-                                      group eventDay by GetIso8601WeekOfYear(eventDay.Date) into w
-                                      select new Week(new ObservableCollection<Day>(w));
 
-            return new ObservableCollection<Week>(weeks);  
+            //Adds the days visible from next month
+            Week lastWeek = weeks.Last();
+            int dayIncrementForEndOfMonth = ((int)lastWeek.Days.Last().Date.DayOfWeek == 0) ? 7 : (int)lastWeek.Days.Last().Date.DayOfWeek;
+            dayIncrementForEndOfMonth = 7 - dayIncrementForEndOfMonth;
+            do
+            {
+                lastWeek.Days.Add(new Day() { Date = lastWeek.Days.Last().Date.AddDays(dayIncrementForEndOfMonth) });
+                dayIncrementForEndOfMonth--;
+            } while (dayIncrementForEndOfMonth > 0);
+            weeks[4] = new Week(lastWeek.Days);
+
+            return weeks;  
         }
-
 
         // This presumes that weeks start with Monday.
         // Week 1 is the 1st week of the year with a Thursday in it.

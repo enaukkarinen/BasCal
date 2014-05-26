@@ -24,7 +24,6 @@ namespace BasCal_SilverlightClient.ViewModel
     public class EventViewModel : ViewModelBase
     {
         private EventDataServiceClient client;
-
         private BasCal_SilverlightClient.Model.UpcomingEventDTO upcomingEventInFull;
         private ObservableCollection<UpcomingEventShortDTO> upcomingEventsInShortFormatList;
         private ObservableCollection<Week> weeks;
@@ -71,6 +70,7 @@ namespace BasCal_SilverlightClient.ViewModel
         // Commands binded in xaml
         public ICommand LoadCalendar { get; set; }
         public ICommand LoadUpcomingEventList { get; set; }
+        public ICommand LoadFullEventDataByGuid { get; set; }
         public ICommand SaveEvent { get; set; }
         public ICommand AddEvent { get; set; }
 
@@ -86,8 +86,15 @@ namespace BasCal_SilverlightClient.ViewModel
             this.LoadCalendar = new DelegateCommand(FetchEventsByMonth, CanExecute);
             this.SaveEvent = new DelegateCommand(AddOrUpdateEventInDatabase, CanExecute);
             this.AddEvent = new DelegateCommand(DestroyUpcomingEventInFull, CanExecute);
+        //    this.LoadFullEventDataByGuid = new DelegateCommand(dd => FetchUpcomingEventByGuid(dd));
         }
 
+        public void FetchUpcomingEventByGuid(object parameter, string guid)
+        {
+            string sds = ((TextBlock)parameter).Text.ToString();
+            MessageBox.Show(sds);
+            client.FetchEventByGuidAsync(new Guid(sds));
+        }
         public void DestroyUpcomingEventInFull(object parameter)
         {
             this.UpcomingEventInFull = new BasCal_SilverlightClient.Model.UpcomingEventDTO() 
@@ -126,6 +133,7 @@ namespace BasCal_SilverlightClient.ViewModel
 
         private void FillCalendarDataGrid(ObservableCollection<UpcomingEventShortDTO> returnedList)
         {
+            ObservableCollection<Week> test = WeekFactory.WeekBuilder(returnedList);    
             this.Weeks = WeekFactory.WeekBuilder(returnedList);                       
         }
 
@@ -133,11 +141,6 @@ namespace BasCal_SilverlightClient.ViewModel
         void client_FetchUpcomingEventsShortCompleted(object sender, FetchUpcomingEventsShortCompletedEventArgs e)
         {
             UpcomingEventsInShortFormatList = new ObservableCollection<UpcomingEventShortDTO>(e.Result.OrderByDescending(ev => ev.StartTime));
-        }
-
-        public void FetchUpcomingEventByGuid(Guid guid)
-        {
-            client.FetchEventByGuidAsync(guid);
         }
         void client_FetchEventByGuidCompleted(object sender, FetchEventByGuidCompletedEventArgs e)
         {

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:data="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" x:Class="BasCal_SilverlightClient.MainPage"
+    xmlns:data="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" x:Class="BasCal_SilverlightClient.EventView"
     
     xmlns:local="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data"
     xmlns:primitives="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows"
@@ -459,19 +459,31 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Grid>
-                
-                <ListBox x:Name="listboxUpcomingEvents" ItemsSource="{Binding UpcomingEventsInShortFormatList}" Margin="5,45,35,15" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                <ListBox x:Name="listboxUpcomingEvents"  ItemsSource="{Binding UpcomingEventsInShortFormatList}" Margin="5,45,35,15" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding LoadFullEventDataByGuid}"></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <ListBox.ItemTemplate>
+
                         <DataTemplate>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                    <i:InvokeCommandAction Command="{Binding LoadFullEventDataByGuid}"></i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            
                             <StackPanel Cursor="Hand" x:Name="UpcomingEventListItem" Orientation="Vertical" Margin="0,5,0,0" HorizontalAlignment="Stretch" MouseLeftButtonUp="UpcomingEventListItem_MouseLeftButtonUp">
-                                <Grid >
-                                    <TextBlock Text="{Binding EventId}" Visibility="Collapsed"/>
+                                <Grid >      
+                                    <TextBlock x:Name="EventIdTextBlock"  Text="{Binding EventId}" Visibility="Collapsed"/>
                                     <TextBlock Height="20" Text="{Binding Name}" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI" FontWeight="Bold" Foreground="#FFEBEBEB"/>
                                 </Grid>
                                 <Grid >
                                     <TextBlock Height="30" Margin="0,-15,0,5" VerticalAlignment="Center"  Text="{Binding StartTime}" FontSize="12" FontFamily="Segoe UI" Foreground="#FFEBEBEB"/>
                                     <TextBlock Height="30" Margin="0,15,0,5" VerticalAlignment="Center"  Text="{Binding EndTime}" FontSize="12" FontFamily="Segoe UI" Foreground="#FFEBEBEB"/>
-                                </Grid>
+                                </Grid>                          
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

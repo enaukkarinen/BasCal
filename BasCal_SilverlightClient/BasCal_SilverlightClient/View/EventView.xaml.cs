@@ -14,10 +14,10 @@ using BasCal_SilverlightClient.ViewModel;
 
 namespace BasCal_SilverlightClient
 {
-    public partial class MainPage : UserControl
+    public partial class EventView : UserControl
     {
 
-        public MainPage()
+        public EventView()
         {
             InitializeComponent();
             HideEventFullInfoBox.Completed += HideEventFullInfoBox_Completed;
@@ -47,8 +47,8 @@ namespace BasCal_SilverlightClient
 
         private void UpcomingEventListItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            string eventId = ((TextBlock)((Grid)((StackPanel)sender).Children[0]).Children[0]).Text;
-            ((EventViewModel)this.DataContext).FetchUpcomingEventByGuid(new Guid(eventId));
+            //string eventId = ((TextBlock)((Grid)((StackPanel)sender).Children[0]).Children[0]).Text;
+            //((EventViewModel)this.DataContext).FetchUpcomingEventByGuid(new Guid(eventId));
             EventFullInfo.Visibility = System.Windows.Visibility.Visible;
             ShowEventFullInfoBox.Begin();
 

@@ -26,7 +26,7 @@ namespace BasCal_SilverlightClient
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            this.RootVisual = new MainPage();
+            this.RootVisual = new EventView();
         }
 
         private void Application_Exit(object sender, EventArgs e)
