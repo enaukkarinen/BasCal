@@ -102,10 +102,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="CommandBase\DelegateCommand.cs" />
-    <Compile Include="CommandBase\RelayCommand.cs" />
     <Compile Include="CommandBase\ViewModelBase.cs" />
     <Compile Include="Model\Day.cs" />
-    <Compile Include="Model\UpcomingEventDTO.cs" />
+    <Compile Include="Model\UpcomingEventWithValidation.cs" />
     <Compile Include="Model\Week.cs" />
     <Compile Include="Model\WeekFactory.cs" />
     <Compile Include="CollectionExtensions\ToObservableExtension.cs" />
@@ -116,6 +115,9 @@
     </Compile>
     <Compile Include="ViewModel\EventViewModel.cs" />
     <Compile Include="ViewModel\FetchEventCommand.cs" />
+    <Compile Include="View\CalendarCell.xaml.cs">
+      <DependentUpon>CalendarCell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EventView.xaml.cs">
       <DependentUpon>EventView.xaml</DependentUpon>
     </Compile>
@@ -126,6 +128,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="View\CalendarCell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EventView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

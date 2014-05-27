@@ -12,6 +12,7 @@
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:is="http://schemas.microsoft.com/expression/2010/interactions"
     xmlns:dataInput="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.Input"
+    xmlns:cell="clr-namespace:BasCal_SilverlightClient.View"
     
     mc:Ignorable="d"
     d:DesignHeight="700" d:DesignWidth="1200"
@@ -356,10 +357,11 @@
                         <data:DataGridTemplateColumn Header="Monday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid Background="{Binding Days[0].CellColor}">
+                                    <cell:CalendarCell DataContext="{Binding Days[0]}"></cell:CalendarCell>
+                                    <!--<Grid Background="{Binding Days[0].CellColor}">
                                         <TextBlock Text="{Binding MondayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Monday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>
+                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -367,10 +369,11 @@
                         <data:DataGridTemplateColumn Header="Tuesday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid Background="{Binding Days[1].CellColor}">
+                                    <cell:CalendarCell DataContext="{Binding Days[1]}"></cell:CalendarCell>
+                                    <!--<Grid Background="{Binding Days[1].CellColor}">
                                         <TextBlock Text="{Binding TuesdayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Tuesday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>
+                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -378,10 +381,11 @@
                         <data:DataGridTemplateColumn Header="Wednesday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid Background="{Binding Days[2].CellColor}">
+                                    <cell:CalendarCell DataContext="{Binding Days[2]}"></cell:CalendarCell>
+                                    <!--<Grid Background="{Binding Days[2].CellColor}">
                                         <TextBlock Text="{Binding WednesdayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Wednesday}"  VerticalAlignment="Center"></TextBlock>
-                                    </Grid>
+                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -389,10 +393,11 @@
                         <data:DataGridTemplateColumn Header="Thursday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid Background="{Binding Days[3].CellColor}">
+                                    <cell:CalendarCell DataContext="{Binding Days[3]}"></cell:CalendarCell>
+                                    <!--<Grid Background="{Binding Days[3].CellColor}">
                                         <TextBlock Text="{Binding ThursdayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Thursday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>
+                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -400,10 +405,11 @@
                         <data:DataGridTemplateColumn Header="Friday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid Background="{Binding Days[4].CellColor}">
+                                    <cell:CalendarCell DataContext="{Binding Days[4]}"></cell:CalendarCell>
+                                    <!--<Grid Background="{Binding Days[4].CellColor}">
                                         <TextBlock Text="{Binding FridayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Friday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>
+                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -411,10 +417,11 @@
                         <data:DataGridTemplateColumn Header="Saturday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid Background="{Binding Days[5].CellColor}">
+                                    <cell:CalendarCell DataContext="{Binding Days[5]}"></cell:CalendarCell>
+                                    <!--<Grid Background="{Binding Days[5].CellColor}">
                                         <TextBlock Text="{Binding SaturdayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Saturday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>
+                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -422,10 +429,11 @@
                         <data:DataGridTemplateColumn Header="Sunday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid Background="{Binding Days[6].CellColor}">
+                                    <cell:CalendarCell DataContext="{Binding Days[6]}"></cell:CalendarCell>
+                                    <!--<Grid Background="{Binding Days[6].CellColor}">
                                         <TextBlock Text="{Binding SundayDate}" FontWeight="Bold"></TextBlock>
                                         <TextBlock Text="{Binding Sunday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>
+                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -463,18 +471,12 @@
                 <ListBox x:Name="listboxUpcomingEvents"  ItemsSource="{Binding UpcomingEventsInShortFormatList}" Margin="5,45,35,15" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding LoadFullEventDataByGuid}"></i:InvokeCommandAction>
+                            <i:InvokeCommandAction Command="{Binding LoadFullEventDataByGuid}" CommandParameter="{Binding ElementName=listboxUpcomingEvents, Path=SelectedItem}"></i:InvokeCommandAction>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <ListBox.ItemTemplate>
 
-                        <DataTemplate>
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseLeftButtonUp">
-                                    <i:InvokeCommandAction Command="{Binding LoadFullEventDataByGuid}"></i:InvokeCommandAction>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            
+                        <DataTemplate>                        
                             <StackPanel Cursor="Hand" x:Name="UpcomingEventListItem" Orientation="Vertical" Margin="0,5,0,0" HorizontalAlignment="Stretch" MouseLeftButtonUp="UpcomingEventListItem_MouseLeftButtonUp">
                                 <Grid >      
                                     <TextBlock x:Name="EventIdTextBlock"  Text="{Binding EventId}" Visibility="Collapsed"/>

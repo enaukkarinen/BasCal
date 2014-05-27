@@ -15,7 +15,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BasCal_SilverlightClient.Model
 {
-    public class UpcomingEventDTO : INotifyPropertyChanged, IDataErrorInfo
+    public class UpcomingEventWithValidation : INotifyPropertyChanged, IDataErrorInfo
     {
         private System.DateTime EndTimeField;
 
@@ -33,8 +33,6 @@ namespace BasCal_SilverlightClient.Model
 
         private int TypeIdField;
 
-
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.Guid EventId
         {
             get
@@ -51,7 +49,6 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Location
         {
             get
@@ -68,8 +65,6 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
-        [Required]
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Name
         {
             get
@@ -86,8 +81,6 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
-        [Required]
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime StartTime
         {
             get
@@ -104,8 +97,6 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
-        [Required]
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public System.DateTime EndTime
         {
             get
@@ -121,7 +112,7 @@ namespace BasCal_SilverlightClient.Model
                 }
             }
         }
-        [System.Runtime.Serialization.DataMemberAttribute()]
+
         public string Summary
         {
             get
@@ -138,7 +129,6 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Type
         {
             get
@@ -155,7 +145,6 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public int TypeId
         {
             get
@@ -183,11 +172,11 @@ namespace BasCal_SilverlightClient.Model
             }
         }
 
-        public UpcomingEventDTO()
+        public UpcomingEventWithValidation()
         {
         }
 
-        public UpcomingEventDTO(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO ued)
+        public UpcomingEventWithValidation(BasCal_SilverlightClient.EventDataService.UpcomingEventDTO ued)
         {
             this.EventId = ued.EventId;
             this.Name = ued.Name;

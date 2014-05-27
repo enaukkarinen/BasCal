@@ -24,7 +24,7 @@ namespace BasCal_SilverlightClient.ViewModel
     public class EventViewModel : ViewModelBase
     {
         private EventDataServiceClient client;
-        private BasCal_SilverlightClient.Model.UpcomingEventDTO upcomingEventInFull;
+        private BasCal_SilverlightClient.Model.UpcomingEventWithValidation upcomingEventInFull;
         private ObservableCollection<UpcomingEventShortDTO> upcomingEventsInShortFormatList;
         private ObservableCollection<Week> weeks;
 
@@ -39,7 +39,7 @@ namespace BasCal_SilverlightClient.ViewModel
             }
         }
 
-        public BasCal_SilverlightClient.Model.UpcomingEventDTO UpcomingEventInFull
+        public BasCal_SilverlightClient.Model.UpcomingEventWithValidation UpcomingEventInFull
         {
             get { return upcomingEventInFull; }
             set 
@@ -67,12 +67,19 @@ namespace BasCal_SilverlightClient.ViewModel
             }
         }
 
+
+        private ICommand loadFullEventDataByGuid;
+        public ICommand LoadFullEventDataByGuid
+        {
+            get { return loadFullEventDataByGuid; }
+        }
+
         // Commands binded in xaml
         public ICommand LoadCalendar { get; set; }
-        public ICommand LoadUpcomingEventList { get; set; }
-        public ICommand LoadFullEventDataByGuid { get; set; }
+        public ICommand LoadUpcomingEventList { get; set; }     
         public ICommand SaveEvent { get; set; }
         public ICommand AddEvent { get; set; }
+
 
         // Constructor
         public EventViewModel()
@@ -82,22 +89,24 @@ namespace BasCal_SilverlightClient.ViewModel
             client.FetchEventByGuidCompleted += client_FetchEventByGuidCompleted;
             client.FetchEventsByMonthCompleted += client_FetchEventsByMonthCompleted;
             client.AddOrUpdateEventCompleted += client_AddOrUpdateEventCompleted;
+
+
             this.LoadUpcomingEventList = new DelegateCommand(FetchUpcomingEventShortInShortFormat, CanExecute);
             this.LoadCalendar = new DelegateCommand(FetchEventsByMonth, CanExecute);
             this.SaveEvent = new DelegateCommand(AddOrUpdateEventInDatabase, CanExecute);
             this.AddEvent = new DelegateCommand(DestroyUpcomingEventInFull, CanExecute);
-        //    this.LoadFullEventDataByGuid = new DelegateCommand(dd => FetchUpcomingEventByGuid(dd));
+            this.loadFullEventDataByGuid = new DelegateCommand(FetchUpcomingEventByGuid, CanExecute);
         }
 
-        public void FetchUpcomingEventByGuid(object parameter, string guid)
+        public void FetchUpcomingEventByGuid(object parameter)
         {
-            string sds = ((TextBlock)parameter).Text.ToString();
-            MessageBox.Show(sds);
-            client.FetchEventByGuidAsync(new Guid(sds));
+            Guid guid = ((UpcomingEventShortDTO)parameter).EventId;
+            client.FetchEventByGuidAsync(guid);
         }
+
         public void DestroyUpcomingEventInFull(object parameter)
         {
-            this.UpcomingEventInFull = new BasCal_SilverlightClient.Model.UpcomingEventDTO() 
+            this.UpcomingEventInFull = new BasCal_SilverlightClient.Model.UpcomingEventWithValidation() 
             { 
                 Name = "New event",
                 EventId = Guid.NewGuid(), 
@@ -144,7 +153,7 @@ namespace BasCal_SilverlightClient.ViewModel
         }
         void client_FetchEventByGuidCompleted(object sender, FetchEventByGuidCompletedEventArgs e)
         {
-            UpcomingEventInFull = new Model.UpcomingEventDTO(e.Result);
+            UpcomingEventInFull = new Model.UpcomingEventWithValidation(e.Result);
         }
 
         public bool CanExecute(object parameter)
