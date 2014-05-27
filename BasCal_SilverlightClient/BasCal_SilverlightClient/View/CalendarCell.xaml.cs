@@ -1,26 +1,70 @@
-﻿using BasCal_SilverlightClient.Model;
+﻿using BasCal_SilverlightClient.EventDataService;
+using BasCal_SilverlightClient.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+
 
 namespace BasCal_SilverlightClient.View
 {
     public partial class CalendarCell : UserControl
     {
-        private Day day;
 
-        public Day Day { get; set; }
         public CalendarCell()
         {
             InitializeComponent();
+            //RandomAnimationFailure();
+            //CellGrow.Completed += CellGrow_Completed;
+        }
+        private void RandomAnimationFailure()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            Random r = new Random();
+
+
+            timer.Interval = new TimeSpan(0, 0, 0, r.Next(1, 59), 0);
+            timer.Tick += timer_Tick;
+            timer.Start();
+        }
+
+        void CellGrow_Completed(object sender, EventArgs e)
+        {
+            CellShrink.Begin();
+        }
+
+        protected void timer_Tick(object sender, object e)
+        {
+            CellGrow.Begin();
+        }
+
+        private void CellGrid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            CellGrow.Begin();
+        }
+
+        private void CellGrid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            CellShrink.Begin();
+        }
+
+        private void CellGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
+
+    
+
+
 }

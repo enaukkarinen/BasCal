@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Navigation;
 using BasCal_SilverlightClient.ViewModel;
+using BasCal_SilverlightClient.View;
 
 namespace BasCal_SilverlightClient
 {
@@ -47,18 +48,14 @@ namespace BasCal_SilverlightClient
 
         private void UpcomingEventListItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            //string eventId = ((TextBlock)((Grid)((StackPanel)sender).Children[0]).Children[0]).Text;
-            //((EventViewModel)this.DataContext).FetchUpcomingEventByGuid(new Guid(eventId));
             EventFullInfo.Visibility = System.Windows.Visibility.Visible;
             ShowEventFullInfoBox.Begin();
-
         }
 
         private void EventFullInfoCloseBtn_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             HideEventFullInfoBox.Begin();
         }
-
 
         void HideEventFullInfoBox_Completed(object sender, EventArgs e)
         {
@@ -81,5 +78,10 @@ namespace BasCal_SilverlightClient
             CharmsBarSlideOut.Begin();
         }
 
+        private void CellEditStyle(object sender, DataGridPreparingCellForEditEventArgs e)
+        {
+            CalendarCell cell = ((CalendarCell)e.EditingElement);
+            cell.CellGrid.Background = new SolidColorBrush(Colors.White);
+        }
     }
 }

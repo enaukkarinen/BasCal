@@ -290,12 +290,11 @@
         </Grid.Background>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="Loaded">
-                <i:InvokeCommandAction Command="{Binding LoadCalendar}"></i:InvokeCommandAction>
+                <i:InvokeCommandAction Command="{Binding LoadMonth}"></i:InvokeCommandAction>
             </i:EventTrigger>
         </i:Interaction.Triggers>
 
         <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2" Background="#59000000" >
-
             <Viewbox HorizontalAlignment="Left">
                 <TextBlock Cursor="Hand" Text="basCal" FontFamily="Segoe UI" FontSize="36" Margin="15" TextDecorations="Underline">
                     <TextBlock.Foreground>
@@ -305,8 +304,7 @@
                         </LinearGradientBrush>
                     </TextBlock.Foreground>
                 </TextBlock>
-            </Viewbox>
-            
+            </Viewbox>        
         </Grid>
 
         <Grid x:Name="MainGrid" Grid.Row="1" Grid.ColumnSpan="2">
@@ -325,43 +323,27 @@
 
 
             <Grid x:Name="ContentGrid" Grid.Column="1"  VerticalAlignment="Stretch">
-
-                <data:DataGrid ItemsSource="{Binding Weeks}" Margin="10,15,10,10" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="120" Background="Transparent"
-           AlternatingRowBackground="Transparent"
-           RowBackground="Transparent"
-           BorderBrush="Transparent"
-           CellStyle="{StaticResource CellStyle}"
-           GridLinesVisibility="None" 
-           SelectionMode="Single"
-		   Foreground="#FFEBEBEB"
-		   RowStyle="{StaticResource MyCustomRow}">
-                    <data:DataGrid.Resources>
-                        <!--<Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5"/>
-                            <Setter Property="FontSize" Value="12"/>
-                            <Setter Property="FontFamily" Value="Segoe UI"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="Foreground" Value="#FFEBEBEB"/>
-                        </Style>-->
-                        <Style TargetType="Grid">
-                            <Setter Property="Margin" Value="5" />
-                            <!--<Setter Property="Background" Value="#FF5C6875" />-->
-                        </Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="5" />
-                            <Setter Property="FontFamily" Value="Segoe UI"/>
-                        </Style>
-                    </data:DataGrid.Resources>
+                <!--PreparingCellForEdit="CellEditStyle"-->
+                <data:DataGrid x:Name="CalendarDataGrid" ItemsSource="{Binding Weeks}" Margin="10,15,10,10" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="120" Background="Transparent"
+                    AlternatingRowBackground="Transparent"
+                    RowBackground="Transparent"
+                    BorderBrush="Transparent"
+                    CellStyle="{StaticResource CellStyle}"
+                    GridLinesVisibility="None" 
+                    SelectionMode="Single"                              
+		            RowStyle="{StaticResource MyCustomRow}">
+                    <!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding DataGridDaySelection}" CommandParameter="{Binding SelectedDay}"></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
+                    
                     <data:DataGrid.Columns>
 
                         <data:DataGridTemplateColumn Header="Monday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <cell:CalendarCell DataContext="{Binding Days[0]}"></cell:CalendarCell>
-                                    <!--<Grid Background="{Binding Days[0].CellColor}">
-                                        <TextBlock Text="{Binding MondayDate}" FontWeight="Bold"></TextBlock>
-                                        <TextBlock Text="{Binding Monday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -370,10 +352,6 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <cell:CalendarCell DataContext="{Binding Days[1]}"></cell:CalendarCell>
-                                    <!--<Grid Background="{Binding Days[1].CellColor}">
-                                        <TextBlock Text="{Binding TuesdayDate}" FontWeight="Bold"></TextBlock>
-                                        <TextBlock Text="{Binding Tuesday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -382,10 +360,6 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <cell:CalendarCell DataContext="{Binding Days[2]}"></cell:CalendarCell>
-                                    <!--<Grid Background="{Binding Days[2].CellColor}">
-                                        <TextBlock Text="{Binding WednesdayDate}" FontWeight="Bold"></TextBlock>
-                                        <TextBlock Text="{Binding Wednesday}"  VerticalAlignment="Center"></TextBlock>
-                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -394,10 +368,6 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <cell:CalendarCell DataContext="{Binding Days[3]}"></cell:CalendarCell>
-                                    <!--<Grid Background="{Binding Days[3].CellColor}">
-                                        <TextBlock Text="{Binding ThursdayDate}" FontWeight="Bold"></TextBlock>
-                                        <TextBlock Text="{Binding Thursday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -406,10 +376,6 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <cell:CalendarCell DataContext="{Binding Days[4]}"></cell:CalendarCell>
-                                    <!--<Grid Background="{Binding Days[4].CellColor}">
-                                        <TextBlock Text="{Binding FridayDate}" FontWeight="Bold"></TextBlock>
-                                        <TextBlock Text="{Binding Friday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -418,10 +384,6 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <cell:CalendarCell DataContext="{Binding Days[5]}"></cell:CalendarCell>
-                                    <!--<Grid Background="{Binding Days[5].CellColor}">
-                                        <TextBlock Text="{Binding SaturdayDate}" FontWeight="Bold"></TextBlock>
-                                        <TextBlock Text="{Binding Saturday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -430,10 +392,6 @@
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <cell:CalendarCell DataContext="{Binding Days[6]}"></cell:CalendarCell>
-                                    <!--<Grid Background="{Binding Days[6].CellColor}">
-                                        <TextBlock Text="{Binding SundayDate}" FontWeight="Bold"></TextBlock>
-                                        <TextBlock Text="{Binding Sunday}" VerticalAlignment="Center"></TextBlock>
-                                    </Grid>-->
                                 </DataTemplate>
                             </data:DataGridTemplateColumn.CellTemplate>
                         </data:DataGridTemplateColumn>
@@ -471,7 +429,7 @@
                 <ListBox x:Name="listboxUpcomingEvents"  ItemsSource="{Binding UpcomingEventsInShortFormatList}" Margin="5,45,35,15" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding LoadFullEventDataByGuid}" CommandParameter="{Binding ElementName=listboxUpcomingEvents, Path=SelectedItem}"></i:InvokeCommandAction>
+                            <i:InvokeCommandAction Command="{Binding LoadFullEventDataFromList}" CommandParameter="{Binding ElementName=listboxUpcomingEvents, Path=SelectedItem}"></i:InvokeCommandAction>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <ListBox.ItemTemplate>

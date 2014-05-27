@@ -1,4 +1,5 @@
-﻿using BasCal_SilverlightClient.EventDataService;
+﻿using BasCal_SilverlightClient.CommandBase;
+using BasCal_SilverlightClient.EventDataService;
 using System;
 using System.Collections.ObjectModel;
 using System.Net;
@@ -13,22 +14,27 @@ using System.Windows.Shapes;
 
 namespace BasCal_SilverlightClient.Model
 {
-    public class Day
+    public class Day : ViewModelBase
     {
-        public DateTime Date { get; set; }
-        public ObservableCollection<UpcomingEventShortDTO> DaysEvents { get; set; }
-        public SolidColorBrush CellColor 
+        private DateTime date;
+        private ObservableCollection<UpcomingEventShortDTO> daysEvents;
+
+        public DateTime Date 
         {
-            get
+            get { return date; }
+            set 
             {
-                if (this.DaysEvents.Count > 0)
-                {
-                    return GetColorFromHexa("#FF6F93BB");                 
-                }
-                else
-                {
-                    return GetColorFromHexa("#FF5C6875");
-                }
+                date = value;
+                OnPropertyChanged("Date");
+            } 
+        }
+        public ObservableCollection<UpcomingEventShortDTO> DaysEvents 
+        {
+            get { return daysEvents; }
+            set 
+            {
+                daysEvents = value;
+                OnPropertyChanged("DaysEvents");
             }
         }
 
@@ -36,17 +42,6 @@ namespace BasCal_SilverlightClient.Model
         {
             this.DaysEvents = new ObservableCollection<UpcomingEventShortDTO>();
         }
-
-        private SolidColorBrush GetColorFromHexa(string hexaColor)
-        {
-            return new SolidColorBrush(
-                Color.FromArgb(
-                    Convert.ToByte(hexaColor.Substring(1, 2), 16),
-                    Convert.ToByte(hexaColor.Substring(3, 2), 16),
-                    Convert.ToByte(hexaColor.Substring(5, 2), 16),
-                    Convert.ToByte(hexaColor.Substring(7, 2), 16)
-                )
-            );
-        }
+     
     }
 }
