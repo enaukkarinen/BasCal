@@ -13,7 +13,7 @@ using System.Windows.Navigation;
 using BasCal_SilverlightClient.ViewModel;
 using BasCal_SilverlightClient.View;
 
-namespace BasCal_SilverlightClient
+namespace BasCal_SilverlightClient.View
 {
     public partial class EventView : UserControl
     {
@@ -22,8 +22,8 @@ namespace BasCal_SilverlightClient
         {
             InitializeComponent();
             HideEventFullInfoBox.Completed += HideEventFullInfoBox_Completed;
+            HideDayInfo.Completed += HideDayInfo_Completed;
         }
-
 
         private void image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -77,5 +77,22 @@ namespace BasCal_SilverlightClient
         {
             CharmsBarSlideOut.Begin();
         }
+
+        private void CalendarDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DayInfoGrid.Visibility = System.Windows.Visibility.Visible;
+            ShowDayInfo.Begin();
+        }
+
+        private void btnDayInfoClose_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            HideDayInfo.Begin();
+        }
+
+        void HideDayInfo_Completed(object sender, EventArgs e)
+        {
+            DayInfoGrid.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
     }
 }

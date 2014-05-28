@@ -2,6 +2,7 @@
 using BasCal_SilverlightClient.EventDataService;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace BasCal_SilverlightClient.Model
 {
-    public class Day : ViewModelBase
+    public class Day
     {
         private DateTime date;
         private ObservableCollection<UpcomingEventShortDTO> daysEvents;
@@ -25,7 +26,6 @@ namespace BasCal_SilverlightClient.Model
             set 
             {
                 date = value;
-                OnPropertyChanged("Date");
             } 
         }
         public ObservableCollection<UpcomingEventShortDTO> DaysEvents 
@@ -34,7 +34,6 @@ namespace BasCal_SilverlightClient.Model
             set 
             {
                 daysEvents = value;
-                OnPropertyChanged("DaysEvents");
             }
         }
 

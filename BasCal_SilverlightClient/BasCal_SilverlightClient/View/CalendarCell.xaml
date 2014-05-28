@@ -3,15 +3,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-
-             
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:is="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:viewModel="clr-namespace:BasCal_SilverlightClient.ViewModel"   
     xmlns:model="clr-namespace:BasCal_SilverlightClient.Model"
     xmlns:conv="clr-namespace:BasCal_SilverlightClient.View.Converters"
-    
+    xmlns:view="clr-namespace:BasCal_SilverlightClient.View"
     mc:Ignorable="d"
     d:DesignHeight="120" d:DesignWidth="160">
 	<UserControl.Resources>
-        
+        <viewModel:EventViewModel x:Key="ViewModel" />
         <conv:DateTimeConverter x:Key="DateTimeConverter" />
         <conv:CellColorConverter x:Key="CellColorConverter" />
         <conv:DaysEventsConverter x:Key="DaysEventsConverter" />
@@ -42,11 +43,16 @@
     <UserControl.DataContext>
         <model:Day />
     </UserControl.DataContext>
-    <!---->
+
     <Grid x:Name="CellGrid" RenderTransformOrigin="0.5,0.5">
         <Grid.RenderTransform>
             <CompositeTransform/>
         </Grid.RenderTransform>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseEnter">
+                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=view:EventView}, Path=DataContext.DataGridDaySelection}" CommandParameter="{Binding }"></i:InvokeCommandAction>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <Border x:Name="CellBorder" BorderThickness="5" Background="{Binding Path=Date, Converter={StaticResource CellBorderConverter} }" >
         <Grid Margin="2" Cursor="Hand" Background="{Binding Path=DaysEvents, Converter={StaticResource CellColorConverter} }" MouseEnter="CellGrid_MouseEnter" MouseLeave="CellGrid_MouseLeave">
             <Grid.RowDefinitions>

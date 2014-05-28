@@ -27,6 +27,7 @@ namespace BasCal_SilverlightClient.ViewModel
         private UpcomingEventWithValidation upcomingEventInFull;
         private ObservableCollection<UpcomingEventShortDTO> upcomingEventsInShortFormatList;
         private ObservableCollection<Week> weeks;
+        private Day day;
 
         public ObservableCollection<UpcomingEventShortDTO> UpcomingEventsInShortFormatList
         {
@@ -62,10 +63,25 @@ namespace BasCal_SilverlightClient.ViewModel
                 }
             }
         }
-
+        public Day Day
+        {
+            get { return day; }
+            set 
+            {
+                if (value != null)
+                {
+                    day = value;
+                    OnPropertyChanged("Day");
+                }
+            }
+        }
         // Commands binded in xaml
         #region Commands
-
+        
+        public ICommand DataGridDaySelection  
+        {
+            get { return new DelegateCommand(DaySelection, (x) => { return true; } ); }
+        }
         public ICommand LoadMonth
         {
             get { return new DelegateCommand(FetchEventsByMonth, (x) => { return true; } ); }
@@ -94,14 +110,14 @@ namespace BasCal_SilverlightClient.ViewModel
         {
         }
 
-
-        private void DaySelection(object obj)
+        public void DaySelection(object obj)
         {
-            Day asd = (Day)obj;
-            MessageBox.Show("selection");
-        }
-
-
+            Day value = (Day)obj;
+            if (value != null)
+            {
+                this.Day = (Day)obj;
+            }
+        }  
 
         /// <summary>
         /// Retrieves a collection of events in a shortened format.
@@ -110,7 +126,7 @@ namespace BasCal_SilverlightClient.ViewModel
         public async void FetchUpcomingEventsInShortFormat(object parameter)
         {
             var results = await EventServiceProxy.FetchUpcomingEventsInShortFormat();
-            UpcomingEventsInShortFormatList = new ObservableCollection<UpcomingEventShortDTO>(results.OrderByDescending(ev => ev.StartTime));
+            this.UpcomingEventsInShortFormatList = new ObservableCollection<UpcomingEventShortDTO>(results.OrderByDescending(ev => ev.StartTime));
         }
 
         /// <summary>
@@ -132,7 +148,7 @@ namespace BasCal_SilverlightClient.ViewModel
             if (parameter != null)
             {
                 var result = await EventServiceProxy.FetchEventByGuid(((UpcomingEventShortDTO)parameter).EventId);
-                UpcomingEventInFull = new UpcomingEventWithValidation(result);
+                this.UpcomingEventInFull = new UpcomingEventWithValidation(result);
             }
         }
 
