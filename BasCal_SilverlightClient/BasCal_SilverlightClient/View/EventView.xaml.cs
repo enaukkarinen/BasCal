@@ -80,6 +80,7 @@ namespace BasCal_SilverlightClient.View
 
         private void CalendarDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            CalendarDataGrid.SelectedIndex = -1;
             DayInfoGrid.Visibility = System.Windows.Visibility.Visible;
             ShowDayInfo.Begin();
         }

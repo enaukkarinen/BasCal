@@ -54,7 +54,7 @@
             </i:EventTrigger>
         </i:Interaction.Triggers>
         <Border x:Name="CellBorder" BorderThickness="5" Background="{Binding Path=Date, Converter={StaticResource CellBorderConverter} }" >
-        <Grid Margin="2" Cursor="Hand" Background="{Binding Path=DaysEvents, Converter={StaticResource CellColorConverter} }" MouseEnter="CellGrid_MouseEnter" MouseLeave="CellGrid_MouseLeave">
+        <Grid Margin="4" Cursor="Hand" Background="{Binding Path=DaysEvents, Converter={StaticResource CellColorConverter} }" MouseEnter="CellGrid_MouseEnter" MouseLeave="CellGrid_MouseLeave">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="2*" />

@@ -6,18 +6,14 @@ using System.Globalization;
 using System.Collections.Generic;
 using BasCal_SilverlightClient.CollectionExtensions;
 
-using System.Reactive.Linq;
-using System.Reactive.Concurrency;
-using System.Reactive.PlatformServices;
-
 namespace BasCal_SilverlightClient.Model
 {
     public static class WeekFactory
     {
-        public static ObservableCollection<Week> WeekBuilder(ObservableCollection<UpcomingEventShortDTO> events)
+        public static ObservableCollection<Week> WeekBuilder(DateTime currentMonth, ObservableCollection<UpcomingEventShortDTO> events)
         {
-            DateTime firstDayOfMonth = new DateTime(events.First().StartTime.Year, events.First().StartTime.Month, 1);
-
+            //DateTime firstDayOfMonth = new DateTime(events.First().StartTime.Year, events.First().StartTime.Month, 1);
+            DateTime firstDayOfMonth = new DateTime(currentMonth.Year, currentMonth.Month, 1);
             // Populates a month with days and events.
             ObservableCollection<Day> month = PopulateMonth(firstDayOfMonth, events);
 
@@ -60,7 +56,8 @@ namespace BasCal_SilverlightClient.Model
         {
             return (from eventDay in days
                     group eventDay by GetIso8601WeekOfYear(eventDay.Date) into w
-                    select new Week(new ObservableCollection<Day>(w))).ToObservableCollection();
+                    select new Week(new ObservableCollection<Day>(w)))
+                    .ToObservableCollection();
         }
 
         /// <summary>
@@ -77,22 +74,12 @@ namespace BasCal_SilverlightClient.Model
                                                          select day).ToObservableCollection();
             weeks[0] = new Week(DaysOfFirstWeek.OrderBy(d => d.Date).ToObservableCollection());
 
-            #region RX
-            //IObservable<Day> DaysOfFirstWeek2 = (from day in weeks.First().Days
-            //                                     select day).Concat
-            //                                       (from day in GetDaysFromPreviousMonth(weeks.First().Days.First().Date)
-            //                                        select day).ToObservable(NewThreadScheduler.Default);
-            //DaysOfFirstWeek.Subscribe();
-            //weeks[0] = new Week(new ObservableCollection(DaysOfFirstWeek));
-            #endregion
-
-
             // Adds days visible from the following month
             ObservableCollection<Day> DaysOfLastWeek = (from day in weeks.Last().Days
                                                         select day).Concat
                                                        (from day in GetDaysFromFollowingMonth(weeks.Last().Days.Last().Date)
                                                         select day).ToObservableCollection();
-            weeks[4] = new Week(DaysOfLastWeek.OrderBy(d => d.Date).ToObservableCollection());
+            weeks[weeks.Count - 1] = new Week(DaysOfLastWeek.OrderBy(d => d.Date).ToObservableCollection());
 
             return weeks; 
         }

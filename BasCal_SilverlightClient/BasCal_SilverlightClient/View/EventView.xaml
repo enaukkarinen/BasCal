@@ -10,6 +10,7 @@
     xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:is="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.SL5"
     xmlns:dataInput="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.Input"
     xmlns:cell="clr-namespace:BasCal_SilverlightClient.View"
     xmlns:conv="clr-namespace:BasCal_SilverlightClient.View.Converters"
@@ -243,16 +244,6 @@
         		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
         	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ModifyEventGrid">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="UserGroupsGrid">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-        	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="CharmsBarSlideOut">
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="RightPanelCharmsBar">
@@ -260,14 +251,6 @@
         		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="10"/>
         	</DoubleAnimationUsingKeyFrames>
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="AddEventGrid">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ModifyEventGrid">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="UserGroupsGrid">
         		<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
         	</DoubleAnimationUsingKeyFrames>
@@ -342,7 +325,7 @@
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
             <RowDefinition Height="9*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -374,10 +357,6 @@
                     </TextBlock.Foreground>
                 </TextBlock>
             </Viewbox> 
-            <Grid Grid.Column="1"></Grid>
-            <Grid Grid.Column="2">
-                
-            </Grid>
         </Grid>
 
         <Grid x:Name="MainGrid" Grid.Row="1" Grid.ColumnSpan="2">
@@ -404,15 +383,17 @@
                     CellStyle="{StaticResource CellStyle}"
                     GridLinesVisibility="None" 
                     SelectionMode="Single"                              
-		            RowStyle="{StaticResource MyCustomRow}" SelectionChanged="CalendarDataGrid_SelectionChanged">
-                    <!--<i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding DataGridDaySelection}" CommandParameter="{Binding ElementName=CalendarDataGrid, Path=SelectedItem}"></i:InvokeCommandAction>
+		            RowStyle="{StaticResource MyCustomRow}" 
+                    SelectionChanged="CalendarDataGrid_SelectionChanged">
+                    
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseWheel">
+                            <GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding SwitchMonth}" PassEventArgsToCommand="True" />
                         </i:EventTrigger>
-                    </i:Interaction.Triggers>-->
+                    </i:Interaction.Triggers>
                     
                     <data:DataGrid.Columns>
-
+ 
                         <data:DataGridTemplateColumn Header="Monday">
                             <data:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -522,91 +503,92 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
+            
+            <!-- Keep Opacity="0" Visibility="Collapsed" by default. -->
+            <Grid x:Name="EventFullInfo" Grid.ColumnSpan="2" Grid.RowSpan="2" Canvas.ZIndex="5" Background="#66778899" Opacity="0" Visibility="Collapsed">
 
-        </Grid>
+                <Grid x:Name="EventFullInfoInnerBox" Width="400" Height="300" Background="#FF4D5863" Canvas.ZIndex="6" RenderTransformOrigin="0.5,0.5" >
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="5"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="FontFamily" Value="Segoe UI"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Foreground" Value="#FFEBEBEB"/>
+                        </Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Margin" Value="5"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="FontFamily" Value="Segoe UI"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Foreground" Value="#FF4D5863"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <Grid.RenderTransform>
+                        <CompositeTransform ScaleX="0" ScaleY="0"/>
+                        <!--ScaleX="0" ScaleY="0"-->
+                    </Grid.RenderTransform>
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="50" Opacity="100" ShadowDepth="10"  Direction="-50" Color="#FF1F2A36" />
+                    </Grid.Effect>
 
-        <!-- Keep Opacity="0" Visibility="Collapsed" by default. -->
-        <Grid x:Name="EventFullInfo" Grid.ColumnSpan="2" Grid.RowSpan="2" Canvas.ZIndex="5" Background="#66778899" Opacity="0" Visibility="Collapsed">
-
-            <Grid x:Name="EventFullInfoInnerBox" Width="400" Height="300" Background="#FF4D5863" Canvas.ZIndex="6" RenderTransformOrigin="0.5,0.5" >
-                <Grid.Resources>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Margin" Value="5"/>
-                        <Setter Property="FontSize" Value="12"/>
-                        <Setter Property="FontFamily" Value="Segoe UI"/>
-                        <Setter Property="VerticalAlignment" Value="Center"/>
-                        <Setter Property="Foreground" Value="#FFEBEBEB"/>
-                    </Style>
-                    <Style TargetType="TextBox">
-                        <Setter Property="Margin" Value="5"/>
-                        <Setter Property="FontSize" Value="12"/>
-                        <Setter Property="FontFamily" Value="Segoe UI"/>
-                        <Setter Property="VerticalAlignment" Value="Center"/>
-                        <Setter Property="Foreground" Value="#FF4D5863"/>
-                    </Style>
-                </Grid.Resources>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-                <Grid.RenderTransform>
-                    <CompositeTransform ScaleX="0" ScaleY="0"/>
-                    <!--ScaleX="0" ScaleY="0"-->
-                </Grid.RenderTransform>
-                <Grid.Effect>
-                    <DropShadowEffect BlurRadius="50" Opacity="100" ShadowDepth="10"  Direction="-50" Color="#FF1F2A36" />
-                </Grid.Effect>
-
-                <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" FontWeight="Bold">
+                    <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" FontWeight="Bold">
 					<Run Text="Name:"/>
-                </TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" FontWeight="Bold">
+                    </TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" FontWeight="Bold">
 					<Run Text="Type:"/>
-                </TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" FontWeight="Bold">
+                    </TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" FontWeight="Bold">
 					<Run Text="Summary:"/>
-                </TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" FontWeight="Bold">
+                    </TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" FontWeight="Bold">
 					<Run Text="Location:"/>
-                </TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" FontWeight="Bold">
+                    </TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" FontWeight="Bold">
 					<Run Text="Starts at:"/>
-                </TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" FontWeight="Bold">
+                    </TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" FontWeight="Bold">
 					<Run Text="Ends at:"/>
-                </TextBlock>
+                    </TextBlock>
 
-                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=UpcomingEventInFull.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=UpcomingEventInFull.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=UpcomingEventInFull.Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
-                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=UpcomingEventInFull.Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
-                <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=UpcomingEventInFull.StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" HorizontalAlignment="Left"/>
-                <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=UpcomingEventInFull.EndTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" HorizontalAlignment="Left"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=UpcomingEventInFull.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=UpcomingEventInFull.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=UpcomingEventInFull.Summary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=UpcomingEventInFull.Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=UpcomingEventInFull.StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" HorizontalAlignment="Left"/>
+                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=UpcomingEventInFull.EndTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" HorizontalAlignment="Left"/>
 
-                <Image x:Name="EventFullInfoCloseBtn" Cursor="Hand" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Width="15" Height="15" Source="/BasCal_SilverlightClient;component/Content/closebtn.png" MouseLeftButtonUp="EventFullInfoCloseBtn_MouseLeftButtonUp" />
+                    <Image x:Name="EventFullInfoCloseBtn" Cursor="Hand" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="5" Width="15" Height="15" Source="/BasCal_SilverlightClient;component/Content/closebtn.png" MouseLeftButtonUp="EventFullInfoCloseBtn_MouseLeftButtonUp" />
 
-                <Image x:Name="SaveModifiedEventBtn" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,30,0" Width="30" Height="30" Source="/BasCal_SilverlightClient;component/Content/save.png" MouseLeftButtonUp="EventFullInfoCloseBtn_MouseLeftButtonUp">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding SaveEvent}" CommandParameter="{Binding UpcomingEventInFull}" ></i:InvokeCommandAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Image>
+                    <Image x:Name="SaveModifiedEventBtn" Cursor="Hand" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,30,0" Width="30" Height="30" Source="/BasCal_SilverlightClient;component/Content/save.png" MouseLeftButtonUp="EventFullInfoCloseBtn_MouseLeftButtonUp">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SaveEvent}" CommandParameter="{Binding UpcomingEventInFull}" ></i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
 
-                <!--<dataInput:ValidationSummary Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Grid.RowSpan="2" />-->
+                    <!--<dataInput:ValidationSummary Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Grid.RowSpan="2" />-->
+                </Grid>
+
             </Grid>
 
         </Grid>
+
     
         <Grid x:Name="RightPanelCharmsBar" Grid.RowSpan="2" Grid.Column="1" Width="10" Background="Black" MouseEnter="RightPanelCharmsBar_MouseEnter" MouseLeave="RightPanelCharmsBar_MouseLeave">
             <Grid.RowDefinitions>
@@ -614,16 +596,6 @@
                 <RowDefinition Height="0.40*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-
-            <Grid x:Name="ModifyEventGrid" Grid.Row="0" MaxWidth="50" Opacity="0" VerticalAlignment="Bottom" >
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-                <Image Grid.Row="1" Source="/BasCal_SilverlightClient;component/Content/Modify.png" VerticalAlignment="Bottom"></Image>
-                <TextBlock Grid.Row="2" Text="modify event" Foreground="#FFEBEBEB" FontSize="8" HorizontalAlignment="Center"></TextBlock>
-            </Grid>
 
             <Grid x:Name="AddEventGrid" Grid.Row="1" MaxWidth="50" Opacity="0" Cursor="Hand" MouseLeftButtonUp="AddEventGrid_MouseLeftButtonUp" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
@@ -638,16 +610,6 @@
 
                 <Image Grid.Row="0" Source="/BasCal_SilverlightClient;component/Content/Add.png" VerticalAlignment="Bottom"></Image>
                 <TextBlock Grid.Row="1" Text="add event" Foreground="#FFEBEBEB" FontSize="8" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
-            </Grid>
-
-            <Grid x:Name="UserGroupsGrid" Grid.Row="2" MaxWidth="50" Opacity="0" Cursor="Hand" VerticalAlignment="Top" Visibility="Collapsed">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-
-                <Image Grid.Row="0" Source="/BasCal_SilverlightClient;component/Content/Groups.png" VerticalAlignment="Top"></Image>
-                <TextBlock Grid.Row="1" Text="user groups" Foreground="#FFEBEBEB" FontSize="8" VerticalAlignment="Top" HorizontalAlignment="Center"></TextBlock>
             </Grid>
         </Grid>
 

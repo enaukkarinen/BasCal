@@ -203,7 +203,6 @@ namespace BasCal_SilverlightClient.Model
             };
         }
 
-
         #region Error handling
 
         private string Errors;

@@ -24,6 +24,7 @@ namespace BasCal_SilverlightClient.ViewModel
 {
     public class EventViewModel : ViewModelBase
     {
+        private DateTime desiredMonth = DateTime.Now;
         private UpcomingEventWithValidation upcomingEventInFull;
         private ObservableCollection<UpcomingEventShortDTO> upcomingEventsInShortFormatList;
         private ObservableCollection<Week> weeks;
@@ -75,12 +76,25 @@ namespace BasCal_SilverlightClient.ViewModel
                 }
             }
         }
+
         // Commands binded in xaml
         #region Commands
-        
+
+        public ICommand SwitchMonth 
+        {
+            get { return new DelegateCommand(FetchEventsByMonth, (x) => { return true; }); }
+        }
+
         public ICommand DataGridDaySelection  
         {
-            get { return new DelegateCommand(DaySelection, (x) => { return true; } ); }
+            get { return new DelegateCommand((object obj) => 
+            {
+                Day value = (Day)obj;
+                if (value != null)
+                {
+                    this.Day = (Day)obj;
+                }
+            }, (x) => { return true; }); }
         }
         public ICommand LoadMonth
         {
@@ -110,15 +124,6 @@ namespace BasCal_SilverlightClient.ViewModel
         {
         }
 
-        public void DaySelection(object obj)
-        {
-            Day value = (Day)obj;
-            if (value != null)
-            {
-                this.Day = (Day)obj;
-            }
-        }  
-
         /// <summary>
         /// Retrieves a collection of events in a shortened format.
         /// </summary>
@@ -135,8 +140,25 @@ namespace BasCal_SilverlightClient.ViewModel
         /// <param name="parameter"></param>
         private async void FetchEventsByMonth(object parameter)
         {
-            var results = await EventServiceProxy.FetchEventsByMonth(5);
-            this.Weeks = WeekFactory.WeekBuilder(results);    
+            
+            if (parameter == null)
+            {
+                desiredMonth = DateTime.Now;
+            }
+            else
+            {
+                int monthIncrement = ((MouseWheelEventArgs)parameter).Delta;
+                if (monthIncrement > 0)
+                {
+                    desiredMonth = desiredMonth.AddMonths(-1);
+                }
+                else
+                {
+                    desiredMonth = desiredMonth.AddMonths(1);
+                }
+            }
+            var results = await EventServiceProxy.FetchEventsByMonth(desiredMonth.Month);
+            this.Weeks = WeekFactory.WeekBuilder(desiredMonth, results);    
         }
 
         /// <summary>
