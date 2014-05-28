@@ -6,6 +6,10 @@ using System.Globalization;
 using System.Collections.Generic;
 using BasCal_SilverlightClient.CollectionExtensions;
 
+using System.Reactive.Linq;
+using System.Reactive.Concurrency;
+using System.Reactive.PlatformServices;
+
 namespace BasCal_SilverlightClient.Model
 {
     public static class WeekFactory
@@ -72,6 +76,16 @@ namespace BasCal_SilverlightClient.Model
                                                         (from day in GetDaysFromPreviousMonth(weeks.First().Days.First().Date)
                                                          select day).ToObservableCollection();
             weeks[0] = new Week(DaysOfFirstWeek.OrderBy(d => d.Date).ToObservableCollection());
+
+            #region RX
+            //IObservable<Day> DaysOfFirstWeek2 = (from day in weeks.First().Days
+            //                                     select day).Concat
+            //                                       (from day in GetDaysFromPreviousMonth(weeks.First().Days.First().Date)
+            //                                        select day).ToObservable(NewThreadScheduler.Default);
+            //DaysOfFirstWeek.Subscribe();
+            //weeks[0] = new Week(new ObservableCollection(DaysOfFirstWeek));
+            #endregion
+
 
             // Adds days visible from the following month
             ObservableCollection<Day> DaysOfLastWeek = (from day in weeks.Last().Days

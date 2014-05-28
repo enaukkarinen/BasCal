@@ -7,7 +7,6 @@ namespace BasCal_SilverlightClient.Services
 {
     public class EventServiceProxy
     {
-
         public static Task<string> AddOrUpdateEvent(UpcomingEventDTO guid)
         {
             var tcs = new TaskCompletionSource<string>();

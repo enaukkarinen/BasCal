@@ -15,6 +15,7 @@
         <conv:DateTimeConverter x:Key="DateTimeConverter" />
         <conv:CellColorConverter x:Key="CellColorConverter" />
         <conv:DaysEventsConverter x:Key="DaysEventsConverter" />
+        <conv:CellBorderConverter x:Key="CellBorderConverter" />
         
         <Storyboard x:Name="CellGrow">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="CellGrid">
@@ -41,23 +42,27 @@
     <UserControl.DataContext>
         <model:Day />
     </UserControl.DataContext>
-    <!--Background="{Binding Path=DaysEvents, Converter={StaticResource CellColorConverter}}"-->
-    <Grid x:Name="CellGrid" Cursor="Hand" Background="{Binding Path=DaysEvents, Converter={StaticResource CellColorConverter} }"  Margin="5" RenderTransformOrigin="0.5,0.5" MouseEnter="CellGrid_MouseEnter" MouseLeave="CellGrid_MouseLeave" MouseLeftButtonUp="CellGrid_MouseLeftButtonUp">
-    	<Grid.RenderTransform>
-    		<CompositeTransform/>
-    	</Grid.RenderTransform>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="0.3*" />
-        </Grid.RowDefinitions>
-        
-        <Grid Grid.Row="0" Margin="5">
-            <!--, Converter={StaticResource DateTimeConverter}-->
-            <TextBlock Text="{Binding Path=Date, Converter={StaticResource DateTimeConverter} }" FontWeight="Bold" FontSize="14"></TextBlock>
+    <!---->
+    <Grid x:Name="CellGrid" RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <CompositeTransform/>
+        </Grid.RenderTransform>
+        <Border x:Name="CellBorder" BorderThickness="5" Background="{Binding Path=Date, Converter={StaticResource CellBorderConverter} }" >
+        <Grid Margin="2" Cursor="Hand" Background="{Binding Path=DaysEvents, Converter={StaticResource CellColorConverter} }" MouseEnter="CellGrid_MouseEnter" MouseLeave="CellGrid_MouseLeave" MouseLeftButtonUp="CellGrid_MouseLeftButtonUp">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="0.3*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="5">
+                <!--, Converter={StaticResource DateTimeConverter}-->
+                <TextBlock Text="{Binding Path=Date, Converter={StaticResource DateTimeConverter} }" FontWeight="Bold" FontSize="14"></TextBlock>
+            </Grid>
+            <Grid Grid.Row="1" Margin="5">
+                <TextBlock Text="{Binding Path=DaysEvents, Converter={StaticResource DaysEventsConverter} }" TextWrapping="Wrap" FontFamily="Segoe UI"></TextBlock>
+            </Grid>
         </Grid>
-        <Grid Grid.Row="1" Margin="5">
-            <TextBlock Text="{Binding Path=DaysEvents, Converter={StaticResource DaysEventsConverter} }" TextWrapping="Wrap" FontFamily="Segoe UI"></TextBlock>
-        </Grid>
+    </Border>
     </Grid>
 </UserControl>

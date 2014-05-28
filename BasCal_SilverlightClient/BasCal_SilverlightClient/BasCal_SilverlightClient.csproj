@@ -136,9 +136,11 @@
     <Compile Include="View\CalendarCell.xaml.cs">
       <DependentUpon>CalendarCell.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Converters\CellBorderConverter.cs" />
     <Compile Include="View\Converters\CellColorConverter.cs" />
     <Compile Include="View\Converters\DateTimeConverter.cs" />
     <Compile Include="View\Converters\DaysEventsConverter.cs" />
+    <Compile Include="View\Converters\HexaToArgbConverter.cs" />
     <Compile Include="View\EventView.xaml.cs">
       <DependentUpon>EventView.xaml</DependentUpon>
     </Compile>

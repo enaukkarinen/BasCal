@@ -48,7 +48,6 @@ namespace BasCal_SilverlightClient.ViewModel
                     upcomingEventInFull = value;
                     OnPropertyChanged("UpcomingEventInFull");
                 }
-
             }
         }
         public ObservableCollection<Week> Weeks
@@ -63,8 +62,6 @@ namespace BasCal_SilverlightClient.ViewModel
                 }
             }
         }
-
-
 
         // Commands binded in xaml
         #region Commands

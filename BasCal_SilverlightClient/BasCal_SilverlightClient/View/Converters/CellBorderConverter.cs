@@ -1,7 +1,5 @@
-﻿
-using BasCal_SilverlightClient.EventDataService;
+﻿using BasCal_SilverlightClient.EventDataService;
 using System;
-using System.Collections.ObjectModel;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,28 +13,29 @@ using System.Windows.Shapes;
 
 namespace BasCal_SilverlightClient.View.Converters
 {
-    public class CellColorConverter : IValueConverter
+    public class CellBorderConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             SolidColorBrush color;
-            int count = ((ObservableCollection<UpcomingEventShortDTO>)value).Count;
-            if (count > 0)
+            DateTime date = ((DateTime)value).Date;
+            if (date == DateTime.Now.Date)
             {
-                color = HexaToArgbConverter.GetColorFromHexa("#FF6F93BB");
+                color = HexaToArgbConverter.GetColorFromHexa("#FFC6C6C6");
             }
             else
             {
-                color = HexaToArgbConverter.GetColorFromHexa("#FF5C6875");
+                color = new SolidColorBrush(Colors.Transparent);
             }
             return color;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return HexaToArgbConverter.GetColorFromHexa("#FF5C6875");
+            return ((DateTime)value);
         }
 
-    }
 
+    }
+   
 }
