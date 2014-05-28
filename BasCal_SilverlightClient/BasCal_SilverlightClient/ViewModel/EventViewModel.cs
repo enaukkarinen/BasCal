@@ -129,8 +129,11 @@ namespace BasCal_SilverlightClient.ViewModel
         /// <param name="parameter"></param>
         public async void FetchFullEventInfoFromList(object parameter)
         {
-            var result = await EventServiceProxy.FetchEventByGuid(((UpcomingEventShortDTO)parameter).EventId);
-            UpcomingEventInFull = new UpcomingEventWithValidation(result);
+            if (parameter != null)
+            {
+                var result = await EventServiceProxy.FetchEventByGuid(((UpcomingEventShortDTO)parameter).EventId);
+                UpcomingEventInFull = new UpcomingEventWithValidation(result);
+            }
         }
 
         /// <summary>

@@ -57,11 +57,6 @@ namespace BasCal_SilverlightClient.View
         {
             CellShrink.Begin();
         }
-
-        private void CellGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
     }
 
     

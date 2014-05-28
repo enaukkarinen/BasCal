@@ -77,11 +77,5 @@ namespace BasCal_SilverlightClient
         {
             CharmsBarSlideOut.Begin();
         }
-
-        private void CellEditStyle(object sender, DataGridPreparingCellForEditEventArgs e)
-        {
-            CalendarCell cell = ((CalendarCell)e.EditingElement);
-            cell.CellGrid.Background = new SolidColorBrush(Colors.White);
-        }
     }
 }

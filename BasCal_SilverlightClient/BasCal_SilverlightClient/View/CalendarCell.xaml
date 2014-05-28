@@ -48,7 +48,7 @@
             <CompositeTransform/>
         </Grid.RenderTransform>
         <Border x:Name="CellBorder" BorderThickness="5" Background="{Binding Path=Date, Converter={StaticResource CellBorderConverter} }" >
-        <Grid Margin="2" Cursor="Hand" Background="{Binding Path=DaysEvents, Converter={StaticResource CellColorConverter} }" MouseEnter="CellGrid_MouseEnter" MouseLeave="CellGrid_MouseLeave" MouseLeftButtonUp="CellGrid_MouseLeftButtonUp">
+        <Grid Margin="2" Cursor="Hand" Background="{Binding Path=DaysEvents, Converter={StaticResource CellColorConverter} }" MouseEnter="CellGrid_MouseEnter" MouseLeave="CellGrid_MouseLeave">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="2*" />
