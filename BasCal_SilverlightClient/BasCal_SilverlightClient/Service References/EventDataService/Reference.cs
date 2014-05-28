@@ -294,20 +294,10 @@ namespace BasCal_SilverlightClient.EventDataService {
         
         BasCal_SilverlightClient.EventDataService.UpcomingEventDTO EndFetchEventByGuid(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEventDataService/FetchUpcomingEvents", ReplyAction="http://tempuri.org/IEventDataService/FetchUpcomingEventsResponse")]
-        System.IAsyncResult BeginFetchUpcomingEvents(System.AsyncCallback callback, object asyncState);
-        
-        System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventDTO> EndFetchUpcomingEvents(System.IAsyncResult result);
-        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEventDataService/FetchUpcomingEventsShort", ReplyAction="http://tempuri.org/IEventDataService/FetchUpcomingEventsShortResponse")]
         System.IAsyncResult BeginFetchUpcomingEventsShort(System.AsyncCallback callback, object asyncState);
         
         System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventShortDTO> EndFetchUpcomingEventsShort(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEventDataService/Add", ReplyAction="http://tempuri.org/IEventDataService/AddResponse")]
-        System.IAsyncResult BeginAdd(int a, int b, System.AsyncCallback callback, object asyncState);
-        
-        int EndAdd(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -392,25 +382,6 @@ namespace BasCal_SilverlightClient.EventDataService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class FetchUpcomingEventsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public FetchUpcomingEventsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventDTO> Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventDTO>)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class FetchUpcomingEventsShortCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -424,25 +395,6 @@ namespace BasCal_SilverlightClient.EventDataService {
             get {
                 base.RaiseExceptionIfNecessary();
                 return ((System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventShortDTO>)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class AddCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public AddCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public int Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
             }
         }
     }
@@ -475,23 +427,11 @@ namespace BasCal_SilverlightClient.EventDataService {
         
         private System.Threading.SendOrPostCallback onFetchEventByGuidCompletedDelegate;
         
-        private BeginOperationDelegate onBeginFetchUpcomingEventsDelegate;
-        
-        private EndOperationDelegate onEndFetchUpcomingEventsDelegate;
-        
-        private System.Threading.SendOrPostCallback onFetchUpcomingEventsCompletedDelegate;
-        
         private BeginOperationDelegate onBeginFetchUpcomingEventsShortDelegate;
         
         private EndOperationDelegate onEndFetchUpcomingEventsShortDelegate;
         
         private System.Threading.SendOrPostCallback onFetchUpcomingEventsShortCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginAddDelegate;
-        
-        private EndOperationDelegate onEndAddDelegate;
-        
-        private System.Threading.SendOrPostCallback onAddCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -554,11 +494,7 @@ namespace BasCal_SilverlightClient.EventDataService {
         
         public event System.EventHandler<FetchEventByGuidCompletedEventArgs> FetchEventByGuidCompleted;
         
-        public event System.EventHandler<FetchUpcomingEventsCompletedEventArgs> FetchUpcomingEventsCompleted;
-        
         public event System.EventHandler<FetchUpcomingEventsShortCompletedEventArgs> FetchUpcomingEventsShortCompleted;
-        
-        public event System.EventHandler<AddCompletedEventArgs> AddCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -747,50 +683,6 @@ namespace BasCal_SilverlightClient.EventDataService {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult BasCal_SilverlightClient.EventDataService.IEventDataService.BeginFetchUpcomingEvents(System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginFetchUpcomingEvents(callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventDTO> BasCal_SilverlightClient.EventDataService.IEventDataService.EndFetchUpcomingEvents(System.IAsyncResult result) {
-            return base.Channel.EndFetchUpcomingEvents(result);
-        }
-        
-        private System.IAsyncResult OnBeginFetchUpcomingEvents(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            return ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).BeginFetchUpcomingEvents(callback, asyncState);
-        }
-        
-        private object[] OnEndFetchUpcomingEvents(System.IAsyncResult result) {
-            System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventDTO> retVal = ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).EndFetchUpcomingEvents(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnFetchUpcomingEventsCompleted(object state) {
-            if ((this.FetchUpcomingEventsCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.FetchUpcomingEventsCompleted(this, new FetchUpcomingEventsCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void FetchUpcomingEventsAsync() {
-            this.FetchUpcomingEventsAsync(null);
-        }
-        
-        public void FetchUpcomingEventsAsync(object userState) {
-            if ((this.onBeginFetchUpcomingEventsDelegate == null)) {
-                this.onBeginFetchUpcomingEventsDelegate = new BeginOperationDelegate(this.OnBeginFetchUpcomingEvents);
-            }
-            if ((this.onEndFetchUpcomingEventsDelegate == null)) {
-                this.onEndFetchUpcomingEventsDelegate = new EndOperationDelegate(this.OnEndFetchUpcomingEvents);
-            }
-            if ((this.onFetchUpcomingEventsCompletedDelegate == null)) {
-                this.onFetchUpcomingEventsCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnFetchUpcomingEventsCompleted);
-            }
-            base.InvokeAsync(this.onBeginFetchUpcomingEventsDelegate, null, this.onEndFetchUpcomingEventsDelegate, this.onFetchUpcomingEventsCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult BasCal_SilverlightClient.EventDataService.IEventDataService.BeginFetchUpcomingEventsShort(System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginFetchUpcomingEventsShort(callback, asyncState);
         }
@@ -832,54 +724,6 @@ namespace BasCal_SilverlightClient.EventDataService {
                 this.onFetchUpcomingEventsShortCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnFetchUpcomingEventsShortCompleted);
             }
             base.InvokeAsync(this.onBeginFetchUpcomingEventsShortDelegate, null, this.onEndFetchUpcomingEventsShortDelegate, this.onFetchUpcomingEventsShortCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult BasCal_SilverlightClient.EventDataService.IEventDataService.BeginAdd(int a, int b, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginAdd(a, b, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        int BasCal_SilverlightClient.EventDataService.IEventDataService.EndAdd(System.IAsyncResult result) {
-            return base.Channel.EndAdd(result);
-        }
-        
-        private System.IAsyncResult OnBeginAdd(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            int a = ((int)(inValues[0]));
-            int b = ((int)(inValues[1]));
-            return ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).BeginAdd(a, b, callback, asyncState);
-        }
-        
-        private object[] OnEndAdd(System.IAsyncResult result) {
-            int retVal = ((BasCal_SilverlightClient.EventDataService.IEventDataService)(this)).EndAdd(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnAddCompleted(object state) {
-            if ((this.AddCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.AddCompleted(this, new AddCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void AddAsync(int a, int b) {
-            this.AddAsync(a, b, null);
-        }
-        
-        public void AddAsync(int a, int b, object userState) {
-            if ((this.onBeginAddDelegate == null)) {
-                this.onBeginAddDelegate = new BeginOperationDelegate(this.OnBeginAdd);
-            }
-            if ((this.onEndAddDelegate == null)) {
-                this.onEndAddDelegate = new EndOperationDelegate(this.OnEndAdd);
-            }
-            if ((this.onAddCompletedDelegate == null)) {
-                this.onAddCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnAddCompleted);
-            }
-            base.InvokeAsync(this.onBeginAddDelegate, new object[] {
-                        a,
-                        b}, this.onEndAddDelegate, this.onAddCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -1009,18 +853,6 @@ namespace BasCal_SilverlightClient.EventDataService {
                 return _result;
             }
             
-            public System.IAsyncResult BeginFetchUpcomingEvents(System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[0];
-                System.IAsyncResult _result = base.BeginInvoke("FetchUpcomingEvents", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventDTO> EndFetchUpcomingEvents(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventDTO> _result = ((System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventDTO>)(base.EndInvoke("FetchUpcomingEvents", _args, result)));
-                return _result;
-            }
-            
             public System.IAsyncResult BeginFetchUpcomingEventsShort(System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[0];
                 System.IAsyncResult _result = base.BeginInvoke("FetchUpcomingEventsShort", _args, callback, asyncState);
@@ -1030,20 +862,6 @@ namespace BasCal_SilverlightClient.EventDataService {
             public System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventShortDTO> EndFetchUpcomingEventsShort(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventShortDTO> _result = ((System.Collections.ObjectModel.ObservableCollection<BasCal_SilverlightClient.EventDataService.UpcomingEventShortDTO>)(base.EndInvoke("FetchUpcomingEventsShort", _args, result)));
-                return _result;
-            }
-            
-            public System.IAsyncResult BeginAdd(int a, int b, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[2];
-                _args[0] = a;
-                _args[1] = b;
-                System.IAsyncResult _result = base.BeginInvoke("Add", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public int EndAdd(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                int _result = ((int)(base.EndInvoke("Add", _args, result)));
                 return _result;
             }
         }

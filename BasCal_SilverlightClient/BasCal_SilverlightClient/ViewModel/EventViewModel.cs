@@ -141,6 +141,7 @@ namespace BasCal_SilverlightClient.ViewModel
         {
             var result = await EventServiceProxy.AddOrUpdateEvent(this.UpcomingEventInFull.ToWCFUpcomingEventDTO());
             MessageBox.Show(result);
+            FetchEventsByMonth(new Object());
         }
 
         /// <summary>

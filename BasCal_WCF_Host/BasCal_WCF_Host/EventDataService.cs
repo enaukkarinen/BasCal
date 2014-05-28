@@ -19,49 +19,22 @@ namespace BasCal_WCF_Host
 
         public UpcomingEventDTO FetchEventByGuid(Guid guid)
         {
-            Event ev = db.FetchEventByGuid(guid);
-            return ev.ToUpcomingEventDTO();         
+            return db.FetchEventByGuid(guid).ToUpcomingEventDTO();         
         }
 
         public string AddOrUpdateEvent(UpcomingEventDTO uev)
         {
-                Event ev = uev.ToEvent();
-                return db.UpdateOrAddEvent(ev);
+                return db.UpdateOrAddEvent(uev.ToEvent());
         }
 
         public List<UpcomingEventShortDTO> FetchEventsByMonth(int m)
         {
-            List<Event> evs = db.FetchEventsByMonth(m).ToList();
-            List<UpcomingEventShortDTO> paluu = new List<UpcomingEventShortDTO>();
-
-            foreach (Event ev in evs)
-            {
-                paluu.Add(ev.ToUpcomingEventShortDTO());
-            }
-            return paluu;
-        }
-
-        public List<UpcomingEventDTO> FetchUpcomingEvents()
-        {
-            List<Event> events = db.FetchEvents().ToList();
-            List<UpcomingEventDTO> paluu = new List<UpcomingEventDTO>();
-            foreach (Event e in events)
-            {
-                paluu.Add(e.ToUpcomingEventDTO());
-            }
-            return paluu;
+            return db.FetchEventsByMonth(m).ToList().Select(e => e.ToUpcomingEventShortDTO()).ToList();
         }
 
         public List<UpcomingEventShortDTO> FetchUpcomingEventsShort()
         {
             return db.FetchEvents().ToList().Select(x => x.ToUpcomingEventShortDTO()).ToList();
-            //List<UpcomingEventShortDTO> paluu = new List<UpcomingEventShortDTO>();
-
-            //foreach (Event ev in evs)
-            //{
-            //    paluu.Add(ev.ToUpcomingEventShortDTO());
-            //}
-            //return evs;
         }
 
         #endregion
@@ -71,22 +44,7 @@ namespace BasCal_WCF_Host
 
         public List<EventTypeDTO> FetchEventTypes()
         {
-            List<EventType> evs =  db.FetchEventTypes().ToList();
-            List<EventTypeDTO> ret = new List<EventTypeDTO>();
-            foreach (var ev in evs)
-            {
-                ret.Add(ev.ToEventTypeDTO());
-            }
-            return ret;
-            
-        }
-        #endregion
-
-        #region IService Members
-
-        public int Add(int a, int b)
-        {
-            return (a + b);
+            return db.FetchEventTypes().ToList().Select(et => et.ToEventTypeDTO()).ToList();
         }
         #endregion
 

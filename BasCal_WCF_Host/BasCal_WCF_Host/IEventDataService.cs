@@ -23,13 +23,8 @@ namespace BasCal_WCF_Host
         UpcomingEventDTO FetchEventByGuid(Guid guid);
 
         [OperationContract]
-        List<UpcomingEventDTO> FetchUpcomingEvents();
-
-        [OperationContract]
         List<UpcomingEventShortDTO> FetchUpcomingEventsShort();
 
         #endregion
-        [OperationContract]
-        int Add(int a, int b);
     }
 }

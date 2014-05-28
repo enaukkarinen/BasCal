@@ -42,10 +42,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UpcomingEventShortDTO" nillable="true" type="tns:UpcomingEventShortDTO" />
-  <xs:complexType name="ArrayOfUpcomingEventDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="UpcomingEventDTO" nillable="true" type="tns:UpcomingEventDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfUpcomingEventDTO" nillable="true" type="tns:ArrayOfUpcomingEventDTO" />
 </xs:schema>

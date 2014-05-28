@@ -61,23 +61,11 @@
   <wsdl:message name="IEventDataService_FetchEventByGuid_OutputMessage">
     <wsdl:part name="parameters" element="tns:FetchEventByGuidResponse" />
   </wsdl:message>
-  <wsdl:message name="IEventDataService_FetchUpcomingEvents_InputMessage">
-    <wsdl:part name="parameters" element="tns:FetchUpcomingEvents" />
-  </wsdl:message>
-  <wsdl:message name="IEventDataService_FetchUpcomingEvents_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FetchUpcomingEventsResponse" />
-  </wsdl:message>
   <wsdl:message name="IEventDataService_FetchUpcomingEventsShort_InputMessage">
     <wsdl:part name="parameters" element="tns:FetchUpcomingEventsShort" />
   </wsdl:message>
   <wsdl:message name="IEventDataService_FetchUpcomingEventsShort_OutputMessage">
     <wsdl:part name="parameters" element="tns:FetchUpcomingEventsShortResponse" />
-  </wsdl:message>
-  <wsdl:message name="IEventDataService_Add_InputMessage">
-    <wsdl:part name="parameters" element="tns:Add" />
-  </wsdl:message>
-  <wsdl:message name="IEventDataService_Add_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddResponse" />
   </wsdl:message>
   <wsdl:message name="IClientAccessPolicy_GetClientAccessPolicy_InputMessage">
     <wsdl:part name="parameters" element="tns:GetClientAccessPolicy" />
@@ -102,17 +90,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IEventDataService/FetchEventByGuid" message="tns:IEventDataService_FetchEventByGuid_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEventDataService/FetchEventByGuidResponse" message="tns:IEventDataService_FetchEventByGuid_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="FetchUpcomingEvents">
-      <wsdl:input wsaw:Action="http://tempuri.org/IEventDataService/FetchUpcomingEvents" message="tns:IEventDataService_FetchUpcomingEvents_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IEventDataService/FetchUpcomingEventsResponse" message="tns:IEventDataService_FetchUpcomingEvents_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="FetchUpcomingEventsShort">
       <wsdl:input wsaw:Action="http://tempuri.org/IEventDataService/FetchUpcomingEventsShort" message="tns:IEventDataService_FetchUpcomingEventsShort_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IEventDataService/FetchUpcomingEventsShortResponse" message="tns:IEventDataService_FetchUpcomingEventsShort_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="Add">
-      <wsdl:input wsaw:Action="http://tempuri.org/IEventDataService/Add" message="tns:IEventDataService_Add_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IEventDataService/AddResponse" message="tns:IEventDataService_Add_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IClientAccessPolicy">
@@ -160,26 +140,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FetchUpcomingEvents">
-      <soap12:operation soapAction="http://tempuri.org/IEventDataService/FetchUpcomingEvents" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="FetchUpcomingEventsShort">
       <soap12:operation soapAction="http://tempuri.org/IEventDataService/FetchUpcomingEventsShort" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Add">
-      <soap12:operation soapAction="http://tempuri.org/IEventDataService/Add" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -226,26 +188,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FetchUpcomingEvents">
-      <soap:operation soapAction="http://tempuri.org/IEventDataService/FetchUpcomingEvents" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="FetchUpcomingEventsShort">
       <soap:operation soapAction="http://tempuri.org/IEventDataService/FetchUpcomingEventsShort" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="Add">
-      <soap:operation soapAction="http://tempuri.org/IEventDataService/Add" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
