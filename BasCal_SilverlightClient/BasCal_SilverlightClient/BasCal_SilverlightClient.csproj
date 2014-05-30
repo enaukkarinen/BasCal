@@ -144,8 +144,6 @@
     </Compile>
     <Compile Include="Services\EventServiceProxy.cs" />
     <Compile Include="ViewModel\EventViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\CalendarCell.xaml.cs">
       <DependentUpon>CalendarCell.xaml</DependentUpon>
     </Compile>
