@@ -9,8 +9,6 @@ namespace BasCal_SilverlightClient.CommandBase
         /// Occurs when changes occur that affect whether the command should execute.
         /// </summary>
         public event EventHandler CanExecuteChanged;
-
-        Func<object, bool> canExecute;
         Action<object> executeAction;
         bool canExecuteCache;
 
@@ -19,11 +17,9 @@ namespace BasCal_SilverlightClient.CommandBase
         /// </summary>
         /// <param name="executeAction">The execute action.</param>
         /// <param name="canExecute">The can execute.</param>
-        public DelegateCommand(Action<object> executeAction,
-                               Func<object, bool> canExecute)
+        public DelegateCommand(Action<object> executeAction)
         {
             this.executeAction = executeAction;
-            this.canExecute = canExecute;
         }
 
         #region ICommand Members
@@ -41,7 +37,7 @@ namespace BasCal_SilverlightClient.CommandBase
         /// </returns>
         public bool CanExecute(object parameter)
         {
-            bool tempCanExecute = canExecute(parameter);
+            bool tempCanExecute = true;
 
             if (canExecuteCache != tempCanExecute)
             {

@@ -20,34 +20,11 @@ namespace BasCal_SilverlightClient.View
 {
     public partial class CalendarCell : UserControl
     {
-
         public CalendarCell()
         {
             InitializeComponent();
-            //RandomAnimationFailure();
-            //CellGrow.Completed += CellGrow_Completed;
         }
-        //private void RandomAnimationFailure()
-        //{
-        //    DispatcherTimer timer = new DispatcherTimer();
-        //    Random r = new Random();
-
-
-        //    timer.Interval = new TimeSpan(0, 0, 0, r.Next(1, 59), 0);
-        //    timer.Tick += timer_Tick;
-        //    timer.Start();
-        //}
-
-        //void CellGrow_Completed(object sender, EventArgs e)
-        //{
-        //    CellShrink.Begin();
-        //}
-
-        //protected void timer_Tick(object sender, object e)
-        //{
-        //    CellGrow.Begin();
-        //}
-
+       
         private void CellGrid_MouseEnter(object sender, MouseEventArgs e)
         {
             CellGrow.Begin();
@@ -58,8 +35,4 @@ namespace BasCal_SilverlightClient.View
             CellShrink.Begin();
         }
     }
-
-    
-
-
 }

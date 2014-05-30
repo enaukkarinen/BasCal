@@ -26,7 +26,7 @@
         <conv:CellColorConverter x:Key="CellColorConverter" />
         <conv:DaysEventsConverter x:Key="DaysEventsConverter" />
         <conv:CellBorderConverter x:Key="CellBorderConverter" />
-        
+        <conv:CurrentMonthConverter x:Key="CurrentMonthConverter" />
         <Style x:Key="CellStyle" TargetType="local:DataGridCell">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -356,7 +356,18 @@
                         </LinearGradientBrush>
                     </TextBlock.Foreground>
                 </TextBlock>
-            </Viewbox> 
+            </Viewbox>
+            <Grid Grid.Column="2">
+                <TextBlock Text="{Binding DesiredMonth, Converter={StaticResource CurrentMonthConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                           FontFamily="Segoe UI" FontSize="36" Margin="15" HorizontalAlignment="Right">
+                    <TextBlock.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF778798" Offset="0"/>
+                            <GradientStop Color="#FF4D5863" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBlock.Foreground>
+                </TextBlock>
+            </Grid>
         </Grid>
 
         <Grid x:Name="MainGrid" Grid.Row="1" Grid.ColumnSpan="2">
@@ -376,7 +387,7 @@
 
             <Grid x:Name="ContentGrid" Grid.Column="1"  VerticalAlignment="Stretch">
 
-                <data:DataGrid x:Name="CalendarDataGrid" ItemsSource="{Binding Weeks}" Margin="10,15,10,10" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="120" Background="Transparent"
+                <data:DataGrid x:Name="CalendarDataGrid" ItemsSource="{Binding Weeks}" Margin="10,15,10,10" AutoGenerateColumns="False" ColumnWidth="1*" RowHeight="130" Background="Transparent"
                     AlternatingRowBackground="Transparent"
                     RowBackground="Transparent"
                     BorderBrush="Transparent"

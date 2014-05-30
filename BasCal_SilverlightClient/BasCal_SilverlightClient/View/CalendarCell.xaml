@@ -62,7 +62,6 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Margin="5">
-                <!--, Converter={StaticResource DateTimeConverter}-->
                 <TextBlock Text="{Binding Path=Date, Converter={StaticResource DateTimeConverter} }" FontWeight="Bold" FontSize="14"></TextBlock>
             </Grid>
             <Grid Grid.Row="1" Margin="5">

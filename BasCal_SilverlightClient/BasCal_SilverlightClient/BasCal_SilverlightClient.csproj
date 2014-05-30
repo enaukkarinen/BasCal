@@ -151,6 +151,7 @@
     </Compile>
     <Compile Include="View\Converters\CellBorderConverter.cs" />
     <Compile Include="View\Converters\CellColorConverter.cs" />
+    <Compile Include="View\Converters\CurrentMonthConverter.cs" />
     <Compile Include="View\Converters\DateTimeConverter.cs" />
     <Compile Include="View\Converters\DaysEventsConverter.cs" />
     <Compile Include="View\Converters\HexaToArgbConverter.cs" />

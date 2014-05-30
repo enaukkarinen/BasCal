@@ -27,23 +27,14 @@ namespace BasCal_SilverlightClient.View
 
         private void image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            try
+            if (LeftPanelGrid.Width == 25)
             {
-                if (LeftPanelGrid.Width == 25)
-                {
-                    LeftPanelSlideIn.Begin();
-                }
-                else
-                {
-                    LeftPanelSlideBack.Begin();
-                }
+                LeftPanelSlideIn.Begin();
             }
-            catch (Exception exc)
+            else
             {
-                MessageBox.Show("Is WFC running? \r\n \r\n" + exc.Message);
+                LeftPanelSlideBack.Begin();
             }
-          
-
         }
 
         private void UpcomingEventListItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

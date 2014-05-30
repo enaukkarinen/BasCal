@@ -19,17 +19,15 @@ namespace BasCal_SilverlightClient.View.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            SolidColorBrush color;
             int count = ((ObservableCollection<UpcomingEventShortDTO>)value).Count;
             if (count > 0)
             {
-                color = HexaToArgbConverter.GetColorFromHexa("#FF6F93BB");
+                return HexaToArgbConverter.GetColorFromHexa("#FF6F93BB");
             }
             else
             {
-                color = HexaToArgbConverter.GetColorFromHexa("#FF5C6875");
+                return HexaToArgbConverter.GetColorFromHexa("#FF5C6875");
             }
-            return color;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

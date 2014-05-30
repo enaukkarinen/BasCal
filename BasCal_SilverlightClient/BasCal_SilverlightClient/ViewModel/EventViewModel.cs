@@ -24,12 +24,32 @@ namespace BasCal_SilverlightClient.ViewModel
 {
     public class EventViewModel : ViewModelBase
     {
-        private DateTime desiredMonth = DateTime.Now;
+        private DateTime desiredMonth;       
         private UpcomingEventWithValidation upcomingEventInFull;
         private ObservableCollection<UpcomingEventShortDTO> upcomingEventsInShortFormatList;
         private ObservableCollection<Week> weeks;
         private Day day;
 
+        #region Properties
+
+        public DateTime DesiredMonth
+        {
+            get 
+            {
+                if(desiredMonth == new DateTime())
+                    return new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                else
+                return desiredMonth; 
+            }
+            set
+            {
+                if (value != null && value != new DateTime())
+                {
+                    desiredMonth = value;
+                    OnPropertyChanged("DesiredMonth");
+                }
+            }
+        }
         public ObservableCollection<UpcomingEventShortDTO> UpcomingEventsInShortFormatList
         {
             get { return upcomingEventsInShortFormatList; }
@@ -76,45 +96,48 @@ namespace BasCal_SilverlightClient.ViewModel
                 }
             }
         }
+        
+        #endregion
 
-        // Commands binded in xaml
         #region Commands
 
         public ICommand SwitchMonth 
         {
-            get { return new DelegateCommand(FetchEventsByMonth, (x) => { return true; }); }
+            get { return new DelegateCommand(FetchEventsByMonth); }
         }
-
         public ICommand DataGridDaySelection  
         {
-            get { return new DelegateCommand((object obj) => 
+            get
             {
-                Day value = (Day)obj;
-                if (value != null)
+                return new DelegateCommand((object obj) =>
                 {
-                    this.Day = (Day)obj;
-                }
-            }, (x) => { return true; }); }
+                    Day value = (Day)obj;
+                    if (value != null)
+                    {
+                        this.Day = (Day)obj;
+                    }
+                });
+            }
         }
         public ICommand LoadMonth
         {
-            get { return new DelegateCommand(FetchEventsByMonth, (x) => { return true; } ); }
+            get { return new DelegateCommand(FetchEventsByMonth); }
         }      
         public ICommand LoadUpcomingEventList 
         {
-            get { return new DelegateCommand(FetchUpcomingEventsInShortFormat, (x) => { return true; }); }
+            get { return new DelegateCommand(FetchUpcomingEventsInShortFormat); }
         }            
         public ICommand SaveEvent 
         {
-            get { return new DelegateCommand(AddOrUpdateEventInDatabase, (x) => { return true; } ); }
+            get { return new DelegateCommand(AddOrUpdateEventInDatabase); }
         }
         public ICommand AddEvent 
         {
-            get { return new DelegateCommand(DestroyUpcomingEventInFull, (x) => { return true; }); }
+            get { return new DelegateCommand(DestroyUpcomingEventInFull); }
         }      
         public ICommand LoadFullEventDataFromList 
         {
-            get { return new DelegateCommand(FetchFullEventInfoFromList, (x) => { return true; }); }
+            get { return new DelegateCommand(FetchFullEventInfoFromList); }
         }
 
         #endregion
@@ -139,26 +162,20 @@ namespace BasCal_SilverlightClient.ViewModel
         /// </summary>
         /// <param name="parameter"></param>
         private async void FetchEventsByMonth(object parameter)
-        {
-            
+        {        
             if (parameter == null)
-            {
-                desiredMonth = DateTime.Now;
-            }
+                this.DesiredMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             else
             {
                 int monthIncrement = ((MouseWheelEventArgs)parameter).Delta;
                 if (monthIncrement > 0)
-                {
-                    desiredMonth = desiredMonth.AddMonths(-1);
-                }
+                    this.DesiredMonth = this.DesiredMonth.AddMonths(-1);
                 else
-                {
-                    desiredMonth = desiredMonth.AddMonths(1);
-                }
+                    this.DesiredMonth = this.DesiredMonth.AddMonths(1);
             }
-            var results = await EventServiceProxy.FetchEventsByMonth(desiredMonth.Month);
-            this.Weeks = WeekFactory.WeekBuilder(desiredMonth, results);    
+
+            var results = await EventServiceProxy.FetchEventsByMonth(this.DesiredMonth.Month);
+            this.Weeks = WeekFactory.WeekBuilder(this.DesiredMonth, results);    
         }
 
         /// <summary>
