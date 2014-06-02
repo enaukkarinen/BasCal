@@ -2,93 +2,40 @@
 using System.Threading.Tasks;
 using BasCal_SilverlightClient.EventDataService;
 using System;
+using System.Reactive.Linq;
 
 namespace BasCal_SilverlightClient.Services
 {
     public class EventServiceProxy
     {
-        public static Task<string> AddOrUpdateEvent(UpcomingEventDTO guid)
+        static IEventDataService client = (IEventDataService)new EventDataService.EventDataServiceClient();
+
+        public static IObservable<UpcomingEventDTO> FetchEventByGuid(Guid guid)
         {
-            var tcs = new TaskCompletionSource<string>();
-
-            var client = new EventDataService.EventDataServiceClient();
-
-            client.AddOrUpdateEventCompleted += (s, e) =>
-            {
-                if (e.Error != null)
-                    tcs.TrySetException(e.Error);
-                else if (e.Cancelled)
-                    tcs.TrySetCanceled();
-                else
-                    tcs.TrySetResult(e.Result);
-            };
-
-            client.AddOrUpdateEventAsync(guid);
-
-            return tcs.Task;
+            //Func<Guid, IObservable<UpcomingEventDTO>> observableSearchFunc
+            var observableSearchFunc = Observable.FromAsyncPattern<Guid, UpcomingEventDTO>
+                (client.BeginFetchEventByGuid, client.EndFetchEventByGuid);
+            return observableSearchFunc(guid);
         }
 
-        public static Task<UpcomingEventDTO> FetchEventByGuid(Guid guid)
+        public static IObservable<ObservableCollection<UpcomingEventShortDTO>> FetchEventsByMonth(int month)
         {
-            var tcs = new TaskCompletionSource<UpcomingEventDTO>();
-
-            var client = new EventDataService.EventDataServiceClient();
-
-            client.FetchEventByGuidCompleted += (s, e) =>
-            {
-                if (e.Error != null)
-                    tcs.TrySetException(e.Error);
-                else if (e.Cancelled)
-                    tcs.TrySetCanceled();
-                else
-                    tcs.TrySetResult(e.Result);
-            };
-
-            client.FetchEventByGuidAsync(guid);
-
-            return tcs.Task;
+            var observableSearchFunc = Observable.FromAsyncPattern<int, ObservableCollection<UpcomingEventShortDTO>>
+                (client.BeginFetchEventsByMonth, client.EndFetchEventsByMonth);            
+            return observableSearchFunc(month);
+        }
+        public static IObservable<string> AddOrUpdateEvent(UpcomingEventDTO eve)
+        {
+            var observableSearchFunc = Observable.FromAsyncPattern<UpcomingEventDTO, string>
+                (client.BeginAddOrUpdateEvent, client.EndAddOrUpdateEvent);
+            return observableSearchFunc(eve);
         }
 
-        public static Task<ObservableCollection<UpcomingEventShortDTO>> FetchEventsByMonth(int month)
+        public static IObservable<ObservableCollection<UpcomingEventShortDTO>> FetchUpcomingEventsInShortFormat()
         {
-            var tcs = new TaskCompletionSource<ObservableCollection<UpcomingEventShortDTO>>();
-
-            var client = new EventDataService.EventDataServiceClient();
-
-            client.FetchEventsByMonthCompleted += (s, e) =>
-            {
-                if (e.Error != null)
-                    tcs.TrySetException(e.Error);
-                else if (e.Cancelled)
-                    tcs.TrySetCanceled();
-                else
-                    tcs.TrySetResult(e.Result);
-            };
-
-            client.FetchEventsByMonthAsync(month);
-
-            return tcs.Task;
-        }
-
-        public static Task<ObservableCollection<UpcomingEventShortDTO>> FetchUpcomingEventsInShortFormat()
-        {
-            var tcs = new TaskCompletionSource<ObservableCollection<UpcomingEventShortDTO>>();
-
-            var client = new EventDataService.EventDataServiceClient();
-
-            client.FetchUpcomingEventsShortCompleted += (s, e) =>
-            {
-                if (e.Error != null)
-                    tcs.TrySetException(e.Error);
-                else if (e.Cancelled)
-                    tcs.TrySetCanceled();
-                else
-                    tcs.TrySetResult(e.Result);
-            };
-
-            client.FetchUpcomingEventsShortAsync();
-
-            return tcs.Task;
+            var observableSearchFunc = Observable.FromAsyncPattern<ObservableCollection<UpcomingEventShortDTO>>
+                (client.BeginFetchUpcomingEventsShort, client.EndFetchUpcomingEventsShort);
+            return observableSearchFunc();
         }
     }
 }

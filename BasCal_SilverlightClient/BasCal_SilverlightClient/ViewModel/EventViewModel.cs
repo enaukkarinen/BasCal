@@ -19,6 +19,13 @@ using System.Collections.Generic;
 using Microsoft.Expression.Interactivity.Core;
 using BasCal_SilverlightClient.CommandBase;
 using BasCal_SilverlightClient.Services;
+using System.Reactive.Concurrency;
+
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using System.Reactive.Threading;
+using System.Reactive.Joins;
+using System.Threading;
 
 namespace BasCal_SilverlightClient.ViewModel
 {
@@ -142,7 +149,6 @@ namespace BasCal_SilverlightClient.ViewModel
 
         #endregion
 
-        // Constructor
         public EventViewModel()
         {
         }
@@ -151,17 +157,19 @@ namespace BasCal_SilverlightClient.ViewModel
         /// Retrieves a collection of events in a shortened format.
         /// </summary>
         /// <param name="parameter"></param>
-        public async void FetchUpcomingEventsInShortFormat(object parameter)
+        public void FetchUpcomingEventsInShortFormat(object parameter)
         {
-            var results = await EventServiceProxy.FetchUpcomingEventsInShortFormat();
-            this.UpcomingEventsInShortFormatList = new ObservableCollection<UpcomingEventShortDTO>(results.OrderByDescending(ev => ev.StartTime));
+            IObservable<ObservableCollection<UpcomingEventShortDTO>> events =
+               EventServiceProxy.FetchUpcomingEventsInShortFormat().ObserveOn(SynchronizationContext.Current);
+            events.Subscribe(eve => this.UpcomingEventsInShortFormatList = 
+                new ObservableCollection<UpcomingEventShortDTO>(eve.OrderByDescending(ev => ev.StartTime)));
         }
 
         /// <summary>
         /// Retrieves events by month and creates a week collection.
         /// </summary>
         /// <param name="parameter"></param>
-        private async void FetchEventsByMonth(object parameter)
+        private void FetchEventsByMonth(object parameter)
         {        
             if (parameter == null)
                 this.DesiredMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -174,20 +182,22 @@ namespace BasCal_SilverlightClient.ViewModel
                     this.DesiredMonth = this.DesiredMonth.AddMonths(1);
             }
 
-            var results = await EventServiceProxy.FetchEventsByMonth(this.DesiredMonth.Month);
-            this.Weeks = WeekFactory.WeekBuilder(this.DesiredMonth, results);    
+            IObservable<ObservableCollection<UpcomingEventShortDTO>> events = 
+                EventServiceProxy.FetchEventsByMonth(this.DesiredMonth.Month).ObserveOn(SynchronizationContext.Current);
+            events.Subscribe(eve => this.Weeks = WeekFactory.WeekBuilder(this.DesiredMonth, eve));
         }
 
         /// <summary>
         /// Retrieves full event info
         /// </summary>
         /// <param name="parameter"></param>
-        public async void FetchFullEventInfoFromList(object parameter)
+        public void FetchFullEventInfoFromList(object parameter)
         {
             if (parameter != null)
             {
-                var result = await EventServiceProxy.FetchEventByGuid(((UpcomingEventShortDTO)parameter).EventId);
-                this.UpcomingEventInFull = new UpcomingEventWithValidation(result);
+                IObservable<UpcomingEventDTO> eventInFull = EventServiceProxy.FetchEventByGuid(((UpcomingEventShortDTO)parameter).EventId)
+                    .ObserveOn(SynchronizationContext.Current);
+                eventInFull.Subscribe(rx => this.UpcomingEventInFull = new UpcomingEventWithValidation(rx));
             }
         }
 
@@ -195,15 +205,19 @@ namespace BasCal_SilverlightClient.ViewModel
         /// Send an event instance to server and updates the corresponding row in database
         /// </summary>
         /// <param name="parameter"></param>
-        public async void AddOrUpdateEventInDatabase(object parameter)
+        public void AddOrUpdateEventInDatabase(object parameter)
         {
-            var result = await EventServiceProxy.AddOrUpdateEvent(this.UpcomingEventInFull.ToWCFUpcomingEventDTO());
-            MessageBox.Show(result);
-            FetchEventsByMonth(new Object());
+            IObservable<string> reply = EventServiceProxy.AddOrUpdateEvent(this.UpcomingEventInFull.ToWCFUpcomingEventDTO())
+                    .ObserveOn(SynchronizationContext.Current);
+            reply.Subscribe(rx => MessageBox.Show(rx));
+
+            IObservable<ObservableCollection<UpcomingEventShortDTO>> events = EventServiceProxy.FetchEventsByMonth(
+                this.DesiredMonth.Month).ObserveOn(SynchronizationContext.Current);
+            events.Subscribe(eve => this.Weeks = WeekFactory.WeekBuilder(this.DesiredMonth, eve));
         }
 
         /// <summary>
-        /// Formats an Event
+        /// Formats the eventform
         /// </summary>
         /// <param name="parameter"></param>
         public void DestroyUpcomingEventInFull(object parameter)
@@ -218,8 +232,5 @@ namespace BasCal_SilverlightClient.ViewModel
                 Type = "Unspecified"
             };
         }
-
-
-
     }
 }

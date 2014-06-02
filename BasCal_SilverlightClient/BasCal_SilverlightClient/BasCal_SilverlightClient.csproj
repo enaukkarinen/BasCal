@@ -143,6 +143,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Services\EventServiceProxy.cs" />
+    <Compile Include="Services\EventServiceProxyAwaitAsync.cs" />
     <Compile Include="ViewModel\EventViewModel.cs" />
     <Compile Include="View\CalendarCell.xaml.cs">
       <DependentUpon>CalendarCell.xaml</DependentUpon>
