@@ -30,12 +30,12 @@ namespace BasCal_SilverlightClient.View.Converters
     {
         public static string ToMonthName(this DateTime dateTime)
         {
-            return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dateTime.Month);
+            return CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(dateTime.Month);
         }
 
         public static string ToShortMonthName(this DateTime dateTime)
         {
-            return CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(dateTime.Month);
+            return CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedMonthName(dateTime.Month);
         }
     }
 }
